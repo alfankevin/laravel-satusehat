@@ -61,9 +61,7 @@ final class PasienControllerTest extends TestCase
         $pstPrb = $this->faker->word();
         $aktif = $this->faker->boolean();
         $ketAktif = $this->faker->word();
-        $created_at = Carbon::parse($this->faker->dateTime());
         $created_by = $this->faker->numberBetween(-10000, 10000);
-        $updated_at = Carbon::parse($this->faker->dateTime());
         $updated_by = $this->faker->numberBetween(-10000, 10000);
         $deleted_at = Carbon::parse($this->faker->dateTime());
         $deleted_by = $this->faker->numberBetween(-10000, 10000);
@@ -87,9 +85,7 @@ final class PasienControllerTest extends TestCase
             'pstPrb' => $pstPrb,
             'aktif' => $aktif,
             'ketAktif' => $ketAktif,
-            'created_at' => $created_at->toDateTimeString(),
             'created_by' => $created_by,
-            'updated_at' => $updated_at->toDateTimeString(),
             'updated_by' => $updated_by,
             'deleted_at' => $deleted_at->toDateTimeString(),
             'deleted_by' => $deleted_by,
@@ -114,9 +110,7 @@ final class PasienControllerTest extends TestCase
             ->where('pstPrb', $pstPrb)
             ->where('aktif', $aktif)
             ->where('ketAktif', $ketAktif)
-            ->where('created_at', $created_at)
             ->where('created_by', $created_by)
-            ->where('updated_at', $updated_at)
             ->where('updated_by', $updated_by)
             ->where('deleted_at', $deleted_at)
             ->where('deleted_by', $deleted_by)
@@ -160,9 +154,7 @@ final class PasienControllerTest extends TestCase
         $pstPrb = $this->faker->word();
         $aktif = $this->faker->boolean();
         $ketAktif = $this->faker->word();
-        $created_at = Carbon::parse($this->faker->dateTime());
         $created_by = $this->faker->numberBetween(-10000, 10000);
-        $updated_at = Carbon::parse($this->faker->dateTime());
         $updated_by = $this->faker->numberBetween(-10000, 10000);
         $deleted_at = Carbon::parse($this->faker->dateTime());
         $deleted_by = $this->faker->numberBetween(-10000, 10000);
@@ -186,9 +178,7 @@ final class PasienControllerTest extends TestCase
             'pstPrb' => $pstPrb,
             'aktif' => $aktif,
             'ketAktif' => $ketAktif,
-            'created_at' => $created_at->toDateTimeString(),
             'created_by' => $created_by,
-            'updated_at' => $updated_at->toDateTimeString(),
             'updated_by' => $updated_by,
             'deleted_at' => $deleted_at->toDateTimeString(),
             'deleted_by' => $deleted_by,
@@ -213,9 +203,7 @@ final class PasienControllerTest extends TestCase
             ->where('pstPrb', $pstPrb)
             ->where('aktif', $aktif)
             ->where('ketAktif', $ketAktif)
-            ->where('created_at', $created_at)
             ->where('created_by', $created_by)
-            ->where('updated_at', $updated_at)
             ->where('updated_by', $updated_by)
             ->where('deleted_at', $deleted_at)
             ->where('deleted_by', $deleted_by)

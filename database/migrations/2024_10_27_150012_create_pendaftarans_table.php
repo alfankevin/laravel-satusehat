@@ -25,9 +25,7 @@ return new class extends Migration
             $table->float('heartRate');
             $table->integer('rujukBalik');
             $table->integer('kdTkp');
-            $table->dateTime('created_at');
             $table->integer('created_by');
-            $table->dateTime('updated_at');
             $table->integer('updated_by');
             $table->dateTime('deleted_at');
             $table->integer('deleted_by');

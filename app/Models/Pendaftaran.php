@@ -51,8 +51,6 @@ class Pendaftaran extends Model
         'respRate' => 'float',
         'lingkarPerut' => 'float',
         'heartRate' => 'float',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
         'pasien_id' => 'integer',
         'poli_id' => 'integer',

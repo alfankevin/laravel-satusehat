@@ -48,8 +48,6 @@ class Pasien extends Model
         'id' => 'integer',
         'tglLahir' => 'date',
         'aktif' => 'boolean',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
         'provinsi_id' => 'integer',
         'kabupaten_id' => 'integer',
