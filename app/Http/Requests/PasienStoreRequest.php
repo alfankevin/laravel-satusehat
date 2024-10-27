@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class PasienStoreRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     */
+    public function rules(): array
+    {
+        return [
+            'nomorRm' => ['required', 'integer'],
+            'noKartu' => ['required', 'string', 'max:13'],
+            'nama' => ['required', 'string'],
+            'hubunganKeluarga' => ['required', 'string'],
+            'sex' => ['required', 'string', 'max:1'],
+            'tglLahir' => ['required', 'date'],
+            'jnsPeserta' => ['required', 'integer'],
+            'golDarah' => ['required', 'string'],
+            'noHp' => ['required', 'string'],
+            'noKtp' => ['required', 'string'],
+            'pstProl' => ['required', 'string'],
+            'pstPrb' => ['required', 'string'],
+            'aktif' => ['required'],
+            'ketAktif' => ['required', 'string'],
+            'created_at' => ['required'],
+            'created_by' => ['required', 'integer'],
+            'updated_at' => ['required'],
+            'updated_by' => ['required', 'integer'],
+            'deleted_at' => ['required'],
+            'deleted_by' => ['required', 'integer'],
+            'provinsi_id' => ['required', 'integer', 'exists:provinsis,id'],
+            'kabupaten_id' => ['required', 'integer', 'exists:kabupatens,id'],
+            'kecamatan_id' => ['required', 'integer', 'exists:kecamatans,id'],
+            'kelurahan_id' => ['required', 'integer', 'exists:kelurahans,id'],
+        ];
+    }
+}
