@@ -27,13 +27,13 @@ class Pendaftaran extends Model
         'lingkarPerut',
         'heartRate',
         'rujukBalik',
-        'kdTkp',
         'created_by',
         'updated_by',
         'deleted_by',
         'pasien_id',
         'poli_id',
         'practitioner_id',
+        'tkp_id',
     ];
 
     /**
@@ -55,6 +55,7 @@ class Pendaftaran extends Model
         'pasien_id' => 'integer',
         'poli_id' => 'integer',
         'practitioner_id' => 'integer',
+        'tkp_id' => 'integer',
     ];
 
     public function pasien(): BelongsTo
@@ -70,5 +71,10 @@ class Pendaftaran extends Model
     public function practitioner(): BelongsTo
     {
         return $this->belongsTo(Practitioner::class);
+    }
+
+    public function tkp(): BelongsTo
+    {
+        return $this->belongsTo(Tkp::class);
     }
 }

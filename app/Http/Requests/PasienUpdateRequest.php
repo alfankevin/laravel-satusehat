@@ -38,9 +38,6 @@ class PasienUpdateRequest extends FormRequest
             'updated_by' => ['required', 'integer'],
             'deleted_at' => ['required'],
             'deleted_by' => ['required', 'integer'],
-            'provinsi_id' => ['required', 'integer', 'exists:provinsis,id'],
-            'kabupaten_id' => ['required', 'integer', 'exists:kabupatens,id'],
-            'kecamatan_id' => ['required', 'integer', 'exists:kecamatans,id'],
             'kelurahan_id' => ['required', 'integer', 'exists:kelurahans,id'],
         ];
     }

@@ -24,7 +24,6 @@ return new class extends Migration
             $table->float('lingkarPerut');
             $table->float('heartRate');
             $table->integer('rujukBalik');
-            $table->integer('kdTkp');
             $table->integer('created_by');
             $table->integer('updated_by');
             $table->dateTime('deleted_at');
@@ -32,6 +31,7 @@ return new class extends Migration
             $table->foreignId('pasien_id');
             $table->foreignId('poli_id');
             $table->foreignId('practitioner_id');
+            $table->foreignId('tkp_id');
             $table->timestamps();
         });
     }

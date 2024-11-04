@@ -31,7 +31,6 @@ class PendaftaranStoreRequest extends FormRequest
             'lingkarPerut' => ['required', 'numeric'],
             'heartRate' => ['required', 'numeric'],
             'rujukBalik' => ['required', 'integer'],
-            'kdTkp' => ['required', 'integer'],
             'created_by' => ['required', 'integer'],
             'updated_by' => ['required', 'integer'],
             'deleted_at' => ['required'],
@@ -39,6 +38,7 @@ class PendaftaranStoreRequest extends FormRequest
             'pasien_id' => ['required', 'integer', 'exists:pasiens,id'],
             'poli_id' => ['required', 'integer', 'exists:polis,id'],
             'practitioner_id' => ['required', 'integer', 'exists:practitioners,id'],
+            'tkp_id' => ['required', 'integer', 'exists:tkps,id'],
         ];
     }
 }

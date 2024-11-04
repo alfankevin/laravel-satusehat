@@ -8,6 +8,7 @@ use App\Models\Pasien;
 use App\Models\Pendaftaran;
 use App\Models\Poli;
 use App\Models\Practitioner;
+use App\Models\Tkp;
 
 class PendaftaranFactory extends Factory
 {
@@ -35,7 +36,6 @@ class PendaftaranFactory extends Factory
             'lingkarPerut' => $this->faker->randomFloat(0, 0, 9999999999.),
             'heartRate' => $this->faker->randomFloat(0, 0, 9999999999.),
             'rujukBalik' => $this->faker->numberBetween(-10000, 10000),
-            'kdTkp' => $this->faker->numberBetween(-10000, 10000),
             'created_by' => $this->faker->numberBetween(-10000, 10000),
             'updated_by' => $this->faker->numberBetween(-10000, 10000),
             'deleted_at' => $this->faker->dateTime(),
@@ -43,6 +43,7 @@ class PendaftaranFactory extends Factory
             'pasien_id' => Pasien::factory(),
             'poli_id' => Poli::factory(),
             'practitioner_id' => Practitioner::factory(),
+            'tkp_id' => Tkp::factory(),
         ];
     }
 }

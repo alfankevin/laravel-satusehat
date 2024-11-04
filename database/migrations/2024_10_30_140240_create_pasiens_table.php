@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -32,9 +31,6 @@ return new class extends Migration
             $table->integer('updated_by');
             $table->dateTime('deleted_at');
             $table->integer('deleted_by');
-            $table->foreignId('provinsi_id');
-            $table->foreignId('kabupaten_id');
-            $table->foreignId('kecamatan_id');
             $table->foreignId('kelurahan_id');
             $table->timestamps();
         });

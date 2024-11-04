@@ -4,11 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Kabupaten;
-use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Pasien;
-use App\Models\Provinsi;
 
 class PasienFactory extends Factory
 {
@@ -43,9 +40,6 @@ class PasienFactory extends Factory
             'updated_by' => $this->faker->numberBetween(-10000, 10000),
             'deleted_at' => $this->faker->dateTime(),
             'deleted_by' => $this->faker->numberBetween(-10000, 10000),
-            'provinsi_id' => Provinsi::factory(),
-            'kabupaten_id' => Kabupaten::factory(),
-            'kecamatan_id' => Kecamatan::factory(),
             'kelurahan_id' => Kelurahan::factory(),
         ];
     }

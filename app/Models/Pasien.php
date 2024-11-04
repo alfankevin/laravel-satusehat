@@ -33,9 +33,6 @@ class Pasien extends Model
         'created_by',
         'updated_by',
         'deleted_by',
-        'provinsi_id',
-        'kabupaten_id',
-        'kecamatan_id',
         'kelurahan_id',
     ];
 
@@ -49,26 +46,8 @@ class Pasien extends Model
         'tglLahir' => 'date',
         'aktif' => 'boolean',
         'deleted_at' => 'datetime',
-        'provinsi_id' => 'integer',
-        'kabupaten_id' => 'integer',
-        'kecamatan_id' => 'integer',
         'kelurahan_id' => 'integer',
     ];
-
-    public function provinsi(): BelongsTo
-    {
-        return $this->belongsTo(Provinsi::class);
-    }
-
-    public function kabupaten(): BelongsTo
-    {
-        return $this->belongsTo(Kabupaten::class);
-    }
-
-    public function kecamatan(): BelongsTo
-    {
-        return $this->belongsTo(Kecamatan::class);
-    }
 
     public function kelurahan(): BelongsTo
     {

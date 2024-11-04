@@ -2,11 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\Kabupaten;
-use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Pasien;
-use App\Models\Provinsi;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Carbon;
@@ -65,9 +62,6 @@ final class PasienControllerTest extends TestCase
         $updated_by = $this->faker->numberBetween(-10000, 10000);
         $deleted_at = Carbon::parse($this->faker->dateTime());
         $deleted_by = $this->faker->numberBetween(-10000, 10000);
-        $provinsi = Provinsi::factory()->create();
-        $kabupaten = Kabupaten::factory()->create();
-        $kecamatan = Kecamatan::factory()->create();
         $kelurahan = Kelurahan::factory()->create();
 
         $response = $this->post(route('pasiens.store'), [
@@ -89,9 +83,6 @@ final class PasienControllerTest extends TestCase
             'updated_by' => $updated_by,
             'deleted_at' => $deleted_at->toDateTimeString(),
             'deleted_by' => $deleted_by,
-            'provinsi_id' => $provinsi->id,
-            'kabupaten_id' => $kabupaten->id,
-            'kecamatan_id' => $kecamatan->id,
             'kelurahan_id' => $kelurahan->id,
         ]);
 
@@ -114,9 +105,6 @@ final class PasienControllerTest extends TestCase
             ->where('updated_by', $updated_by)
             ->where('deleted_at', $deleted_at)
             ->where('deleted_by', $deleted_by)
-            ->where('provinsi_id', $provinsi->id)
-            ->where('kabupaten_id', $kabupaten->id)
-            ->where('kecamatan_id', $kecamatan->id)
             ->where('kelurahan_id', $kelurahan->id)
             ->get();
         $this->assertCount(1, $pasiens);
@@ -158,9 +146,6 @@ final class PasienControllerTest extends TestCase
         $updated_by = $this->faker->numberBetween(-10000, 10000);
         $deleted_at = Carbon::parse($this->faker->dateTime());
         $deleted_by = $this->faker->numberBetween(-10000, 10000);
-        $provinsi = Provinsi::factory()->create();
-        $kabupaten = Kabupaten::factory()->create();
-        $kecamatan = Kecamatan::factory()->create();
         $kelurahan = Kelurahan::factory()->create();
 
         $response = $this->put(route('pasiens.update', $pasien), [
@@ -182,9 +167,6 @@ final class PasienControllerTest extends TestCase
             'updated_by' => $updated_by,
             'deleted_at' => $deleted_at->toDateTimeString(),
             'deleted_by' => $deleted_by,
-            'provinsi_id' => $provinsi->id,
-            'kabupaten_id' => $kabupaten->id,
-            'kecamatan_id' => $kecamatan->id,
             'kelurahan_id' => $kelurahan->id,
         ]);
 
@@ -207,9 +189,6 @@ final class PasienControllerTest extends TestCase
             ->where('updated_by', $updated_by)
             ->where('deleted_at', $deleted_at)
             ->where('deleted_by', $deleted_by)
-            ->where('provinsi_id', $provinsi->id)
-            ->where('kabupaten_id', $kabupaten->id)
-            ->where('kecamatan_id', $kecamatan->id)
             ->where('kelurahan_id', $kelurahan->id)
             ->get();
         $this->assertCount(1, $pasiens);
