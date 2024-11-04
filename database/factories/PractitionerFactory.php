@@ -23,6 +23,7 @@ class PractitionerFactory extends Factory
     {
         return [
             'namaPractitioner' => $this->faker->word(),
+            'nikPractitioner' => $this->faker->word(),
             'practitioner_group_id' => PractitionerGroup::factory(),
         ];
     }

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->integer('nomorRm');
             $table->string('noKartu', 13);
             $table->string('nama');
-            $table->string('hubunganKeluarga');
             $table->char('sex', 1);
             $table->date('tglLahir');
             $table->integer('jnsPeserta');
@@ -31,7 +30,7 @@ return new class extends Migration
             $table->integer('updated_by');
             $table->dateTime('deleted_at');
             $table->integer('deleted_by');
-            $table->foreignId('kelurahan_id');
+            $table->foreignId('KD_KELURAHAN');
             $table->timestamps();
         });
     }

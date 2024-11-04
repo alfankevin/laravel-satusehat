@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\Kelurahan;
+use App\Models\KDKELURAHAN;
 use App\Models\Pasien;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -47,7 +47,6 @@ final class PasienControllerTest extends TestCase
         $nomorRm = $this->faker->numberBetween(-10000, 10000);
         $noKartu = $this->faker->word();
         $nama = $this->faker->word();
-        $hubunganKeluarga = $this->faker->word();
         $sex = $this->faker->randomLetter();
         $tglLahir = Carbon::parse($this->faker->date());
         $jnsPeserta = $this->faker->numberBetween(-10000, 10000);
@@ -62,13 +61,12 @@ final class PasienControllerTest extends TestCase
         $updated_by = $this->faker->numberBetween(-10000, 10000);
         $deleted_at = Carbon::parse($this->faker->dateTime());
         $deleted_by = $this->faker->numberBetween(-10000, 10000);
-        $kelurahan = Kelurahan::factory()->create();
+        $KD_KELURAHAN = KDKELURAHAN::factory()->create();
 
         $response = $this->post(route('pasiens.store'), [
             'nomorRm' => $nomorRm,
             'noKartu' => $noKartu,
             'nama' => $nama,
-            'hubunganKeluarga' => $hubunganKeluarga,
             'sex' => $sex,
             'tglLahir' => $tglLahir->toDateString(),
             'jnsPeserta' => $jnsPeserta,
@@ -83,14 +81,13 @@ final class PasienControllerTest extends TestCase
             'updated_by' => $updated_by,
             'deleted_at' => $deleted_at->toDateTimeString(),
             'deleted_by' => $deleted_by,
-            'kelurahan_id' => $kelurahan->id,
+            'KD_KELURAHAN' => $KD_KELURAHAN->id,
         ]);
 
         $pasiens = Pasien::query()
             ->where('nomorRm', $nomorRm)
             ->where('noKartu', $noKartu)
             ->where('nama', $nama)
-            ->where('hubunganKeluarga', $hubunganKeluarga)
             ->where('sex', $sex)
             ->where('tglLahir', $tglLahir)
             ->where('jnsPeserta', $jnsPeserta)
@@ -105,7 +102,7 @@ final class PasienControllerTest extends TestCase
             ->where('updated_by', $updated_by)
             ->where('deleted_at', $deleted_at)
             ->where('deleted_by', $deleted_by)
-            ->where('kelurahan_id', $kelurahan->id)
+            ->where('KD_KELURAHAN', $KD_KELURAHAN->id)
             ->get();
         $this->assertCount(1, $pasiens);
         $pasien = $pasiens->first();
@@ -131,7 +128,6 @@ final class PasienControllerTest extends TestCase
         $nomorRm = $this->faker->numberBetween(-10000, 10000);
         $noKartu = $this->faker->word();
         $nama = $this->faker->word();
-        $hubunganKeluarga = $this->faker->word();
         $sex = $this->faker->randomLetter();
         $tglLahir = Carbon::parse($this->faker->date());
         $jnsPeserta = $this->faker->numberBetween(-10000, 10000);
@@ -146,13 +142,12 @@ final class PasienControllerTest extends TestCase
         $updated_by = $this->faker->numberBetween(-10000, 10000);
         $deleted_at = Carbon::parse($this->faker->dateTime());
         $deleted_by = $this->faker->numberBetween(-10000, 10000);
-        $kelurahan = Kelurahan::factory()->create();
+        $KD_KELURAHAN = KDKELURAHAN::factory()->create();
 
         $response = $this->put(route('pasiens.update', $pasien), [
             'nomorRm' => $nomorRm,
             'noKartu' => $noKartu,
             'nama' => $nama,
-            'hubunganKeluarga' => $hubunganKeluarga,
             'sex' => $sex,
             'tglLahir' => $tglLahir->toDateString(),
             'jnsPeserta' => $jnsPeserta,
@@ -167,14 +162,13 @@ final class PasienControllerTest extends TestCase
             'updated_by' => $updated_by,
             'deleted_at' => $deleted_at->toDateTimeString(),
             'deleted_by' => $deleted_by,
-            'kelurahan_id' => $kelurahan->id,
+            'KD_KELURAHAN' => $KD_KELURAHAN->id,
         ]);
 
         $pasiens = Pasien::query()
             ->where('nomorRm', $nomorRm)
             ->where('noKartu', $noKartu)
             ->where('nama', $nama)
-            ->where('hubunganKeluarga', $hubunganKeluarga)
             ->where('sex', $sex)
             ->where('tglLahir', $tglLahir)
             ->where('jnsPeserta', $jnsPeserta)
@@ -189,7 +183,7 @@ final class PasienControllerTest extends TestCase
             ->where('updated_by', $updated_by)
             ->where('deleted_at', $deleted_at)
             ->where('deleted_by', $deleted_by)
-            ->where('kelurahan_id', $kelurahan->id)
+            ->where('KD_KELURAHAN', $KD_KELURAHAN->id)
             ->get();
         $this->assertCount(1, $pasiens);
         $pasien = $pasiens->first();

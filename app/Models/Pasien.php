@@ -19,7 +19,6 @@ class Pasien extends Model
         'nomorRm',
         'noKartu',
         'nama',
-        'hubunganKeluarga',
         'sex',
         'tglLahir',
         'jnsPeserta',
@@ -33,7 +32,7 @@ class Pasien extends Model
         'created_by',
         'updated_by',
         'deleted_by',
-        'kelurahan_id',
+        'KD_KELURAHAN',
     ];
 
     /**
@@ -46,11 +45,11 @@ class Pasien extends Model
         'tglLahir' => 'date',
         'aktif' => 'boolean',
         'deleted_at' => 'datetime',
-        'kelurahan_id' => 'integer',
+        'KD_KELURAHAN' => 'integer',
     ];
 
-    public function kelurahan(): BelongsTo
+    public function kDKELURAHAN(): BelongsTo
     {
-        return $this->belongsTo(Kelurahan::class);
+        return $this->belongsTo(KDKELURAHAN::class);
     }
 }

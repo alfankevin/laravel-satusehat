@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kecamatans', function (Blueprint $table) {
+        Schema::create('provinsis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->foreignId('kabupaten_id');
+            $table->string('KD_PROVINSI');
+            $table->string('PROVINSI');
+            $table->string('ninput_oleh');
+            $table->string('ninput_tgl');
+            $table->string('nupdate_oleh');
+            $table->string('nupdate_tgl');
+            $table->unique('KD_PROVINSI');
             $table->timestamps();
         });
     }
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kecamatans');
+        Schema::dropIfExists('provinsis');
     }
 };

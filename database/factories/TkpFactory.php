@@ -21,8 +21,8 @@ class TkpFactory extends Factory
     public function definition(): array
     {
         return [
-            'namaTkp' => $this->faker->word(),
-            'kodeTkp' => $this->faker->word(),
+            'nmTkp' => $this->faker->word(),
+            'kdTkp' => $this->faker->word(),
         ];
     }
 }

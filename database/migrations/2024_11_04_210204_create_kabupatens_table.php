@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('kabupatens', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->foreignId('provinsi_id');
+            $table->string('KD_KABUPATEN');
+            $table->string('KD_PROVINSI');
+            $table->string('KABUPATEN');
+            $table->string('ninput_oleh');
+            $table->string('ninput_tgl');
+            $table->string('nupdate_oleh');
+            $table->string('nupdate_tgl');
+            $table->unique('KD_KABUPATEN');
             $table->timestamps();
         });
     }

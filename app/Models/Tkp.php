@@ -16,8 +16,8 @@ class Tkp extends Model
      * @var array
      */
     protected $fillable = [
-        'namaTkp',
-        'kodeTkp',
+        'nmTkp',
+        'kdTkp',
     ];
 
     /**

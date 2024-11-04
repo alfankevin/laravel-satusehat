@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Kelurahan;
+use App\Models\KDKELURAHAN;
 use App\Models\Pasien;
 
 class PasienFactory extends Factory
@@ -25,7 +25,6 @@ class PasienFactory extends Factory
             'nomorRm' => $this->faker->numberBetween(-10000, 10000),
             'noKartu' => $this->faker->regexify('[A-Za-z0-9]{13}'),
             'nama' => $this->faker->word(),
-            'hubunganKeluarga' => $this->faker->word(),
             'sex' => $this->faker->randomLetter(),
             'tglLahir' => $this->faker->date(),
             'jnsPeserta' => $this->faker->numberBetween(-10000, 10000),
@@ -40,7 +39,7 @@ class PasienFactory extends Factory
             'updated_by' => $this->faker->numberBetween(-10000, 10000),
             'deleted_at' => $this->faker->dateTime(),
             'deleted_by' => $this->faker->numberBetween(-10000, 10000),
-            'kelurahan_id' => Kelurahan::factory(),
+            'KD_KELURAHAN' => KDKELURAHAN::factory(),
         ];
     }
 }

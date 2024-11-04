@@ -23,7 +23,6 @@ class PasienUpdateRequest extends FormRequest
             'nomorRm' => ['required', 'integer'],
             'noKartu' => ['required', 'string', 'max:13'],
             'nama' => ['required', 'string'],
-            'hubunganKeluarga' => ['required', 'string'],
             'sex' => ['required', 'string', 'max:1'],
             'tglLahir' => ['required', 'date'],
             'jnsPeserta' => ['required', 'integer'],
@@ -38,7 +37,7 @@ class PasienUpdateRequest extends FormRequest
             'updated_by' => ['required', 'integer'],
             'deleted_at' => ['required'],
             'deleted_by' => ['required', 'integer'],
-            'kelurahan_id' => ['required', 'integer', 'exists:kelurahans,id'],
+            'KD_KELURAHAN' => ['required'],
         ];
     }
 }
