@@ -29,6 +29,7 @@ class Pasien extends Model
         'pstPrb',
         'aktif',
         'ketAktif',
+        'alamat',
         'created_by',
         'updated_by',
         'deleted_by',

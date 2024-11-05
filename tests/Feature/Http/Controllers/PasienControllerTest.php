@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\KDKELURAHAN;
 use App\Models\Pasien;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -57,11 +56,7 @@ final class PasienControllerTest extends TestCase
         $pstPrb = $this->faker->word();
         $aktif = $this->faker->boolean();
         $ketAktif = $this->faker->word();
-        $created_by = $this->faker->numberBetween(-10000, 10000);
-        $updated_by = $this->faker->numberBetween(-10000, 10000);
-        $deleted_at = Carbon::parse($this->faker->dateTime());
-        $deleted_by = $this->faker->numberBetween(-10000, 10000);
-        $KD_KELURAHAN = KDKELURAHAN::factory()->create();
+        $alamat = $this->faker->word();
 
         $response = $this->post(route('pasiens.store'), [
             'nomorRm' => $nomorRm,
@@ -77,11 +72,7 @@ final class PasienControllerTest extends TestCase
             'pstPrb' => $pstPrb,
             'aktif' => $aktif,
             'ketAktif' => $ketAktif,
-            'created_by' => $created_by,
-            'updated_by' => $updated_by,
-            'deleted_at' => $deleted_at->toDateTimeString(),
-            'deleted_by' => $deleted_by,
-            'KD_KELURAHAN' => $KD_KELURAHAN->id,
+            'alamat' => $alamat,
         ]);
 
         $pasiens = Pasien::query()
@@ -98,11 +89,7 @@ final class PasienControllerTest extends TestCase
             ->where('pstPrb', $pstPrb)
             ->where('aktif', $aktif)
             ->where('ketAktif', $ketAktif)
-            ->where('created_by', $created_by)
-            ->where('updated_by', $updated_by)
-            ->where('deleted_at', $deleted_at)
-            ->where('deleted_by', $deleted_by)
-            ->where('KD_KELURAHAN', $KD_KELURAHAN->id)
+            ->where('alamat', $alamat)
             ->get();
         $this->assertCount(1, $pasiens);
         $pasien = $pasiens->first();
@@ -138,11 +125,7 @@ final class PasienControllerTest extends TestCase
         $pstPrb = $this->faker->word();
         $aktif = $this->faker->boolean();
         $ketAktif = $this->faker->word();
-        $created_by = $this->faker->numberBetween(-10000, 10000);
-        $updated_by = $this->faker->numberBetween(-10000, 10000);
-        $deleted_at = Carbon::parse($this->faker->dateTime());
-        $deleted_by = $this->faker->numberBetween(-10000, 10000);
-        $KD_KELURAHAN = KDKELURAHAN::factory()->create();
+        $alamat = $this->faker->word();
 
         $response = $this->put(route('pasiens.update', $pasien), [
             'nomorRm' => $nomorRm,
@@ -158,11 +141,7 @@ final class PasienControllerTest extends TestCase
             'pstPrb' => $pstPrb,
             'aktif' => $aktif,
             'ketAktif' => $ketAktif,
-            'created_by' => $created_by,
-            'updated_by' => $updated_by,
-            'deleted_at' => $deleted_at->toDateTimeString(),
-            'deleted_by' => $deleted_by,
-            'KD_KELURAHAN' => $KD_KELURAHAN->id,
+            'alamat' => $alamat,
         ]);
 
         $pasiens = Pasien::query()
@@ -179,11 +158,7 @@ final class PasienControllerTest extends TestCase
             ->where('pstPrb', $pstPrb)
             ->where('aktif', $aktif)
             ->where('ketAktif', $ketAktif)
-            ->where('created_by', $created_by)
-            ->where('updated_by', $updated_by)
-            ->where('deleted_at', $deleted_at)
-            ->where('deleted_by', $deleted_by)
-            ->where('KD_KELURAHAN', $KD_KELURAHAN->id)
+            ->where('alamat', $alamat)
             ->get();
         $this->assertCount(1, $pasiens);
         $pasien = $pasiens->first();

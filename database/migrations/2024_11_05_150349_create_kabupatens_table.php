@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('provinsis', function (Blueprint $table) {
+        Schema::create('kabupatens', function (Blueprint $table) {
             $table->id();
+            $table->string('KD_KABUPATEN');
             $table->string('KD_PROVINSI');
-            $table->string('PROVINSI');
-            $table->string('ninput_oleh');
-            $table->string('ninput_tgl');
-            $table->string('nupdate_oleh');
-            $table->string('nupdate_tgl');
-            $table->unique('KD_PROVINSI');
+            $table->string('KABUPATEN');
+            $table->string('ninput_oleh')->nullable();
+            $table->string('ninput_tgl')->nullable();
+            $table->string('nupdate_oleh')->nullable();
+            $table->string('nupdate_tgl')->nullable();
+            $table->unique('KD_KABUPATEN');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('provinsis');
+        Schema::dropIfExists('kabupatens');
     }
 };

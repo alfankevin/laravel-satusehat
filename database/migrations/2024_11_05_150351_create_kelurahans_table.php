@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('KD_KELURAHAN');
             $table->string('KD_KECAMATAN');
             $table->string('KELURAHAN');
-            $table->string('ninput_oleh');
-            $table->string('ninput_tgl');
-            $table->string('nupdate_oleh');
-            $table->string('nupdate_tgl');
+            $table->string('ninput_oleh')->nullable();
+            $table->string('ninput_tgl')->nullable();
+            $table->string('nupdate_oleh')->nullable();
+            $table->string('nupdate_tgl')->nullable();
             $table->unique('KD_KELURAHAN');
             $table->timestamps();
         });

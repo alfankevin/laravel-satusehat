@@ -13,9 +13,17 @@ class PasienController extends Controller
 {
     public function index(Request $request): View
     {
-        $pasiens = Pasien::all();
+        $pasiens = Pasien::orderByDesc('id')->get();
 
-        return view('pasien.index', compact('pasiens'));
+        return view('dashboard.main-menu.pasien.index', compact('pasiens'));
+    }
+
+    public function create(Request $request): View
+    {
+        $latestPasien = Pasien::orderBy('nomorRm', 'desc')->first();
+        $nomorRm = $latestPasien->nomorRm + 1;
+
+        return view('dashboard.main-menu.pasien.create', compact('nomorRm'));
     }
 
     public function store(PasienStoreRequest $request): RedirectResponse

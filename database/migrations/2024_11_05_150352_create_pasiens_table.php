@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
             $table->integer('nomorRm');
-            $table->string('noKartu', 13);
+            $table->string('noKartu');
             $table->string('nama');
             $table->char('sex', 1);
             $table->date('tglLahir');
@@ -26,11 +26,12 @@ return new class extends Migration
             $table->string('pstPrb');
             $table->boolean('aktif');
             $table->string('ketAktif');
-            $table->integer('created_by');
-            $table->integer('updated_by');
-            $table->dateTime('deleted_at');
-            $table->integer('deleted_by');
-            $table->foreignId('KD_KELURAHAN');
+            $table->string('alamat');
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->dateTime('deleted_at')->nullable();
+            $table->integer('deleted_by')->nullable();
+            $table->foreignId('KD_KELURAHAN')->nullable();
             $table->timestamps();
         });
     }
