@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Exports\TindakanExport;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\PemeriksaanController;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -17,8 +18,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/pasien-create', [PasienController::class, 'create'])->name('pasien.create');
     Route::resource('kunjungan', PendaftaranController::class);
     Route::get('/kunjungan-create', [PendaftaranController::class, 'create'])->name('kunjungan.create');
-    Route::view('/antrian', 'dashboard.main-menu.antrian.index')->name('antrian.index');
-    Route::view('/antrian-pemeriksaan', 'dashboard.main-menu.antrian.pemeriksaan')->name('antrian.pemeriksaan');
+    Route::resource('antrian', PemeriksaanController::class);
+    Route::get('/antrian-pemeriksaan/{id}', [PemeriksaanController::class, 'create'])->name('antrian.pemeriksaan');
     Route::view('/farmasi', 'dashboard.main-menu.farmasi.index')->name('farmasi.index');
     Route::view('/kasir', 'dashboard.main-menu.kasir.index')->name('kasir.index');
 
@@ -36,10 +37,3 @@ Route::get('/export-tindakan', function () {
 })->name('export.tindakan');
 
 require __DIR__ . '/auth.php';
-
-
-Route::resource('pasiens', App\Http\Controllers\PasienController::class)->except('create', 'edit', 'show');
-
-Route::resource('practitioners', App\Http\Controllers\PractitionerController::class)->except('create', 'edit', 'show');
-
-Route::resource('pendaftarans', App\Http\Controllers\PendaftaranController::class)->except('create', 'edit', 'show');
