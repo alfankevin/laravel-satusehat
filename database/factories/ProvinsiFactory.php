@@ -21,12 +21,7 @@ class ProvinsiFactory extends Factory
     public function definition(): array
     {
         return [
-            'KD_PROVINSI' => $this->faker->word(),
-            'PROVINSI' => $this->faker->word(),
-            'ninput_oleh' => $this->faker->word(),
-            'ninput_tgl' => $this->faker->word(),
-            'nupdate_oleh' => $this->faker->word(),
-            'nupdate_tgl' => $this->faker->word(),
+            'nama' => $this->faker->word(),
         ];
     }
 }

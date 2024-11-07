@@ -44,18 +44,15 @@ final class PractitionerControllerTest extends TestCase
     public function store_saves_and_redirects(): void
     {
         $namaPractitioner = $this->faker->word();
-        $nikPractitioner = $this->faker->word();
         $practitioner_group = PractitionerGroup::factory()->create();
 
         $response = $this->post(route('practitioners.store'), [
             'namaPractitioner' => $namaPractitioner,
-            'nikPractitioner' => $nikPractitioner,
             'practitioner_group_id' => $practitioner_group->id,
         ]);
 
         $practitioners = Practitioner::query()
             ->where('namaPractitioner', $namaPractitioner)
-            ->where('nikPractitioner', $nikPractitioner)
             ->where('practitioner_group_id', $practitioner_group->id)
             ->get();
         $this->assertCount(1, $practitioners);
@@ -80,18 +77,15 @@ final class PractitionerControllerTest extends TestCase
     {
         $practitioner = Practitioner::factory()->create();
         $namaPractitioner = $this->faker->word();
-        $nikPractitioner = $this->faker->word();
         $practitioner_group = PractitionerGroup::factory()->create();
 
         $response = $this->put(route('practitioners.update', $practitioner), [
             'namaPractitioner' => $namaPractitioner,
-            'nikPractitioner' => $nikPractitioner,
             'practitioner_group_id' => $practitioner_group->id,
         ]);
 
         $practitioners = Practitioner::query()
             ->where('namaPractitioner', $namaPractitioner)
-            ->where('nikPractitioner', $nikPractitioner)
             ->where('practitioner_group_id', $practitioner_group->id)
             ->get();
         $this->assertCount(1, $practitioners);

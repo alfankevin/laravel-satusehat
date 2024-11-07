@@ -17,7 +17,6 @@ class Practitioner extends Model
      */
     protected $fillable = [
         'namaPractitioner',
-        'nikPractitioner',
         'practitioner_group_id',
     ];
 

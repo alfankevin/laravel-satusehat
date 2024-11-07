@@ -6,7 +6,6 @@ use App\Models\Pasien;
 use App\Models\Pendaftaran;
 use App\Models\Poli;
 use App\Models\Practitioner;
-use App\Models\Tkp;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Carbon;
@@ -48,25 +47,67 @@ final class PendaftaranControllerTest extends TestCase
     public function store_saves_and_redirects(): void
     {
         $tglDaftar = Carbon::parse($this->faker->date());
+        $keluhan = $this->faker->word();
+        $kunjSakit = $this->faker->word();
+        $sistole = $this->faker->randomFloat(/** float_attributes **/);
+        $diastole = $this->faker->randomFloat(/** float_attributes **/);
+        $beratBadan = $this->faker->randomFloat(/** float_attributes **/);
+        $tinggiBadan = $this->faker->randomFloat(/** float_attributes **/);
+        $respRate = $this->faker->randomFloat(/** float_attributes **/);
+        $lingkarPerut = $this->faker->randomFloat(/** float_attributes **/);
+        $heartRate = $this->faker->randomFloat(/** float_attributes **/);
+        $rujukBalik = $this->faker->numberBetween(-10000, 10000);
+        $kdTkp = $this->faker->numberBetween(-10000, 10000);
+        $created_by = $this->faker->numberBetween(-10000, 10000);
+        $updated_by = $this->faker->numberBetween(-10000, 10000);
+        $deleted_at = Carbon::parse($this->faker->dateTime());
+        $deleted_by = $this->faker->numberBetween(-10000, 10000);
         $pasien = Pasien::factory()->create();
         $poli = Poli::factory()->create();
         $practitioner = Practitioner::factory()->create();
-        $tkp = Tkp::factory()->create();
 
         $response = $this->post(route('pendaftarans.store'), [
             'tglDaftar' => $tglDaftar->toDateString(),
+            'keluhan' => $keluhan,
+            'kunjSakit' => $kunjSakit,
+            'sistole' => $sistole,
+            'diastole' => $diastole,
+            'beratBadan' => $beratBadan,
+            'tinggiBadan' => $tinggiBadan,
+            'respRate' => $respRate,
+            'lingkarPerut' => $lingkarPerut,
+            'heartRate' => $heartRate,
+            'rujukBalik' => $rujukBalik,
+            'kdTkp' => $kdTkp,
+            'created_by' => $created_by,
+            'updated_by' => $updated_by,
+            'deleted_at' => $deleted_at->toDateTimeString(),
+            'deleted_by' => $deleted_by,
             'pasien_id' => $pasien->id,
             'poli_id' => $poli->id,
             'practitioner_id' => $practitioner->id,
-            'tkp_id' => $tkp->id,
         ]);
 
         $pendaftarans = Pendaftaran::query()
             ->where('tglDaftar', $tglDaftar)
+            ->where('keluhan', $keluhan)
+            ->where('kunjSakit', $kunjSakit)
+            ->where('sistole', $sistole)
+            ->where('diastole', $diastole)
+            ->where('beratBadan', $beratBadan)
+            ->where('tinggiBadan', $tinggiBadan)
+            ->where('respRate', $respRate)
+            ->where('lingkarPerut', $lingkarPerut)
+            ->where('heartRate', $heartRate)
+            ->where('rujukBalik', $rujukBalik)
+            ->where('kdTkp', $kdTkp)
+            ->where('created_by', $created_by)
+            ->where('updated_by', $updated_by)
+            ->where('deleted_at', $deleted_at)
+            ->where('deleted_by', $deleted_by)
             ->where('pasien_id', $pasien->id)
             ->where('poli_id', $poli->id)
             ->where('practitioner_id', $practitioner->id)
-            ->where('tkp_id', $tkp->id)
             ->get();
         $this->assertCount(1, $pendaftarans);
         $pendaftaran = $pendaftarans->first();
@@ -90,25 +131,67 @@ final class PendaftaranControllerTest extends TestCase
     {
         $pendaftaran = Pendaftaran::factory()->create();
         $tglDaftar = Carbon::parse($this->faker->date());
+        $keluhan = $this->faker->word();
+        $kunjSakit = $this->faker->word();
+        $sistole = $this->faker->randomFloat(/** float_attributes **/);
+        $diastole = $this->faker->randomFloat(/** float_attributes **/);
+        $beratBadan = $this->faker->randomFloat(/** float_attributes **/);
+        $tinggiBadan = $this->faker->randomFloat(/** float_attributes **/);
+        $respRate = $this->faker->randomFloat(/** float_attributes **/);
+        $lingkarPerut = $this->faker->randomFloat(/** float_attributes **/);
+        $heartRate = $this->faker->randomFloat(/** float_attributes **/);
+        $rujukBalik = $this->faker->numberBetween(-10000, 10000);
+        $kdTkp = $this->faker->numberBetween(-10000, 10000);
+        $created_by = $this->faker->numberBetween(-10000, 10000);
+        $updated_by = $this->faker->numberBetween(-10000, 10000);
+        $deleted_at = Carbon::parse($this->faker->dateTime());
+        $deleted_by = $this->faker->numberBetween(-10000, 10000);
         $pasien = Pasien::factory()->create();
         $poli = Poli::factory()->create();
         $practitioner = Practitioner::factory()->create();
-        $tkp = Tkp::factory()->create();
 
         $response = $this->put(route('pendaftarans.update', $pendaftaran), [
             'tglDaftar' => $tglDaftar->toDateString(),
+            'keluhan' => $keluhan,
+            'kunjSakit' => $kunjSakit,
+            'sistole' => $sistole,
+            'diastole' => $diastole,
+            'beratBadan' => $beratBadan,
+            'tinggiBadan' => $tinggiBadan,
+            'respRate' => $respRate,
+            'lingkarPerut' => $lingkarPerut,
+            'heartRate' => $heartRate,
+            'rujukBalik' => $rujukBalik,
+            'kdTkp' => $kdTkp,
+            'created_by' => $created_by,
+            'updated_by' => $updated_by,
+            'deleted_at' => $deleted_at->toDateTimeString(),
+            'deleted_by' => $deleted_by,
             'pasien_id' => $pasien->id,
             'poli_id' => $poli->id,
             'practitioner_id' => $practitioner->id,
-            'tkp_id' => $tkp->id,
         ]);
 
         $pendaftarans = Pendaftaran::query()
             ->where('tglDaftar', $tglDaftar)
+            ->where('keluhan', $keluhan)
+            ->where('kunjSakit', $kunjSakit)
+            ->where('sistole', $sistole)
+            ->where('diastole', $diastole)
+            ->where('beratBadan', $beratBadan)
+            ->where('tinggiBadan', $tinggiBadan)
+            ->where('respRate', $respRate)
+            ->where('lingkarPerut', $lingkarPerut)
+            ->where('heartRate', $heartRate)
+            ->where('rujukBalik', $rujukBalik)
+            ->where('kdTkp', $kdTkp)
+            ->where('created_by', $created_by)
+            ->where('updated_by', $updated_by)
+            ->where('deleted_at', $deleted_at)
+            ->where('deleted_by', $deleted_by)
             ->where('pasien_id', $pasien->id)
             ->where('poli_id', $poli->id)
             ->where('practitioner_id', $practitioner->id)
-            ->where('tkp_id', $tkp->id)
             ->get();
         $this->assertCount(1, $pendaftarans);
         $pendaftaran = $pendaftarans->first();

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Kabupaten;
+use App\Models\Provinsi;
 
 class KabupatenFactory extends Factory
 {
@@ -21,13 +22,8 @@ class KabupatenFactory extends Factory
     public function definition(): array
     {
         return [
-            'KD_KABUPATEN' => $this->faker->word(),
-            'KD_PROVINSI' => $this->faker->word(),
-            'KABUPATEN' => $this->faker->word(),
-            'ninput_oleh' => $this->faker->word(),
-            'ninput_tgl' => $this->faker->word(),
-            'nupdate_oleh' => $this->faker->word(),
-            'nupdate_tgl' => $this->faker->word(),
+            'nama' => $this->faker->word(),
+            'provinsi_id' => Provinsi::factory(),
         ];
     }
 }
