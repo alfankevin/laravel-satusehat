@@ -25,34 +25,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data Rows -->
-                    <tr>
-                        <td class="text-center align-middle">0</td>
-                        <td class="align-middle">K2024-000001</td>
-                        <td class="align-middle">Budi Santoso</td>
-                        <td class="align-middle">
-                            07-10-1989 <br>
-                            Laki-laki
-                        </td>
-                        <td class="align-middle">
-                            NIK: 1234567890 <br>
-                            No Kartu: 1234567890
-                        </td>
-                        <td class="text-start align-middle">081234567890</td>
-                        <td class="align-middle">Surabaya</td>
-                        <td class="text-center align-middle">
-                            <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
-                            <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
-                            <form action="" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Apakah Anda yakin untuk menghapus obat ini?')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
                     @foreach ($pasiens as $key => $pasien)
                     <tr>
                         <td class="text-center align-middle">{{ $key + 1 }}</td>
@@ -63,8 +35,8 @@
                             {{ $pasien->sex === 'L' ? 'Laki-laki' : 'Perempuan' }}
                         </td>
                         <td class="align-middle">
-                            <span style="white-space: nowrap">NIK: {{ $pasien->noKtp }}</span><br>
-                            <span style="white-space: nowrap">No Kartu: {{ $pasien->noKartu }}</span>
+                            <span style="white-space: nowrap"> {{ $pasien->noKtp }}</span><br>
+                            <span style="white-space: nowrap">{{ $pasien->noKartu }}</span>
                         </td>
                         <td class="text-start align-middle">{{ $pasien->noHp }}</td>
                         <td class="align-middle">{{ $pasien->alamat }}</td>

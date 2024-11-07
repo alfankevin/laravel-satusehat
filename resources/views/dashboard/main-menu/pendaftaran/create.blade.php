@@ -48,7 +48,7 @@
             <div class="mb-3 row">
                 <label for="tempat" class="col-sm-3 col-form-label fw-bold">Poli & Dokter</label>
                 <div class="col-sm-5">
-                    <select class="form-select" id="name" name="name" required>
+                    <select class="form-select " id="name" name="name" required>
                         <option value="">--Pilih Poli--</option>
                         <option value="1">Poli Umum</option>
                         <option value="1">Poli KIA</option>

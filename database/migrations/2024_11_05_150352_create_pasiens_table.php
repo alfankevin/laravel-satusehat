@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
-            $table->integer('nomorRm');
+            $table->bigInteger('nomorRm');
             $table->string('noKartu');
             $table->string('nama');
             $table->char('sex', 1);
