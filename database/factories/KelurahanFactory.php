@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 
 class KelurahanFactory extends Factory
@@ -22,8 +21,13 @@ class KelurahanFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => $this->faker->word(),
-            'kecamatan_id' => Kecamatan::factory(),
+            'KD_KELURAHAN' => $this->faker->word(),
+            'KD_KECAMATAN' => $this->faker->word(),
+            'KELURAHAN' => $this->faker->word(),
+            'ninput_oleh' => $this->faker->word(),
+            'ninput_tgl' => $this->faker->word(),
+            'nupdate_oleh' => $this->faker->word(),
+            'nupdate_tgl' => $this->faker->word(),
         ];
     }
 }

@@ -21,9 +21,8 @@ class PasienUpdateRequest extends FormRequest
     {
         return [
             'nomorRm' => ['required', 'integer'],
-            'noKartu' => ['required', 'string', 'max:13'],
+            'noKartu' => ['required', 'string'],
             'nama' => ['required', 'string'],
-            'hubunganKeluarga' => ['required', 'string'],
             'sex' => ['required', 'string', 'max:1'],
             'tglLahir' => ['required', 'date'],
             'jnsPeserta' => ['required', 'integer'],
@@ -34,14 +33,12 @@ class PasienUpdateRequest extends FormRequest
             'pstPrb' => ['required', 'string'],
             'aktif' => ['required'],
             'ketAktif' => ['required', 'string'],
-            'created_by' => ['required', 'integer'],
-            'updated_by' => ['required', 'integer'],
-            'deleted_at' => ['required'],
-            'deleted_by' => ['required', 'integer'],
-            'provinsi_id' => ['required', 'integer', 'exists:provinsis,id'],
-            'kabupaten_id' => ['required', 'integer', 'exists:kabupatens,id'],
-            'kecamatan_id' => ['required', 'integer', 'exists:kecamatans,id'],
-            'kelurahan_id' => ['required', 'integer', 'exists:kelurahans,id'],
+            'alamat' => ['required', 'string'],
+            'created_by' => ['nullable', 'integer'],
+            'updated_by' => ['nullable', 'integer'],
+            'deleted_at' => ['nullable'],
+            'deleted_by' => ['nullable', 'integer'],
+            'KD_KELURAHAN' => ['nullable'],
         ];
     }
 }
