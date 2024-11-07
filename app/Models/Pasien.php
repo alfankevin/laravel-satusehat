@@ -19,6 +19,7 @@ class Pasien extends Model
         'nomorRm',
         'noKartu',
         'nama',
+        'hubunganKeluarga',
         'sex',
         'tglLahir',
         'jnsPeserta',
@@ -29,11 +30,13 @@ class Pasien extends Model
         'pstPrb',
         'aktif',
         'ketAktif',
-        'alamat',
         'created_by',
         'updated_by',
         'deleted_by',
-        'KD_KELURAHAN',
+        'provinsi_id',
+        'kabupaten_id',
+        'kecamatan_id',
+        'kelurahan_id',
     ];
 
     /**
@@ -46,11 +49,29 @@ class Pasien extends Model
         'tglLahir' => 'date',
         'aktif' => 'boolean',
         'deleted_at' => 'datetime',
-        'KD_KELURAHAN' => 'integer',
+        'provinsi_id' => 'integer',
+        'kabupaten_id' => 'integer',
+        'kecamatan_id' => 'integer',
+        'kelurahan_id' => 'integer',
     ];
 
-    public function kDKELURAHAN(): BelongsTo
+    public function provinsi(): BelongsTo
     {
-        return $this->belongsTo(KDKELURAHAN::class);
+        return $this->belongsTo(Provinsi::class);
+    }
+
+    public function kabupaten(): BelongsTo
+    {
+        return $this->belongsTo(Kabupaten::class);
+    }
+
+    public function kecamatan(): BelongsTo
+    {
+        return $this->belongsTo(Kecamatan::class);
+    }
+
+    public function kelurahan(): BelongsTo
+    {
+        return $this->belongsTo(Kelurahan::class);
     }
 }

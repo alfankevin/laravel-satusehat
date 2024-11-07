@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Provinsi extends Model
 {
@@ -15,12 +16,7 @@ class Provinsi extends Model
      * @var array
      */
     protected $fillable = [
-        'KD_PROVINSI',
-        'PROVINSI',
-        'ninput_oleh',
-        'ninput_tgl',
-        'nupdate_oleh',
-        'nupdate_tgl',
+        'nama',
     ];
 
     /**
@@ -31,4 +27,9 @@ class Provinsi extends Model
     protected $casts = [
         'id' => 'integer',
     ];
+
+    public function kabupatens(): HasMany
+    {
+        return $this->hasMany(Kabupaten::class);
+    }
 }

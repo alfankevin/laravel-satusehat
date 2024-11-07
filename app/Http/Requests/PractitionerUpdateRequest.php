@@ -21,7 +21,6 @@ class PractitionerUpdateRequest extends FormRequest
     {
         return [
             'namaPractitioner' => ['required', 'string'],
-            'nikPractitioner' => ['required', 'string'],
             'practitioner_group_id' => ['required', 'integer', 'exists:practitioner_groups,id'],
         ];
     }

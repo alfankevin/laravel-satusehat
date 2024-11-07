@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Kelurahan extends Model
 {
@@ -15,13 +17,8 @@ class Kelurahan extends Model
      * @var array
      */
     protected $fillable = [
-        'KD_KELURAHAN',
-        'KD_KECAMATAN',
-        'KELURAHAN',
-        'ninput_oleh',
-        'ninput_tgl',
-        'nupdate_oleh',
-        'nupdate_tgl',
+        'nama',
+        'kecamatan_id',
     ];
 
     /**
@@ -31,5 +28,16 @@ class Kelurahan extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'kecamatan_id' => 'integer',
     ];
+
+    public function pasiens(): HasMany
+    {
+        return $this->hasMany(Pasien::class);
+    }
+
+    public function kecamatan(): BelongsTo
+    {
+        return $this->belongsTo(Kecamatan::class);
+    }
 }

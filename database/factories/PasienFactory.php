@@ -4,8 +4,11 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\KDKELURAHAN;
+use App\Models\Kabupaten;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use App\Models\Pasien;
+use App\Models\Provinsi;
 
 class PasienFactory extends Factory
 {
@@ -22,24 +25,28 @@ class PasienFactory extends Factory
     public function definition(): array
     {
         return [
-            'nomorRm' => date('Ymd') . str_pad($this->faker->unique()->numberBetween(1, 9999), 4, '0', STR_PAD_LEFT),
-            'noKartu' => $this->faker->numerify(str_repeat('#', 8)),
-            'nama' => $this->faker->name(),
-            'sex' => $this->faker->randomElement(['L', 'P']),
+            'nomorRm' => $this->faker->numberBetween(-10000, 10000),
+            'noKartu' => $this->faker->regexify('[A-Za-z0-9]{13}'),
+            'nama' => $this->faker->word(),
+            'hubunganKeluarga' => $this->faker->word(),
+            'sex' => $this->faker->randomLetter(),
             'tglLahir' => $this->faker->date(),
-            'jnsPeserta' => $this->faker->numberBetween(1, 10000),
-            'golDarah' => $this->faker->randomElement(['A', 'B', 'AB', 'O']),
-            'noHp' => '+6285' . $this->faker->numerify(str_repeat('#', 9)), 
-            'noKtp' => $this->faker->numerify(str_repeat('#', 16)),
+            'jnsPeserta' => $this->faker->numberBetween(-10000, 10000),
+            'golDarah' => $this->faker->word(),
+            'noHp' => $this->faker->word(),
+            'noKtp' => $this->faker->word(),
             'pstProl' => $this->faker->word(),
             'pstPrb' => $this->faker->word(),
             'aktif' => $this->faker->boolean(),
             'ketAktif' => $this->faker->word(),
-            'alamat' => $this->faker->address(),
-            'created_by' => $this->faker->numberBetween(1, 10000),
-            'updated_by' => $this->faker->numberBetween(1, 10000),
+            'created_by' => $this->faker->numberBetween(-10000, 10000),
+            'updated_by' => $this->faker->numberBetween(-10000, 10000),
             'deleted_at' => $this->faker->dateTime(),
-            'deleted_by' => $this->faker->numberBetween(1, 10000),
+            'deleted_by' => $this->faker->numberBetween(-10000, 10000),
+            'provinsi_id' => Provinsi::factory(),
+            'kabupaten_id' => Kabupaten::factory(),
+            'kecamatan_id' => Kecamatan::factory(),
+            'kelurahan_id' => Kelurahan::factory(),
         ];
     }
 }
