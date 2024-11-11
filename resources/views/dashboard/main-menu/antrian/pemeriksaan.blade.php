@@ -21,7 +21,7 @@
                                     Nomor RM
                                 </div>
                                 <div class="col-9">
-                                    : 000006
+                                    : {{ $pemeriksaan->pasien->nomorRm }}
                                 </div>
                                 <div class="col-3 fw-bold">
                                     Nama Pasien

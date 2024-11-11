@@ -15,47 +15,26 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>ID</th>
                         <th>Nomor RM</th>
                         <th>Nama Pasien</th>
                         <th>Tgl Lahir & JK</th>
+                        <th>Usia</th>
                         <th>NIK & No Kartu</th>
                         <th class="text-start">No HP</th>
                         <th>Alamat</th>
+                        <th>Kelurahan</th>
+                        <th>Kecamatan</th>
+                        <th>Kabupaten</th>
+                        <th>Provinsi</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data Rows -->
-                    <tr>
-                        <td class="text-center align-middle">0</td>
-                        <td class="align-middle">K2024-000001</td>
-                        <td class="align-middle">Budi Santoso</td>
-                        <td class="align-middle">
-                            07-10-1989 <br>
-                            Laki-laki
-                        </td>
-                        <td class="align-middle">
-                            NIK: 1234567890 <br>
-                            No Kartu: 1234567890
-                        </td>
-                        <td class="text-start align-middle">081234567890</td>
-                        <td class="align-middle">Surabaya</td>
-                        <td class="text-center align-middle">
-                            <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
-                            <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
-                            <form action="" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Apakah Anda yakin untuk menghapus obat ini?')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
                     @foreach ($pasiens as $key => $pasien)
                     <tr>
                         <td class="text-center align-middle">{{ $key + 1 }}</td>
+                        <td class="align-middle">{{ $pasien->id }}</td>
                         <td class="align-middle">{{ $pasien->nomorRm }}</td>
                         <td class="align-middle">{{ $pasien->nama }}</td>
                         <td class="align-middle">
@@ -63,12 +42,20 @@
                             {{ $pasien->sex === 'L' ? 'Laki-laki' : 'Perempuan' }}
                         </td>
                         <td class="align-middle">
-                            <span style="white-space: nowrap">NIK: {{ $pasien->noKtp }}</span><br>
-                            <span style="white-space: nowrap">No Kartu: {{ $pasien->noKartu }}</span>
+                            @php
+                            $usia = \Carbon\Carbon::parse($pasien->tglLahir);
+                            @endphp
+                            <span class="text-nowrap">{{ $usia->diff(\Carbon\Carbon::now())->format('%y tahun,') }}</span>
+                            <span class="text-nowrap">{{ $usia->diff(\Carbon\Carbon::now())->format('%m bulan,') }}</span>
+                            <span class="text-nowrap">{{ $usia->diff(\Carbon\Carbon::now())->format('%d hari') }}</span>
+                        </td>
+                        <td class="align-middle">
+                            <span class="text-nowrap">NIK: {{ $pasien->noKtp }}</span><br>
+                            <span class="text-nowrap">No Kartu: {{ $pasien->noKartu }}</span>
                         </td>
                         <td class="text-start align-middle">{{ $pasien->noHp }}</td>
                         <td class="align-middle">{{ $pasien->alamat }}</td>
-                        <td class="text-center align-middle" style="white-space: nowrap">
+                        <td class="text-center align-middle text-nowrap">
                             <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                             <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
                             <form action="" method="POST" style="display: inline;">
