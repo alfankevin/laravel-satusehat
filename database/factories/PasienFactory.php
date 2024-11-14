@@ -22,15 +22,15 @@ class PasienFactory extends Factory
     public function definition(): array
     {
         return [
-            'nomorRm' => $this->faker->numberBetween(1, 10000),
-            'noKartu' => $this->faker->word(),
-            'nama' => $this->faker->word(),
+            'nomorRm' => date('Ymd') . str_pad($this->faker->unique()->numberBetween(1, 9999), 4, '0', STR_PAD_LEFT),
+            'noKartu' => $this->faker->numerify(str_repeat('#', 8)),
+            'nama' => $this->faker->name(),
             'sex' => $this->faker->randomElement(['L', 'P']),
             'tglLahir' => $this->faker->date(),
             'jnsPeserta' => $this->faker->numberBetween(1, 10000),
             'golDarah' => $this->faker->randomElement(['A', 'B', 'AB', 'O']),
-            'noHp' => $this->faker->word(),
-            'noKtp' => $this->faker->word(),
+            'noHp' => '+6285' . $this->faker->numerify(str_repeat('#', 9)), 
+            'noKtp' => $this->faker->numerify(str_repeat('#', 16)),
             'pstProl' => $this->faker->word(),
             'pstPrb' => $this->faker->word(),
             'aktif' => $this->faker->boolean(),

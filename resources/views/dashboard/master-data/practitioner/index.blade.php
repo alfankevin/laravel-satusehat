@@ -84,7 +84,7 @@
                         <!-- Group field with Select2 -->
                         <div class="mb-3">
                             <label class="form-label">Group</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select class="form-control select2">
                                 <option selected="selected">Alabama</option>
                                 <option>Alaska</option>
                                 <option>California</option>
@@ -113,9 +113,3 @@
     </div>
 @endsection
 
-@section('scripts')
-    <script>
-        //Initialize Select2 Elements
-        $('.select2').select2()
-    </script>
-@endsection

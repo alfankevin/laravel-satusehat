@@ -37,3 +37,8 @@ Route::get('/export-tindakan', function () {
 })->name('export.tindakan');
 
 require __DIR__ . '/auth.php';
+
+
+Route::resource('pasiens', App\Http\Controllers\PasienController::class)->except('create', 'edit', 'show');
+Route::resource('practitioners', App\Http\Controllers\PractitionerController::class)->except('create', 'edit', 'show');
+Route::resource('pendaftarans', App\Http\Controllers\PendaftaranController::class)->except('create', 'edit', 'show');

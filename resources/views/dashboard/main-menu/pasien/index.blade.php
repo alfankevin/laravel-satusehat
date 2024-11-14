@@ -15,6 +15,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>ID</th>
                         <th>Nomor RM</th>
                         <th>Nama Pasien</th>
                         <th>Tgl Lahir & JK</th>
@@ -33,6 +34,7 @@
                     @foreach ($pasiens as $key => $pasien)
                     <tr>
                         <td class="text-center align-middle">{{ $key + 1 }}</td>
+                        <td class="align-middle">{{ $pasien->id }}</td>
                         <td class="align-middle">{{ $pasien->nomorRm }}</td>
                         <td class="align-middle">{{ $pasien->nama }}</td>
                         <td class="align-middle">
@@ -54,9 +56,9 @@
                         <td class="text-start align-middle">{{ $pasien->noHp }}</td>
                         <td class="align-middle">{{ $pasien->alamat }}</td>
                         <td class="align-middle text-capitalize">{{ ucfirst(strtolower($pasien->kelurahan->KELURAHAN)) }}</td>
-                        <td class="align-middle text-capitalize">Kelurahan</td>
-                        <td class="align-middle text-capitalize">Kelurahan</td>
-                        <td class="align-middle text-capitalize">Kelurahan</td>
+                        <td class="align-middle text-capitalize">Kecamatan</td>
+                        <td class="align-middle text-capitalize">Kabupaten</td>
+                        <td class="align-middle text-capitalize">Provinsi</td>
                         <td class="text-center align-middle text-nowrap">
                             <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                             <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
