@@ -83,6 +83,7 @@
 
                     <div class="d-flex flex-wrap gap-2">
                         <button class="btn btn-warning btn-sm"><i class="fas fa-notes-medical"></i> Assesment</button>
+                        <button class="btn btn-warning btn-sm"><i class="fas fa-notes-medical"></i> Catatan Medis</button>
                         <button class="btn btn-primary btn-sm"><i class="fas fa-capsules"></i> Obat Non Racikan</button>
                         <button class="btn btn-info btn-sm"><i class="fas fa-prescription-bottle-alt"></i> Obat
                             Racikan</button>
