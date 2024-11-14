@@ -14,19 +14,19 @@
             </a>
             <a class="nav-link {{ request()->routeIs('pasien.index') ? 'active' : '' }}" href="{{ route('pasien.index') }}">
                 <i class="fas fa-users icon"></i>
-                Daftar Pasien
+                Pasien
             </a>
             <a class="nav-link {{ request()->routeIs('kunjungan.index') ? 'active' : '' }}" href="{{ route('kunjungan.index') }}">
                 <i class="fas fa-calendar icon"></i>
-                Daftar Kunjungan
+                Pendaftaran
             </a>
             <a class="nav-link {{ request()->routeIs('antrian.index') ? 'active' : '' }}" href="{{ route('antrian.index') }}">
                 <i class="fas fa-stethoscope icon"></i>
-                Antrian Pemeriksaan
+                Pemeriksaan
             </a>
             {{-- <a class="nav-link {{ request()->routeIs('farmasi.index') ? 'active' : '' }}" href="{{ route('farmasi.index') }}">
-                <i class="fas fa-clipboard"></i>
-                Farmasi
+            <i class="fas fa-clipboard"></i>
+            Farmasi
             </a>
             <a class="nav-link {{ request()->routeIs('kasir.index') ? 'active' : '' }}" href="{{ route('kasir.index') }}">
                 <i class="fas fa-print"></i>
@@ -51,9 +51,9 @@
             <ul class="nav nav-treeview {{ request()->is(['obat', 'poli', 'diagnosa', 'tindakan', 'alamat','practitioner','practitioner-group']) ? 'd-block' : '' }}" id="formsDropdown" style="display: none;">
                 {{-- <li class="nav-item">
                     <a href="{{ route('obat.index') }}" class="nav-link {{ request()->routeIs('obat.index') ? 'active' : '' }}">
-                        <i class="bi bi-circle"></i>
-                        Data Obat
-                    </a>
+                <i class="bi bi-circle"></i>
+                Data Obat
+                </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('diagnosa.index') }}" class="nav-link {{ request()->routeIs('diagnosa.index') ? 'active' : '' }}">
@@ -113,7 +113,8 @@
         color: #adb5bd;
         padding-left: 5px;
     }
-    .nav-link i.icon{
+
+    .nav-link i.icon {
         width: 25px;
         text-align: center;
         padding-right: 13px;

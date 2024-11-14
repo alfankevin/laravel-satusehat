@@ -30,16 +30,22 @@
                                     : {{ $pemeriksaan->pasien->nama }}
                                 </div>
                                 <div class="col-3 fw-bold">
-                                    TTL Pasien
+                                    Tanggal Lahir
                                 </div>
                                 <div class="col-9">
-                                    : Tempat, {{ \Carbon\Carbon::parse($pemeriksaan->pasien->tglLahir)->format('d-m-Y') }}
+                                    : {{ \Carbon\Carbon::parse($pemeriksaan->pasien->tglLahir)->locale('id')->translatedFormat('d F Y') }}
+                                </div>
+                                <div class="col-3 fw-bold">
+                                    Usia
+                                </div>
+                                <div class="col-9">
+                                    : {{ \Carbon\Carbon::parse($pemeriksaan->pasien->tglLahir)->diff(\Carbon\Carbon::now())->format('%y tahun') }}
                                 </div>
                                 <div class="col-3 fw-bold">
                                     Alamat
                                 </div>
                                 <div class="col-9">
-                                    : Jepara 01/09
+                                    : {{ $pemeriksaan->pasien->alamat }}
                                 </div>
                                 <div class="col-3 fw-bold">
                                     Poli
@@ -49,6 +55,24 @@
                                 </div>
                                 <div class="col-3 fw-bold">
                                     Dokter
+                                </div>
+                                <div class="col-9">
+                                    : {{ $pemeriksaan->practitioner->namaPractitioner }}
+                                </div>
+                                <div class="col-3 fw-bold">
+                                    Tanggal Daftar
+                                </div>
+                                <div class="col-9">
+                                    : {{ \Carbon\Carbon::parse($pemeriksaan->tglDaftar)->format('d-m-Y') }}
+                                </div>
+                                <div class="col-3 fw-bold">
+                                    Jam Daftar
+                                </div>
+                                <div class="col-9">
+                                    : {{ \Carbon\Carbon::parse($pemeriksaan->created_at)->format('H:i') }}
+                                </div>
+                                <div class="col-3 fw-bold">
+                                    Dibuat Oleh
                                 </div>
                                 <div class="col-9">
                                     : {{ $pemeriksaan->practitioner->namaPractitioner }}
@@ -72,23 +96,23 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0 fw-bold">Assesment</h5>
+                    <h5 class="mb-0 fw-bold">Keluhan dan TTV</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('antrian.store') }}" method="POST">
                         @csrf
                         <div class="mb-3 row">
-                            <label for="anamnesa" class="col-sm-3 col-form-label fw-bold">Anamnesa</label>
+                            <label for="keluhan" class="col-sm-3 col-form-label fw-bold">Keluhan</label>
                             <div class="col-sm-9">
                                 <input type="hidden" name="id" value="{{ $pemeriksaan->id }}">
-                                <input type="text" class="form-control" id="anamnesa" name="keluhan" value="{{ $pemeriksaan->keluhan }}">
+                                <input type="text" class="form-control" id="keluhan" name="keluhan" value="{{ $pemeriksaan->keluhan }}">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="suhu" class="col-sm-3 col-form-label fw-bold">Suhu</label>
                             <div class="col-sm-9">
                                 <div class="input-group">
-                                    <input type="number" class="form-control">
+                                    <input type="number" class="form-control" name="suhu" value="{{ $pemeriksaan->suhu }}">
                                     <span class="input-group-text" id="basic-addon2"> C</span>
                                 </div>
                             </div>
@@ -119,13 +143,13 @@
                                         </div>
                                         <label for="" class="text-secondary">Lingkar Perut</label>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <!-- <div class="col-sm-6">
                                         <div class="input-group">
                                             <input type="number" class="form-control" value="20" disabled>
                                             <span class="input-group-text" id="basic-addon2">kg/m2</span>
                                         </div>
                                         <label for="" class="text-secondary">IMT</label>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

@@ -23,6 +23,7 @@ class PemeriksaanStoreRequest extends FormRequest
             'id' => ['nullable', 'integer'],
             'keluhan' => ['nullable', 'string'],
             'kunjSakit' => ['nullable', 'string'],
+            'suhu' => ['nullable', 'numeric'],
             'sistole' => ['nullable', 'numeric'],
             'diastole' => ['nullable', 'numeric'],
             'beratBadan' => ['nullable', 'numeric'],

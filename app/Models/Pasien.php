@@ -49,8 +49,8 @@ class Pasien extends Model
         'KD_KELURAHAN' => 'integer',
     ];
 
-    public function kDKELURAHAN(): BelongsTo
+    public function kelurahan(): BelongsTo
     {
-        return $this->belongsTo(KDKELURAHAN::class);
+        return $this->belongsTo(Kelurahan::class, 'KD_KELURAHAN');
     }
 }

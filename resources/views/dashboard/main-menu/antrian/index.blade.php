@@ -64,7 +64,9 @@
                     <tr>
                         <th class="text-center">No</th>
                         <th>No Antrian</th>
+                        <th>ID Pasien</th>
                         <th>Nama Pasien</th>
+                        <th>Nomor RM</th>
                         <th>Tanggal</th>
                         <th>Jam</th>
                         <th>Status</th>
@@ -73,46 +75,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data Dummy -->
-                    <tr>
-                        <td class="text-center align-middle">0</td>
-                        <td class="align-middle">A 02</td>
-                        <td class="align-middle">Mr. Candido Kautzer DDS</td>
-                        <td class="align-middle">07-10-2024</td>
-                        <td class="align-middle">12:03</td>
-                        <td class="align-middle"><span class="badge bg-info">Sedang Diperiksa</span></td>
-                        <td class="align-middle"><button class="btn btn-primary btn-sm"> <i class="fas fa-stethoscope"></i> Periksa (O)</button>
-                        </td>
-                        <td class="align-middle">
-                            <!-- Tombol Panggil -->
-                            <button class="btn btn-danger btn-panggil btn-sm" data-nomor="A 02">
-                                <i class="bi bi-megaphone-fill"></i> Panggil
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center align-middle">0</td>
-                        <td class="align-middle">A 03</td>
-                        <td class="align-middle">Budi Santoso</td>
-                        <td class="align-middle">07-10-2024</td>
-                        <td class="align-middle">12:30</td>
-                        <td class="align-middle"><span class="badge bg-danger">Belum Diperiksa</span></td>
-                        <td class="align-middle"><a href="{{ route('antrian.pemeriksaan', 1) }}" class="btn btn-primary btn-sm"> <i class="fas fa-stethoscope"></i> Periksa (S)</a>
-                        </td>
-                        <td class="align-middle">
-                            <!-- Tombol Panggil -->
-                            <button class="btn btn-danger btn-panggil btn-sm" data-nomor="A 02">
-                                <i class="bi bi-megaphone-fill"></i> Panggil
-                            </button>
-                        </td>
-                    </tr>
                     @foreach ($pendaftarans as $key => $pendaftaran)
                     <tr>
-                        <td class="text-center align-middle">{{ $pendaftaran->id }}</td>
+                        <td class="text-center align-middle">{{ $key + 1 }}</td>
                         <td class="align-middle">A 03</td>
+                        <td class="align-middle">{{ $pendaftaran->pasien->id }}</td>
                         <td class="align-middle">{{ $pendaftaran->pasien->nama }}</td>
+                        <td class="align-middle">{{ $pendaftaran->pasien->nomorRm }}</td>
                         <td class="align-middle">{{ \Carbon\Carbon::parse($pendaftaran->tglDaftar)->format('d-m-Y') }}</td>
-                        <td class="align-middle">12:30</td>
+                        <td class="align-middle">{{ \Carbon\Carbon::parse($pendaftaran->created_at)->format('H:i') }}</td>
                         <td class="align-middle"><span class="badge bg-danger">Belum Diperiksa</span></td>
                         <td class="align-middle"><a href="{{ route('antrian.pemeriksaan', $pendaftaran->id) }}" class="btn btn-primary btn-sm"> <i class="fas fa-stethoscope"></i> Periksa (S)</a>
                         </td>

@@ -31,6 +31,7 @@ class PendaftaranStoreRequest extends FormRequest
             'lingkarPerut' => ['nullable', 'numeric'],
             'heartRate' => ['nullable', 'numeric'],
             'rujukBalik' => ['nullable', 'integer'],
+            'status' => ['nullable', 'integer'],
             'created_by' => ['nullable', 'integer'],
             'updated_by' => ['nullable', 'integer'],
             'deleted_at' => ['nullable'],

@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kelurahan extends Model
+class Soap extends Model
 {
+    /** @use HasFactory<\Database\Factories\SoapFactory> */
     use HasFactory;
-
-    protected $primaryKey = 'KD_KELURAHAN';
 
     /**
      * The attributes that are mass assignable.
@@ -17,13 +16,12 @@ class Kelurahan extends Model
      * @var array
      */
     protected $fillable = [
-        'KD_KELURAHAN',
-        'KD_KECAMATAN',
-        'KELURAHAN',
-        'ninput_oleh',
-        'ninput_tgl',
-        'nupdate_oleh',
-        'nupdate_tgl',
+        'subyektif',
+        'assesment',
+        'instruksi',
+        'obyektif',
+        'plan',
+        'evaluasi',
     ];
 
     /**
