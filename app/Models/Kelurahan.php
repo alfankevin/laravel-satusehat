@@ -11,6 +11,8 @@ class Kelurahan extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'KD_KELURAHAN';
+
     /**
      * The attributes that are mass assignable.
      *

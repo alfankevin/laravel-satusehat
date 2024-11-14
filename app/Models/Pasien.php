@@ -55,23 +55,8 @@ class Pasien extends Model
         'kelurahan_id' => 'integer',
     ];
 
-    public function provinsi(): BelongsTo
-    {
-        return $this->belongsTo(Provinsi::class);
-    }
-
-    public function kabupaten(): BelongsTo
-    {
-        return $this->belongsTo(Kabupaten::class);
-    }
-
-    public function kecamatan(): BelongsTo
-    {
-        return $this->belongsTo(Kecamatan::class);
-    }
-
     public function kelurahan(): BelongsTo
     {
-        return $this->belongsTo(Kelurahan::class);
+        return $this->belongsTo(Kelurahan::class, 'KD_KELURAHAN');
     }
 }

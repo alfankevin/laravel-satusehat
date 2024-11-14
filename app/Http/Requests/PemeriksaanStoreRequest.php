@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PendaftaranStoreRequest extends FormRequest
+class PemeriksaanStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,9 +20,10 @@ class PendaftaranStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tglDaftar' => ['required', 'date'],
+            'id' => ['nullable', 'integer'],
             'keluhan' => ['nullable', 'string'],
             'kunjSakit' => ['nullable', 'string'],
+            'suhu' => ['nullable', 'numeric'],
             'sistole' => ['nullable', 'numeric'],
             'diastole' => ['nullable', 'numeric'],
             'beratBadan' => ['nullable', 'numeric'],
@@ -30,15 +31,6 @@ class PendaftaranStoreRequest extends FormRequest
             'respRate' => ['nullable', 'numeric'],
             'lingkarPerut' => ['nullable', 'numeric'],
             'heartRate' => ['nullable', 'numeric'],
-            'rujukBalik' => ['nullable', 'integer'],
-            'status' => ['nullable', 'integer'],
-            'created_by' => ['nullable', 'integer'],
-            'updated_by' => ['nullable', 'integer'],
-            'deleted_at' => ['nullable'],
-            'deleted_by' => ['nullable', 'integer'],
-            'pasien_id' => ['required', 'integer', 'exists:pasiens,id'],
-            'poli_id' => ['required', 'integer', 'exists:polis,id'],
-            'practitioner_id' => ['required', 'integer', 'exists:practitioners,id'],
         ];
     }
 }
