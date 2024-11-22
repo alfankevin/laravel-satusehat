@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Soap;
 use App\Models\Pasien;
 use App\Http\Requests\SoapStoreRequest;
+use App\Models\Pendaftaran;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -26,10 +27,10 @@ class SoapController extends Controller
     }
 
     public function store(SoapStoreRequest $request): RedirectResponse
-    {
-        $soap = Soap::create($request->validated());
+    {        
+        $pendaftaran = Pendaftaran::where('id', $request->input('id'))->update($request->validated());
 
-        return redirect()->route('soap.index');
+        return redirect()->back()->with('success', 'Input Pemeriksaan Success!');
     }
 
     public function update(SoapUpdateRequest $request, Soap $soap): RedirectResponse

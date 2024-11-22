@@ -5,6 +5,8 @@ use App\Exports\TindakanExport;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PemeriksaanController;
+use App\Http\Controllers\SoapController;
+use App\Models\Soap;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -19,6 +21,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('kunjungan', PendaftaranController::class);
     Route::get('/kunjungan-create', [PendaftaranController::class, 'create'])->name('kunjungan.create');
     Route::resource('antrian', PemeriksaanController::class);
+    Route::post('/soap', [SoapController::class, 'store'])->name('soap.store');
+    Route::view('/rekam-medis', 'dashboard.main-menu.rekam-medis.index')->name('rekam-medis.index');
     Route::get('/antrian-pemeriksaan/{id}', [PemeriksaanController::class, 'create'])->name('antrian.pemeriksaan');
     Route::view('/farmasi', 'dashboard.main-menu.farmasi.index')->name('farmasi.index');
     Route::view('/kasir', 'dashboard.main-menu.kasir.index')->name('kasir.index');

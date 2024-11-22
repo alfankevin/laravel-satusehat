@@ -35,6 +35,12 @@ return new class extends Migration
             $table->foreignId('poli_id');
             $table->foreignId('practitioner_id');
             $table->foreignId('tkp_id');
+            $table->string('subyektif')->nullable();
+            $table->string('assesment')->nullable();
+            $table->string('instruksi')->nullable();
+            $table->string('obyektif')->nullable();
+            $table->string('plan')->nullable();
+            $table->string('evaluasi')->nullable();
             $table->timestamps();
         });
     }

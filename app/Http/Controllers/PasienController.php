@@ -33,7 +33,7 @@ class PasienController extends Controller
     {
         $pasien = Pasien::create($request->validated());
 
-        return redirect()->route('pasien.index');
+        return redirect()->route('pasien.index')->with('success', 'Create Pasien Successfully!');
     }
 
     public function update(PasienUpdateRequest $request, Pasien $pasien): RedirectResponse
@@ -47,6 +47,6 @@ class PasienController extends Controller
     {
         $pasien->delete();
 
-        return redirect()->route('pasien.index');
+        return redirect()->route('pasien.index')->with('success', 'Delete Pasien Successfully!');
     }
 }

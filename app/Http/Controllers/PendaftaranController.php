@@ -18,7 +18,11 @@ class PendaftaranController extends Controller
     {
         $pendaftarans = Pendaftaran::with('pasien', 'poli', 'practitioner')->orderBy('tglDaftar')->get();
 
-        return view('dashboard.main-menu.pendaftaran.index', compact('pendaftarans'));
+        $polis = Poli::orderBy('namaPoli')->get();
+        $pasiens = Pasien::orderBy('nama')->get();
+        $practitioners = Practitioner::orderBy('namaPractitioner')->get();
+
+        return view('dashboard.main-menu.pendaftaran.index', compact('pendaftarans', 'polis', 'pasiens', 'practitioners'));
     }
 
     public function create(Request $request): View
@@ -32,10 +36,31 @@ class PendaftaranController extends Controller
 
     public function store(PendaftaranStoreRequest $request): RedirectResponse
     {
-        $pendaftaran = Pendaftaran::create($request->validated());
+        // Ambil noAntrian terakhir
+        $lastPendaftaran = Pendaftaran::latest('id')->first();
+        $lastNumber = 0;
 
-        return redirect()->route('kunjungan.index');
+        // Jika ada data sebelumnya, ambil angka terakhir dari noAntrian
+        if ($lastPendaftaran && preg_match('/A-(\d+)/', $lastPendaftaran->noAntrian, $matches)) {
+            $lastNumber = (int) $matches[1];
+        }
+
+        // Hitung nomor antrian baru
+        $newNumber = $lastNumber + 1;
+
+        // Format nomor antrian baru (contoh: A-01, A-02)
+        $newNoAntrian = 'A-' . str_pad($newNumber, 2, '0', STR_PAD_LEFT);
+
+        // Buat pendaftaran baru dengan noAntrian
+        $pendaftaran = Pendaftaran::create(array_merge(
+            $request->validated(),
+            ['noAntrian' => $newNoAntrian]
+        ));
+
+        // Redirect ke halaman kunjungan
+        return redirect()->route('kunjungan.index')->with('success', 'Create Kunjungan Successfully!');
     }
+
 
     public function update(PendaftaranUpdateRequest $request, Pendaftaran $pendaftaran): RedirectResponse
     {
@@ -48,6 +73,6 @@ class PendaftaranController extends Controller
     {
         $pendaftaran->delete();
 
-        return redirect()->route('kunjungan.index');
+        return redirect()->route('kunjungan.index')->with('success', 'Delete Kunjungan Successfully!');
     }
 }

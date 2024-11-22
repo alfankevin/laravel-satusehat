@@ -21,6 +21,7 @@ class PendaftaranStoreRequest extends FormRequest
     {
         return [
             'tglDaftar' => ['required', 'date'],
+            'noAntrian' => ['required', 'string'],
             'keluhan' => ['nullable', 'string'],
             'kunjSakit' => ['nullable', 'string'],
             'sistole' => ['nullable', 'numeric'],

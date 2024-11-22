@@ -37,6 +37,12 @@ class Pendaftaran extends Model
         'poli_id',
         'practitioner_id',
         'tkp_id',
+        'subyektif',
+        'assesment',
+        'instruksi',
+        'obyektif',
+        'plan',
+        'evaluasi',
     ];
 
     /**

@@ -1,6 +1,7 @@
 @extends('dashboard.app')
 @section('content')
-    <div class="card">
+  <div class="container-fluid">
+    <div class="card mt-3">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <h3 class="mb-0 fw-bold">Data Practitioner</h3>
@@ -67,6 +68,7 @@
             </table>
         </div>
     </div>
+  </div>
 
 
     <!-- Modal Form with Select2 for Group -->
