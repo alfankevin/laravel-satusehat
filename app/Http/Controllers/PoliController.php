@@ -14,14 +14,14 @@ class PoliController extends Controller
     public function index(Request $request): View
     {
         $polis = Poli::all();
-
-        return view('poli.index', compact('polis'));
+        // dd($polis);
+        return view('dashboard.master-data.poli.index', compact('polis'));
     }
 
     public function store(PoliStoreRequest $request): RedirectResponse
     {
         $poli = Poli::create($request->validated());
-
+        // dd($poli);
         return redirect()->route('poli.index');
     }
 
