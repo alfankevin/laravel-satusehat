@@ -15,17 +15,18 @@
                 <tr>
                     <th width="5%">No</th>
                     <th width="10%">Kode</th>
-                    <th width="20%">Kabupaten</th>
                     <th width="45%">Provinsi</th>
+                    <th width="20%">Kabupaten</th>
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Data Rows -->
+                @foreach ($provinsi as $item)
                 <tr>
-                    <td>1</td>
-                    <td>182</td>
-                    <td>Jombatan</td>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$item->KD_PROVINSI}}</td>
+                    <td>{{$item->PROVINSI}}</td>
                     <td>Kesamben</td>
                     <td class="text-center">
                         <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Ubah</a>
@@ -39,23 +40,9 @@
                         </form>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>183</td>
-                    <td>Pojokrejo</td>
-                    <td>Kesamben</td>
-                    <td class="text-center">
-                        <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Ubah</a>
-                        <form action="" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Apakah Anda yakin untuk menghapus obat ini?')">
-                                <i class="fas fa-trash"></i> Hapus
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                @endforeach
+                
+                
             </tbody>
         </table>
     </div>

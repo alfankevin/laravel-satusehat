@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Exports\TindakanExport;
+use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PemeriksaanController;
@@ -35,7 +36,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::view('/practitioner', 'dashboard.master-data.practitioner.index')->name('practitioner.index');
     Route::view('/practitioner-group', 'dashboard.master-data.practitioner-group.index')->name('practitioner-group.index');
-    Route::view('/alamat', 'dashboard.master-data.alamat.index')->name('alamat.index');
+
+
+    // Route::view('/alamat', 'dashboard.master-data.alamat.index')->name('alamat.index');
+    Route::get('/alamat', [AlamatController::class, 'index'])->name('alamat.index');
 });
 
 Route::get('/export-tindakan', function () {
