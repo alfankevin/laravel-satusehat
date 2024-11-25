@@ -34,11 +34,11 @@
                             <td width="70%">{{ $item->namaPoli }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#updatePoliModal">
+                                    data-bs-target="#updatePoliModal{{ $item->id }}">
                                     <i class="fas fa-edit"></i> Ubah
                                 </button>
 
-                                <form action="" method="POST" style="display: inline;">
+                                <form action="{{route('poli.destroy', $item->id)}}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"
@@ -85,36 +85,39 @@
     </div>
 
     <!-- Modal for Adding Data -->
-    <div class="modal fade" id="updatePoliModal" tabindex="-1" aria-labelledby="updatePoliModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="/poli/update/{{ $data->id }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="updatePoliModalLabel">Ubah Data Poli</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="kode" class="form-label">Kode Poli</label>
-                            <input type="text" class="form-control" id="kode" name="kodePoli"
-                                value="{{ $data->kodePoli }}" required>
+    @foreach ($polis as $poli)
+        <div class="modal fade" id="updatePoliModal{{ $poli->id }}" tabindex="-1"
+            aria-labelledby="updatePoliModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{{ route('poli.update', $poli->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updatePoliModalLabel">Ubah Data Poli</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="mb-3">
-                            <label for="nama_poli" class="form-label">Nama Poli</label>
-                            <input type="text" class="form-control" id="nama_poli" name="namaPoli"
-                                value="{{ $data->namaPoli }}" required>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="kode" class="form-label">Kode Poli</label>
+                                <input type="text" class="form-control" id="kode" name="kodePoli"
+                                    value="{{ $poli->kodePoli }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nama_poli" class="form-label">Nama Poli</label>
+                                <input type="text" class="form-control" id="nama_poli" name="namaPoli"
+                                    value="{{ $poli->namaPoli }}" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    @endforeach
 @endsection
 
 @section('scripts')

@@ -7,6 +7,8 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PemeriksaanController;
 use App\Http\Controllers\PoliController;
+use App\Http\Controllers\PractitionerController;
+use App\Http\Controllers\PractitionerGroupController;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -30,12 +32,18 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::view('/diagnosa', 'dashboard.master-data.diagnosa.index')->name('diagnosa.index');
 
     // Route::view('/poli', 'dashboard.master-data.poli.index')->name('poli.index');
-    Route::get('/poli',[PoliController::class, 'index'])->name('poli.index');
-    Route::post('/poli/store',[PoliController::class, 'store'])->name('poli.store');
-    Route::put('/poli/update/{id}', [PoliController::class, 'update'])->name('poli.update');
+    Route::get('/poli', [PoliController::class, 'index'])->name('poli.index');
+    Route::post('/poli/store', [PoliController::class, 'store'])->name('poli.store');
+    Route::put('/poli/{id}', [PoliController::class, 'update'])->name('poli.update');
+    Route::delete('/poli/{poli}', [PoliController::class, 'destroy'])->name('poli.destroy');
 
-    Route::view('/practitioner', 'dashboard.master-data.practitioner.index')->name('practitioner.index');
-    Route::view('/practitioner-group', 'dashboard.master-data.practitioner-group.index')->name('practitioner-group.index');
+    Route::get('/practitioner', [PractitionerController::class, 'index'])->name('practitioner.index');
+    Route::post('/practitioner/store', [PractitionerController::class, 'store'])->name('practitioner.store');
+    Route::delete('/practitioner/{practitioner}', [PractitionerController::class, 'destroy'])->name('practitioner.destroy');
+
+    Route::get('/practitioner-group', [PractitionerGroupController::class, 'index'])->name('practitioner-group.index');
+    Route::post('/practitioner-group/store', [PractitionerGroupController::class, 'store'])->name('practitioner-group.store');
+    Route::delete('/practitioner-group/{practitionerGroup}', [PractitionerGroupController::class, 'destroy'])->name('practitioner-group.destroy');
 
 
     // Route::view('/alamat', 'dashboard.master-data.alamat.index')->name('alamat.index');

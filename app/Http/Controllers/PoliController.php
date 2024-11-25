@@ -25,9 +25,11 @@ class PoliController extends Controller
         return redirect()->route('poli.index');
     }
 
-    public function update(PoliUpdateRequest $request, Poli $poli): RedirectResponse
+    public function update(PoliUpdateRequest $request, $id): RedirectResponse
     {
-        $poli->save();
+        $poli = Poli::findOrFail($id); 
+
+        $poli->update($request->only(['kodePoli', 'namaPoli']));
 
         return redirect()->route('poli.index');
     }

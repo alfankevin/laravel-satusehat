@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use App\Models\Practitioner;
+use Illuminate\Http\Request;
+use App\Models\PractitionerGroup;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\PractitionerStoreRequest;
 use App\Http\Requests\PractitionerUpdateRequest;
-use App\Models\Practitioner;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class PractitionerController extends Controller
 {
     public function index(Request $request): View
     {
         $practitioners = Practitioner::all();
-
-        return view('practitioner.index', compact('practitioners'));
+        
+        // dd($groups);
+        return view('dashboard.master-data.practitioner.index', compact('practitioners'));
     }
 
     public function store(PractitionerStoreRequest $request): RedirectResponse
     {
         $practitioner = Practitioner::create($request->validated());
-
+        // dd($practitioner);
         return redirect()->route('practitioner.index');
     }
 
