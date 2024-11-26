@@ -15,14 +15,14 @@ class PractitionerGroupController extends Controller
     {
         $practitionerGroups = PractitionerGroup::all();
 
-        return view('practitionerGroup.index', compact('practitionerGroups'));
+        return view('dashboard.master-data.practitioner-group.index', compact('practitionerGroups'));
     }
 
     public function store(PractitionerGroupStoreRequest $request): RedirectResponse
     {
         $practitionerGroup = PractitionerGroup::create($request->validated());
-
-        return redirect()->route('practitionerGroup.index');
+        // dd($practitionerGroup);
+        return redirect()->route('practitioner-group.index');
     }
 
     public function update(PractitionerGroupUpdateRequest $request, PractitionerGroup $practitionerGroup): RedirectResponse
@@ -36,6 +36,6 @@ class PractitionerGroupController extends Controller
     {
         $practitionerGroup->delete();
 
-        return redirect()->route('practitionerGroup.index');
+        return redirect()->route('practitioner-group.index');
     }
 }

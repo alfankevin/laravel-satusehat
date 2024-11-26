@@ -30,40 +30,27 @@
                 </thead>
                 <tbody>
                     <!-- Data Rows -->
-                    <tr>
-                        <td>1</td>
-                        <td>Dokter</td>
-                        <td>Dr. Abdul Kodir</td>
-                        <td>1234567890</td>
-                        <td class="text-center">
-                            <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Ubah</a>
-                            <form action="" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Apakah Anda yakin untuk menghapus data ini?')">
-                                    <i class="fas fa-trash"></i> Hapus
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Bidan</td>
-                        <td>Catur Wulandari</td>
-                        <td>1234567890</td>
-                        <td class="text-center">
-                            <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Ubah</a>
-                            <form action="" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Apakah Anda yakin untuk menghapus data ini?')">
-                                    <i class="fas fa-trash"></i> Hapus
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
+                    @foreach ($practitioners as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->PractitionerGroup->namaGroup }}</td>
+                            <td>{{ $item->namaPractitioner }}</td>
+                            <td>{{ $item->nikPractitioner }}</td>
+                            <td class="text-center">
+                                <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Ubah</a>
+                                <form action="{{ route('practitioner.destroy', $item->id) }}" method="POST"
+                                    style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Apakah Anda yakin untuk menghapus data ini?')">
+                                        <i class="fas fa-trash"></i> Hapus
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
@@ -76,7 +63,7 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="" method="POST">
+                <form action="{{ route('practitioner.store') }}" method="POST">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="addPractitionerModalLabel">Tambah Data Practitioner</h5>
@@ -86,23 +73,20 @@
                         <!-- Group field with Select2 -->
                         <div class="mb-3">
                             <label class="form-label">Group</label>
-                            <select class="form-control select2">
-                                <option selected="selected">Alabama</option>
-                                <option>Alaska</option>
-                                <option>California</option>
-                                <option>Delaware</option>
-                                <option>Tennessee</option>
-                                <option>Texas</option>
-                                <option>Washington</option>
+                            <select class="form-control" name="practitioner_group_id">
+                                <option selected="selected">Pilih</option>
+                                @foreach (\App\Models\PractitionerGroup::all() as $item)
+                                    <option value="{{ $item->id }}">{{ $item->namaGroup }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" name="namaPractitioner" required>
                         </div>
                         <div class="mb-3">
                             <label for="nik" class="form-label">NIK</label>
-                            <input type="text" class="form-control" id="nik" name="nik" required>
+                            <input type="text" class="form-control" id="nik" name="nikPractitioner" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -114,4 +98,3 @@
         </div>
     </div>
 @endsection
-
