@@ -36,10 +36,10 @@ class PasienFactory extends Factory
             'aktif' => $this->faker->boolean(),
             'ketAktif' => $this->faker->word(),
             'alamat' => $this->faker->address(),
-            'created_by' => $this->faker->numberBetween(1, 10000),
-            'updated_by' => $this->faker->numberBetween(1, 10000),
-            'deleted_at' => $this->faker->dateTime(),
-            'deleted_by' => $this->faker->numberBetween(1, 10000),
+            'created_by' => null,
+            'updated_by' => null,
+            'deleted_at' => null,
+            'deleted_by' => null,
         ];
     }
 }

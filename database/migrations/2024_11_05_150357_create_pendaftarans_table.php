@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('pendaftarans', function (Blueprint $table) {
             $table->id();
             $table->date('tglDaftar');
+            $table->string('noAntrian')->nullable();
             $table->string('keluhan')->nullable();
             $table->string('kunjSakit')->nullable();
+            $table->float('suhu')->nullable();
             $table->float('sistole')->nullable();
             $table->float('diastole')->nullable();
             $table->float('beratBadan')->nullable();
@@ -24,6 +26,7 @@ return new class extends Migration
             $table->float('lingkarPerut')->nullable();
             $table->float('heartRate')->nullable();
             $table->integer('rujukBalik')->nullable();
+            $table->integer('status')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->dateTime('deleted_at')->nullable();
@@ -32,6 +35,12 @@ return new class extends Migration
             $table->foreignId('poli_id');
             $table->foreignId('practitioner_id');
             $table->foreignId('tkp_id');
+            $table->string('subyektif')->nullable();
+            $table->string('assesment')->nullable();
+            $table->string('instruksi')->nullable();
+            $table->string('obyektif')->nullable();
+            $table->string('plan')->nullable();
+            $table->string('evaluasi')->nullable();
             $table->timestamps();
         });
     }

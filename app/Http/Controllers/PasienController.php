@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PasienStoreRequest;
 use App\Http\Requests\PasienUpdateRequest;
 use App\Models\Pasien;
+use App\Models\Kelurahan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -13,7 +14,7 @@ class PasienController extends Controller
 {
     public function index(Request $request): View
     {
-        $pasiens = Pasien::orderByDesc('id')->get();
+        $pasiens = Pasien::with('kelurahan')->orderByDesc('id')->get();
 
         return view('dashboard.main-menu.pasien.index', compact('pasiens'));
     }
@@ -23,6 +24,8 @@ class PasienController extends Controller
         $latestPasien = Pasien::orderBy('nomorRm', 'desc')->first();
         $nomorRm = $latestPasien ? str_pad($latestPasien->nomorRm + 1, 7, '0', STR_PAD_LEFT) : '20240001';
 
+        // $kelurahans = Kelurahan::orderBy('KELURAHAN')->get();
+
         return view('dashboard.main-menu.pasien.create', compact('nomorRm'));
     }
 
@@ -30,7 +33,7 @@ class PasienController extends Controller
     {
         $pasien = Pasien::create($request->validated());
 
-        return redirect()->route('pasien.index');
+        return redirect()->route('pasien.index')->with('success', 'Create Pasien Successfully!');
     }
 
     public function update(PasienUpdateRequest $request, Pasien $pasien): RedirectResponse
@@ -44,6 +47,6 @@ class PasienController extends Controller
     {
         $pasien->delete();
 
-        return redirect()->route('pasien.index');
+        return redirect()->route('pasien.index')->with('success', 'Delete Pasien Successfully!');
     }
 }

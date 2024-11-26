@@ -17,8 +17,10 @@ class Pendaftaran extends Model
      */
     protected $fillable = [
         'tglDaftar',
+        'noAntrian',
         'keluhan',
         'kunjSakit',
+        'suhu',
         'sistole',
         'diastole',
         'beratBadan',
@@ -27,6 +29,7 @@ class Pendaftaran extends Model
         'lingkarPerut',
         'heartRate',
         'rujukBalik',
+        'status',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -34,6 +37,12 @@ class Pendaftaran extends Model
         'poli_id',
         'practitioner_id',
         'tkp_id',
+        'subyektif',
+        'assesment',
+        'instruksi',
+        'obyektif',
+        'plan',
+        'evaluasi',
     ];
 
     /**
@@ -44,6 +53,7 @@ class Pendaftaran extends Model
     protected $casts = [
         'id' => 'integer',
         'tglDaftar' => 'date',
+        'suhu' => 'float',
         'sistole' => 'float',
         'diastole' => 'float',
         'beratBadan' => 'float',

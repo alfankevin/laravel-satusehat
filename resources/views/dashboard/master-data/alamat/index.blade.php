@@ -1,24 +1,26 @@
 @extends('dashboard.app')
 @section('content')
-    <div class="card mb-3">
-        <div class="card-body">
-            <div class="justify-content-start align-items-center">
-                <a href="#" id="btn-kelurahan" class="btn btn-sm btn-primary">Kelurahan</a>
-                <a href="#" id="btn-kecamatan" class="btn btn-sm btn-primary ms-1">Kecamatan</a>
-                <a href="#" id="btn-kabupaten" class="btn btn-sm btn-primary ms-1">Kabupaten</a>
-                <a href="#" id="btn-provinsi" class="btn btn-sm btn-primary ms-1">Provinsi</a>
+    <div class="container-fluid">
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="justify-content-start align-items-center">
+                    <a href="#" id="btn-kelurahan" class="btn btn-sm btn-primary">Kelurahan</a>
+                    <a href="#" id="btn-kecamatan" class="btn btn-sm btn-primary ms-1">Kecamatan</a>
+                    <a href="#" id="btn-kabupaten" class="btn btn-sm btn-primary ms-1">Kabupaten</a>
+                    <a href="#" id="btn-provinsi" class="btn btn-sm btn-primary ms-1">Provinsi</a>
+                </div>
             </div>
         </div>
+    
+    
+        @include('dashboard.master-data.alamat.kelurahan')
+    
+        @include('dashboard.master-data.alamat.kecamatan')
+    
+        @include('dashboard.master-data.alamat.kabupaten')
+    
+        @include('dashboard.master-data.alamat.provinsi')
     </div>
-
-
-    @include('dashboard.master-data.alamat.kelurahan')
-
-    @include('dashboard.master-data.alamat.kecamatan')
-
-    @include('dashboard.master-data.alamat.kabupaten')
-
-    @include('dashboard.master-data.alamat.provinsi')
 
 
     <script>
