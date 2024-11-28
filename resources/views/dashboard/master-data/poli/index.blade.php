@@ -6,7 +6,7 @@
                 <h3 class="mb-0 fw-bold">Data Poli</h3>
                 <div>
                     <!-- Button to trigger the modal -->
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addPoliModal">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addPoliModal">
                         <i class="fas fa-plus"></i> Tambah Data
                     </button>
                     <a href="" class="btn btn-sm btn-warning ms-1"><i class="fas fa-upload me-2"></i>Import Data</a>
@@ -64,7 +64,7 @@
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="addPoliModalLabel">Tambah Data Poli</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
@@ -96,7 +96,7 @@
                         @method('PUT')
                         <div class="modal-header">
                             <h5 class="modal-title" id="updatePoliModalLabel">Ubah Data Poli</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
