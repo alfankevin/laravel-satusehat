@@ -38,7 +38,8 @@
                                     <i class="fas fa-edit"></i> Ubah
                                 </button>
 
-                                <form action="{{route('poli.destroy', $item->id)}}" method="POST" style="display: inline;">
+                                <form action="{{ route('poli.destroy', $item->id) }}" method="POST"
+                                    style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"
