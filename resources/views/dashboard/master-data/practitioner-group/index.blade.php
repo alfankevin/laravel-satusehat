@@ -6,8 +6,8 @@
                 <h3 class="mb-0 fw-bold">Data Practitioner Group</h3>
                 <div>
                     <!-- Button to trigger modal -->
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#addGroupModal">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                        data-target="#addGroupModal">
                         <i class="fas fa-plus"></i> Tambah Data
                     </button>
                     <a href="" class="btn btn-sm btn-warning ms-1"><i class="fas fa-upload me-2"></i>Import Data</a>
@@ -57,7 +57,7 @@
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="addGroupModalLabel">Tambah Data Group</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>

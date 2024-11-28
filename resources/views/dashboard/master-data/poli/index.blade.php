@@ -33,8 +33,8 @@
                             <td width="10%">{{ $item->kodePoli }}</td>
                             <td width="70%">{{ $item->namaPoli }}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#updatePoliModal{{ $item->id }}">
+                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                    data-target="#updatePoliModal{{ $item->id }}">
                                     <i class="fas fa-edit"></i> Ubah
                                 </button>
 
