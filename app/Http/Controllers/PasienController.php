@@ -14,19 +14,20 @@ class PasienController extends Controller
 {
     public function index(Request $request): View
     {
-        $pasiens = Pasien::with('kelurahan')->orderByDesc('id')->get();
-
+        $pasiens = Pasien::with('kelurahan.kecamatan')->orderByDesc('id')->get();
+    
         return view('dashboard.main-menu.pasien.index', compact('pasiens'));
     }
+    
 
     public function create(Request $request): View
     {
         $latestPasien = Pasien::orderBy('nomorRm', 'desc')->first();
         $nomorRm = $latestPasien ? str_pad($latestPasien->nomorRm + 1, 7, '0', STR_PAD_LEFT) : '20240001';
-
+        $kelurahans = Kelurahan::all();
         // $kelurahans = Kelurahan::orderBy('KELURAHAN')->get();
 
-        return view('dashboard.main-menu.pasien.create', compact('nomorRm'));
+        return view('dashboard.main-menu.pasien.create', compact('nomorRm','kelurahans'));
     }
 
     public function store(PasienStoreRequest $request): RedirectResponse

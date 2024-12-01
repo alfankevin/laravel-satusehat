@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Exports\TindakanExport;
-use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PemeriksaanController;
@@ -12,8 +11,6 @@ use App\Http\Controllers\PoliController;
 use App\Http\Controllers\PractitionerController;
 use App\Http\Controllers\PractitionerGroupController;
 use App\Http\Controllers\SoapController;
-use App\Models\Soap;
-
 
 
 Route::get('/', function () {
@@ -51,9 +48,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/practitioner-group/store', [PractitionerGroupController::class, 'store'])->name('practitioner-group.store');
     Route::delete('/practitioner-group/{practitionerGroup}', [PractitionerGroupController::class, 'destroy'])->name('practitioner-group.destroy');
 
-
-    // Route::view('/alamat', 'dashboard.master-data.alamat.index')->name('alamat.index');
-    Route::get('/alamat', [AlamatController::class, 'index'])->name('alamat.index');
 });
 
 Route::get('/export-tindakan', function () {

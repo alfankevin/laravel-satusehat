@@ -59,8 +59,7 @@
                                 </td>
                                 <td class="text-start align-middle">{{ $pasien->noHp }}</td>
                                 <td class="align-middle">{{ $pasien->alamat }}</td>
-                                {{-- <td class="align-middle text-capitalize">{{ ucfirst(strtolower($pasien->kelurahan->KELURAHAN)) }}</td> --}}
-                                <td class="align-middle text-capitalize">Kelurahan</td>
+                                <td class="align-middle text-capitalize">{{ ucfirst(strtolower($pasien->kelurahan->KELURAHAN)) }}</td>
                                 <td class="align-middle text-capitalize">Kecamatan</td>
                                 <td class="align-middle text-capitalize">Kabupaten</td>
                                 <td class="align-middle text-capitalize">Provinsi</td>

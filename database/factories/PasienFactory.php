@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\KDKELURAHAN;
+use App\Models\Kelurahan;
 use App\Models\Pasien;
 
 class PasienFactory extends Factory
@@ -36,6 +37,7 @@ class PasienFactory extends Factory
             'aktif' => $this->faker->boolean(),
             'ketAktif' => $this->faker->word(),
             'alamat' => $this->faker->address(),
+            'KD_KELURAHAN' => Kelurahan::all()->random()->KD_KELURAHAN,
             'created_by' => null,
             'updated_by' => null,
             'deleted_at' => null,

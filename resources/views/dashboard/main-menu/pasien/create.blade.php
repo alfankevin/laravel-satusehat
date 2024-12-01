@@ -93,9 +93,10 @@
                             </div>
                             <div class="col-sm-6 mb-3">
                                 <select  class="js-select2" id="kelurahan" name="KD_KELURAHAN" required>
-                                    <option value="">--Pilih Kelurahan--</option>
-                                    <option value="2">LABUHAN BAJAU</option>
-                                    <option value="3">SUAK LAMATAN</option>
+                                    <option value="0">--Pilih Kelurahan--</option>
+                                    @foreach ($kelurahans as $kelurahan)
+                                        <option value="{{ $kelurahan->KD_KELURAHAN }}">{{ $kelurahan->KELURAHAN }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

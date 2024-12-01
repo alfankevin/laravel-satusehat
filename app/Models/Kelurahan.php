@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Kelurahan extends Model
 {
@@ -33,5 +34,12 @@ class Kelurahan extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'KD_KECAMATAN' => 'integer',
     ];
+
+    public function kecamatan(): BelongsTo
+    {
+        return $this->belongsTo(Kecamatan::class, 'KD_KECAMATAN');
+    }
+
 }

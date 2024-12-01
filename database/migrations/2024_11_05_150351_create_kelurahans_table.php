@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kelurahans', function (Blueprint $table) {
             $table->id();
             $table->string('KD_KELURAHAN');
-            $table->string('KD_KECAMATAN');
+            $table->foreignId('KD_KECAMATAN');
             $table->string('KELURAHAN');
             $table->string('ninput_oleh')->nullable();
             $table->string('ninput_tgl')->nullable();
