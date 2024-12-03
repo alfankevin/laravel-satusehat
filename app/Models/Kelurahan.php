@@ -11,6 +11,8 @@ class Kelurahan extends Model
     use HasFactory;
 
     protected $primaryKey = 'KD_KELURAHAN';
+    protected $table = 'kelurahans';
+
 
     /**
      * The attributes that are mass assignable.
@@ -37,9 +39,9 @@ class Kelurahan extends Model
         'KD_KECAMATAN' => 'integer',
     ];
 
-    public function kecamatan(): BelongsTo
+    public function kecamatan()
     {
-        return $this->belongsTo(Kecamatan::class, 'KD_KECAMATAN');
+        return $this->belongsTo(Kecamatan::class, 'KD_KECAMATAN', 'KD_KECAMATAN');
     }
 
 }

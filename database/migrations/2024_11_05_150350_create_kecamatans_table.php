@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('kecamatans', function (Blueprint $table) {
             $table->id();
-            $table->string('KD_KECAMATAN');
+            $table->string('KD_KECAMATAN')->unique();
             $table->string('KD_KABUPATEN');
             $table->string('KECAMATAN');
             $table->string('ninput_oleh')->nullable();
             $table->string('ninput_tgl')->nullable();
             $table->string('nupdate_oleh')->nullable();
             $table->string('nupdate_tgl')->nullable();
-            $table->unique('KD_KECAMATAN');
             $table->timestamps();
         });
     }

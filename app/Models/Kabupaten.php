@@ -9,6 +9,9 @@ class Kabupaten extends Model
 {
     use HasFactory;
 
+    protected $table = 'kabupatens';
+    protected $primaryKey = 'KD_KABUPATEN';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -32,4 +35,14 @@ class Kabupaten extends Model
     protected $casts = [
         'id' => 'integer',
     ];
+
+    public function provinsi()
+    {
+        return $this->belongsTo(Provinsi::class, 'KD_PROVINSI', 'KD_PROVINSI');
+    }
+
+    public function kecamatans()
+    {
+        return $this->hasMany(Kecamatan::class, 'KD_KABUPATEN', 'KD_KABUPATEN');
+    }
 }
