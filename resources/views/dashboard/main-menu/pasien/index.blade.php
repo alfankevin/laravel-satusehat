@@ -13,12 +13,13 @@
             </div>
             <div class="card-body">
 
-                <table id="dataTable" class="table-responsive table table-bordered table-striped" style="width:100%">
+                <table id="dataTable" class="table-responsive display nowrap table table-striped table-bordered"
+                    style="width:100%">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>ID</th>
-                            <th>Nama <br> Nomor RM</th>
+                            <th >Nama & Nomor RM</th>
                             <th>T.Lahir Sex</th>
                             <th>Usia</th>
                             <th>NIK & No Kartu</th>

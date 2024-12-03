@@ -74,7 +74,8 @@
             </div>
             <div class="card-body" style="overflow-x: hidden;">
                 <table id="dataTable" class="table-responsive display nowrap table table-striped table-bordered"
-                    style="width:100%">
+                    style="width:100%"
+                    >
                     <thead>
                         <tr>
                             <th>No</th>
