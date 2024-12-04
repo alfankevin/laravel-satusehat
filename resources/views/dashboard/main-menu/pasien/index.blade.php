@@ -60,10 +60,10 @@
                                 </td>
                                 <td class="text-start align-middle">{{ $pasien->noHp }}</td>
                                 <td class="align-middle">{{ $pasien->alamat }}</td>
-                                <td class="align-middle text-capitalize">{{ ucfirst(strtolower($pasien->kelurahan->KELURAHAN)) }}</td>
-                                <td class="align-middle text-capitalize">{{ $pasien->kelurahan->kecamatan->KECAMATAN }}</td>
-                                <td class="align-middle text-capitalize">{{ $pasien->kelurahan->kecamatan->kabupaten->KABUPATEN  }}</td>
-                                <td class="align-middle text-capitalize">{{ $pasien->kelurahan->kecamatan->kabupaten->provinsi->PROVINSI  }}</td>
+                                <td class="align-middle text-capitalize">{{ ucfirst(strtolower($pasien->kelurahan->KELURAHAN ?? 'Data kosong')) }}</td>
+                                <td class="align-middle text-capitalize">{{ $pasien->kelurahan->kecamatan->KECAMATAN ?? 'Data kosong'}}</td>
+                                <td class="align-middle text-capitalize">{{ $pasien->kelurahan->kecamatan->kabupaten->KABUPATEN ?? 'Data kosong' }}</td>
+                                <td class="align-middle text-capitalize">{{ $pasien->kelurahan->kecamatan->kabupaten->provinsi->PROVINSI ?? 'Data kosong' }}</td>
                                 <td class="text-center align-middle text-nowrap">
                                     <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
