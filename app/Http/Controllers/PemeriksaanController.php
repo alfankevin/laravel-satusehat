@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PemeriksaanStoreRequest;
 use App\Http\Requests\PemeriksaanUpdateRequest;
+use App\Http\Requests\PendaftaranUpdateRequest;
 use App\Models\Pasien;
 use App\Models\Pendaftaran;
 use Illuminate\Http\RedirectResponse;

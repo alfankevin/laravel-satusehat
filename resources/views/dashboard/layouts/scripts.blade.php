@@ -39,7 +39,8 @@
 <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-
+<!-- ChartJS -->
+<script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
 
 <!-- page script -->
@@ -67,9 +68,3 @@
         });
     });
 </script>
-
-
-
-
-
-

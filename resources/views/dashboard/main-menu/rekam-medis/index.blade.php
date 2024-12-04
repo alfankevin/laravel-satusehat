@@ -17,16 +17,18 @@
                                     <label for="noRM" class="col-sm-4 col-form-label ">No Rekam Medis</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" id="noRM" name="noRM"
-                                            value="0002456" disabled>
+                                            value="{{ $selectedPasien->nomorRm ?? '' }}" disabled>
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
                                     <label for="name" class="col-sm-4 col-form-label fw-bold">Nama Pasien</label>
                                     <div class="col-sm-8">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="name" value="Jhon Doe">
-                                            <span class="input-group-text" id="basic-addon2"><i
-                                                    class="fas fa-search"></i></span>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                value="{{ $selectedPasien->nama ?? '' }}">
+                                            <span class="input-group-text" id="basic-addon2"><a href=""
+                                                    data-toggle="modal" data-target="#modal-pasien"><i
+                                                        class="fas fa-search"></i></a></span>
                                         </div>
                                     </div>
                                 </div>
@@ -34,7 +36,7 @@
                                     <label for="tglLahir" class="col-sm-4 col-form-label ">Tanggal Lahir</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" id="tglLahir" name="tglLahir"
-                                            value="21-12-1990" disabled>
+                                            value="{{ $selectedPasien->tglLahir ?? '' }}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -43,13 +45,14 @@
                                     <label for="sex" class="col-sm-4 col-form-label ">Jenis Kelamin</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" id="sex" name="sex"
-                                            value="Laki-Laki" disabled>
+                                            value="{{ $selectedPasien ? ($selectedPasien->sex === 'L' ? 'Laki-Laki' : 'Perempuan') : '' }}"
+                                            disabled>
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
                                     <label for="alamat" class="col-sm-4 col-form-label ">Alamat</label>
                                     <div class="col-sm-8">
-                                        <textarea class="form-control" rows="3" disabled>Jl. soekarno Hatta 001, Wonocolo, Surabaya, Jawa Timur</textarea>
+                                        <textarea class="form-control" id="alamat" rows="3" disabled>{{ $selectedPasien->alamat ?? '' }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -69,44 +72,131 @@
                                     <tr>
                                         <th class="text-center" width="5%">No</th>
                                         <th width="17%">Tgl Kunjungan</th>
-                                        <th width="14%">No Pendaftaran</th>
+                                        <th width="14%">Poli</th>
                                         <th>Nama Pemeriksa</th>
                                         <th class="text-center" width="5%">PTV</th>
-                                        <th class="text-center" width="5%">MCU</th>
+                                        <th class="text-center" width="5%">SOAP</th>
                                         <th class="text-center" width="8%">Tindakan</th>
                                         <th class="text-center" width="5%">Obat</th>
                                         <th width="13%">Diagnosa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td>18 Mei 2024 10:00:23</td>
-                                        <td>REQ2409382</td>
-                                        <td>dr. Budi Santoso</td>
-                                        <td class="text-center">
-                                            <a href="" data-toggle="modal"
-                                                data-target="#modal-default">
-                                                <i class="fas fa-stethoscope"></i>
-                                            </a>
-                                        </td>
-                                        <td class="text-center"><a href="" data-toggle="modal"
-                                                data-target="#modal-default"><i class="fas fa-stethoscope"></i></a>
-                                        </td>
-                                        <td class="text-center"><a href="" data-toggle="modal"
-                                                data-target="#modal-default"><i class="fas fa-plus-square"></i></a>
-                                        </td>
-                                        <td class="text-center"><a href=""data-toggle="modal"
-                                            data-target="#modal-default"><i class="fas fa-capsules"></i></a></td>
-                                        <td>Diabetes</td>
-                                    </tr>
+                                    @foreach ($rekamMedis as $key => $medis)
+                                        <tr>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($medis->tglDaftar)->translatedFormat('d F Y') }}
+                                            </td>
+                                            <td>{{ $medis->poli->namaPoli }}</td>
+                                            <td>{{ $medis->practitioner->namaPractitioner ?? '' }}</td>
+                                            <td class="text-center"><a href="" data-toggle="modal"
+                                                    data-target="#modal-default"><i class="fas fa-stethoscope"></i></a>
+                                            </td>
+                                            <td class="text-center"><i class="fas fa-stethoscope"></i></td>
+                                            <td class="text-center"><i class="fas fa-plus-square"></i></td>
+                                            <td class="text-center"><i class="fas fa-capsules"></i></td>
+                                            <td>{{ $medis->diagnosa }}</td>
+                                        </tr>
+
+                                        <div class="modal fade" id="modal-default">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-info">
+                                                        <h4 class="modal-title">Detail Data</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h5 class="text-center modal-title">Pemeriksaan Tanda Vital</h5>
+                                                        <hr class="my-0">
+                                                        <div class="row">
+                                                            <div class="col-8">
+                                                                <div class="row">
+                                                                    <div class="col-5">Nama Dokter</div>
+                                                                    <div class="col-7">: {{ $medis->practitioner->namaPractitioner ?? '' }}</div>
+                                                                    <div class="col-5">Suhu Tubuh</div>
+                                                                    <div class="col-7">: {{ $medis->suhu }}</div>
+                                                                    <div class="col-5">Tinggi Badan</div>
+                                                                    <div class="col-7">: {{ $medis->tinggiBadan }} cm</div>
+                                                                    <div class="col-5">Berat Badan</div>
+                                                                    <div class="col-7">: {{ $medis->beratBadan }} kg</div>
+                                                                    <div class="col-5">Lingkar Perut</div>
+                                                                    <div class="col-7">: {{ $medis->lingkarPerut }} cm</div>
+                                                                    <div class="col-5">Sistole</div>
+                                                                    <div class="col-7">: {{ $medis->sistole }}</div>
+                                                                    <div class="col-5">Diastole</div>
+                                                                    <div class="col-7">: {{ $medis->diastole }}</div>
+                                                                    <div class="col-5">Respiratore Rate</div>
+                                                                    <div class="col-7">: {{ $medis->respRate }}</div>
+                                                                    <div class="col-5">Heart Rate</div>
+                                                                    <div class="col-7">: {{ $medis->heartRate }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" id="modal-pasien">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h4 class="modal-title">Detail Data</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="dataTable" class=" display nowrap table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Pilih</th>
+                                <th>Nomor RM</th>
+                                <th>Nama Pasien</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Tanggal Lahir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pasiens as $key => $pasien)
+                                <tr>
+                                    <td class="text-center align-middle">
+                                        <form action="{{ route('rekam-medis.index') }}" method="GET">
+                                            <input type="hidden" name="pasien_id" value="{{ $pasien->id }}">
+                                            <button type="submit" class="btn btn-sm btn-info">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+
+                                    <td class="align-middle">{{ $pasien->nomorRm }}</td>
+                                    <td class="align-middle">{{ $pasien->nama }}</td>
+                                    <td class="align-middle">{{ $pasien->sex === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                    <td class="align-middle">{{ $pasien->tglLahir }}</td>
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 
 
@@ -150,6 +240,5 @@
             </div>
             <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
 @endsection

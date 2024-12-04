@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\PractitionerController;
 use App\Http\Controllers\PractitionerGroupController;
+use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\SoapController;
 
 
@@ -25,10 +26,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/kunjungan-create', [PendaftaranController::class, 'create'])->name('kunjungan.create');
     Route::resource('antrian', PemeriksaanController::class);
     Route::post('/soap', [SoapController::class, 'store'])->name('soap.store');
-    Route::view('/rekam-medis', 'dashboard.main-menu.rekam-medis.index')->name('rekam-medis.index');
+    Route::get('/rekam-medis', [RekamMedisController::class, 'index'])->name('rekam-medis.index');
     Route::get('/antrian-pemeriksaan/{id}', [PemeriksaanController::class, 'create'])->name('antrian.pemeriksaan');
     Route::view('/farmasi', 'dashboard.main-menu.farmasi.index')->name('farmasi.index');
     Route::view('/kasir', 'dashboard.main-menu.kasir.index')->name('kasir.index');
+    Route::get('/rekam-medis/fetch', [RekamMedisController::class, 'fetch'])->name('rekam-medis.fetch');
 
     Route::view('/obat', 'dashboard.master-data.obat.index')->name('obat.index');
     Route::view('/tindakan', 'dashboard.master-data.tindakan.index')->name('tindakan.index');
