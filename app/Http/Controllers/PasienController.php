@@ -15,10 +15,10 @@ class PasienController extends Controller
     public function index(Request $request): View
     {
         $pasiens = Pasien::with('kelurahan.kecamatan')->orderByDesc('id')->get();
-    
+
         return view('dashboard.main-menu.pasien.index', compact('pasiens'));
     }
-    
+
 
     public function create(Request $request): View
     {
@@ -28,15 +28,24 @@ class PasienController extends Controller
         // $kelurahans = Kelurahan::orderBy('KELURAHAN')->get();
 
 
-        return view('dashboard.main-menu.pasien.create', compact('nomorRm','kelurahans'));
+        return view('dashboard.main-menu.pasien.create', compact('nomorRm', 'kelurahans'));
     }
 
     public function store(PasienStoreRequest $request): RedirectResponse
     {
         $pasien = Pasien::create($request->validated());
 
-        return redirect()->route('pasien.index')->with('success', 'Create Pasien Successfully!');
+        // Simpan data pasien ke session
+        session()->flash('newPasien', [
+            'id' => $pasien->id,
+            'nama' => $pasien->nama,
+            'nomorRm' => $pasien->nomorRm,
+        ]);
+
+        return redirect()->route('kunjungan.index', ['pasienBaru' => $pasien->id])
+            ->with('success', 'Pasien berhasil ditambahkan, silakan tambah kunjungan.');
     }
+
 
     public function update(PasienUpdateRequest $request, Pasien $pasien): RedirectResponse
     {

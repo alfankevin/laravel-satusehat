@@ -8,10 +8,13 @@
                     <h1 class="m-0 text-dark">Dashboard</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
-                    </ol>
+                    <div class="mb-3 row d-flex justify-content-end">
+                        <label for="tempat" class="col-sm-3 col-form-label fw-bold">Pilih Tanggal</label>
+                        <div class="col-sm-5">
+                            <input type="date" class="form-control" id="tglKun" name="tglDaftar"
+                                value="{{ now()->format('Y-m-d') }}">
+                        </div>
+                    </div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -55,8 +58,8 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
-                            <p>Jumlah Dokter</p>
+                            <h3>3</h3>
+                            <p>Jumlah Pasien Baru</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -127,78 +130,79 @@
 @endsection
 
 @push('scripts')
-@push('scripts')
-<script>
-    $(function() {
-        //-------------
-        //- DONUT CHART -
-        //-------------
-        var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-        var donutData = {
-            labels: [
-                'Diabetes',
-                'Jantung',
-                'Kanker',
-                'Tuberkulosis',
-                'Asma',
-                'Stroke',
-                'Diare',
-                'Hipertensi',
-                'Sirosis Hati',
-                'Flu'
-            ],
-            datasets: [{
-                data: [700, 500, 400, 600, 300, 100, 100, 100, 100, 100],
-                backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#f56954', '#00a65a', '#f39c12', '#00c0ef'],
-            }]
-        };
-        var donutOptions = {
-            maintainAspectRatio: false,
-            responsive: true
-        };
-        new Chart(donutChartCanvas, {
-            type: 'doughnut',
-            data: donutData,
-            options: donutOptions
-        });
+    @push('scripts')
+        <script>
+            $(function() {
+                //-------------
+                //- DONUT CHART -
+                //-------------
+                var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+                var donutData = {
+                    labels: [
+                        'Diabetes',
+                        'Jantung',
+                        'Kanker',
+                        'Tuberkulosis',
+                        'Asma',
+                        'Stroke',
+                        'Diare',
+                        'Hipertensi',
+                        'Sirosis Hati',
+                        'Flu'
+                    ],
+                    datasets: [{
+                        data: [700, 500, 400, 600, 300, 100, 100, 100, 100, 100],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de',
+                            '#f56954', '#00a65a', '#f39c12', '#00c0ef'
+                        ],
+                    }]
+                };
+                var donutOptions = {
+                    maintainAspectRatio: false,
+                    responsive: true
+                };
+                new Chart(donutChartCanvas, {
+                    type: 'doughnut',
+                    data: donutData,
+                    options: donutOptions
+                });
 
-        //-------------
-        //- BAR CHART -
-        //-------------
-        var barChartCanvas = $('#barChart').get(0).getContext('2d');
-        var barChartData = {
-            labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-            datasets: [
-                {
-                    label: 'Jumlah Pasien Umum',
-                    backgroundColor: '#00a65a',
-                    borderColor: '#00a65a',
-                    data: [65, 59, 80, 81, 56, 55, 40, 70, 60, 90, 95, 85]
-                },
-                {
-                    label: 'Jumlah Pasien BPJS',
-                    backgroundColor: '#f39c12',
-                    borderColor: '#f39c12',
-                    data: [45, 39, 60, 71, 46, 45, 30, 50, 40, 70, 85, 65]
-                }
-            ]
-        };
-        var barChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
-        new Chart(barChartCanvas, {
-            type: 'bar',
-            data: barChartData,
-            options: barChartOptions
-        });
-    });
-</script>
-@endpush
-
+                //-------------
+                //- BAR CHART -
+                //-------------
+                var barChartCanvas = $('#barChart').get(0).getContext('2d');
+                var barChartData = {
+                    labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'
+                    ],
+                    datasets: [{
+                            label: 'Jumlah Pasien Umum',
+                            backgroundColor: '#00a65a',
+                            borderColor: '#00a65a',
+                            data: [65, 59, 80, 81, 56, 55]
+                        },
+                        {
+                            label: 'Jumlah Pasien BPJS',
+                            backgroundColor: '#f39c12',
+                            borderColor: '#f39c12',
+                            data: [45, 39, 60, 71, 46, 45]
+                        }
+                    ]
+                };
+                var barChartOptions = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                };
+                new Chart(barChartCanvas, {
+                    type: 'bar',
+                    data: barChartData,
+                    options: barChartOptions
+                });
+            });
+        </script>
+    @endpush
 @endpush

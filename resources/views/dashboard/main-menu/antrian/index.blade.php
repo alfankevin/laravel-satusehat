@@ -68,13 +68,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <table id="dataTable" class="table-responsive display nowrap table table-striped table-bordered"
-                    style="width:100%">
+                <table id="dataTablePemeriksaan" class="display nowrap  table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
                             <th>No Antrian</th>
-                            <th>ID Pasien</th>
                             <th>Nama Pasien</th>
                             <th>Nomor RM</th>
                             <th>Tanggal</th>
@@ -89,7 +87,6 @@
                             <tr>
                                 <td class="text-center align-middle">{{ $key + 1 }}</td>
                                 <td class="align-middle">{{ $pendaftaran->noAntrian }}</td>
-                                <td class="align-middle">{{ $pendaftaran->pasien->id }}</td>
                                 <td class="align-middle">{{ $pendaftaran->pasien->nama }}</td>
                                 <td class="align-middle">{{ $pendaftaran->pasien->nomorRm }}</td>
                                 <td class="align-middle">

@@ -101,7 +101,7 @@
                     </div>
                     <div class="p-4">
                         <h2 class="text-center">Create Account</h2>
-                        <form action="{{ url('/api/register') }}" method="POST">
+                        <form action="{{ url('register') }}" method="POST">
                             @csrf
                             <div class="mb-3 icon-input">
                                 <label for="name" class="form-label">Nama</label>

@@ -51,6 +51,7 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    
 
     @include('dashboard.layouts.scripts')
     @stack('scripts')

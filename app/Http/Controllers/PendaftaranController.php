@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PendaftaranStoreRequest;
 use App\Http\Requests\PendaftaranUpdateRequest;
+use App\Models\Kelurahan;
 use App\Models\Poli;
 use App\Models\Pasien;
 use App\Models\Pendaftaran;
@@ -16,14 +17,38 @@ class PendaftaranController extends Controller
 {
     public function index(Request $request): View
     {
-        $pendaftarans = Pendaftaran::with('pasien', 'poli', 'practitioner')->orderBy('tglDaftar')->get();
-
+        $query = Pendaftaran::with('pasien', 'poli', 'practitioner')->orderBy('tglDaftar');
+    
+        // Filter berdasarkan input pengguna
+        if ($request->filled('no_rm')) {
+            $query->whereHas('pasien', function ($q) use ($request) {
+                $q->where('nomorRm', 'like', '%' . $request->no_rm . '%');
+            });
+        }
+    
+        if ($request->filled('nama_pasien')) {
+            $query->whereHas('pasien', function ($q) use ($request) {
+                $q->where('nama', 'like', '%' . $request->nama_pasien . '%');
+            });
+        }
+    
+        if ($request->filled('tgl_daftar')) {
+            $query->whereDate('tglDaftar', $request->tgl_daftar);
+        }
+    
+        $pendaftarans = $query->get();
         $polis = Poli::orderBy('namaPoli')->get();
         $pasiens = Pasien::orderBy('nama')->get();
         $practitioners = Practitioner::orderBy('namaPractitioner')->get();
 
-        return view('dashboard.main-menu.pendaftaran.index', compact('pendaftarans', 'polis', 'pasiens', 'practitioners'));
+        $latestPasien = Pasien::orderBy('nomorRm', 'desc')->first();
+        $nomorRm = $latestPasien ? str_pad($latestPasien->nomorRm + 1, 7, '0', STR_PAD_LEFT) : '20240001';
+        $kelurahans = Kelurahan::with('kecamatan')->get();
+        $pasienBaru = $request->get('pasienBaru') ? Pasien::find($request->get('pasienBaru')) : null;
+    
+        return view('dashboard.main-menu.pendaftaran.index', compact('pendaftarans', 'polis', 'pasiens', 'practitioners','nomorRm','kelurahans','pasienBaru'));
     }
+    
 
     public function create(Request $request): View
     {

@@ -58,6 +58,7 @@ Route::get('/export-tindakan', function () {
 
 require __DIR__ . '/auth.php';
 
+Route::view('/404', 'dashboard.main-menu.pendaftaran.404')->name('404');
 
 Route::resource('pasiens', App\Http\Controllers\PasienController::class)->except('create', 'edit', 'show');
 Route::resource('practitioners', App\Http\Controllers\PractitionerController::class)->except('create', 'edit', 'show');
