@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pasien_diagnosas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pasien_id');
+            $table->unsignedBigInteger('practitioner_id');
             $table->foreignId('diagnosa_id')->constrained();
             $table->timestamps();
 
