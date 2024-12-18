@@ -106,8 +106,12 @@
                                     <select class="js-select2" id="kelurahan" name="KD_KELURAHAN" required>
                                         <option value="0">--Pilih Kelurahan--</option>
                                         @foreach ($kelurahans as $kelurahan)
-                                            <option value="{{ $kelurahan->KD_KELURAHAN }}">
-                                                {{ $kelurahan->KELURAHAN }}</option>
+                                            <option class="text-capitalize" value="{{ $kelurahan->KD_KELURAHAN }}">
+                                                {{ ucwords(strtolower($kelurahan->KELURAHAN)) }} -
+                                                {{ ucwords(strtolower($kelurahan->kecamatan->KECAMATAN)) }} -
+                                                {{ ucwords(strtolower($kelurahan->kecamatan->kabupaten->KABUPATEN)) }}
+                                                <!-- {{ ucwords(strtolower($kelurahan->kecamatan->kabupaten->provinsi->PROVINSI)) }} -->
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container px-3" style="max-width: 100%">
         <!-- Section untuk Tabel Data Antrian -->
         <div class="card card-info">
             <div class="card-header">
