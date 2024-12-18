@@ -2,64 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ObatStoreRequest;
+use App\Http\Requests\ObatUpdateRequest;
 use App\Models\Obat;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ObatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request): View
     {
-        //
+        $obats = Obat::orderByDesc('id')->get();
+
+        return view('dashboard.obat.index', compact('obats'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(ObatStoreRequest $request): RedirectResponse
     {
-        //
+        $obat = Obat::create($request->validated());
+
+        return redirect()->route('obat.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(ObatUpdateRequest $request, Obat $obat): RedirectResponse
     {
-        //
+        $obat->save();
+
+        return redirect()->route('obat.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Obat $obat)
+    public function destroy(Request $request, Obat $obat): RedirectResponse
     {
-        //
-    }
+        $obat = Obat::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Obat $obat)
-    {
-        //
-    }
+        $obat->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Obat $obat)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Obat $obat)
-    {
-        //
+        return redirect()->route('dashboard.obat');
     }
 }

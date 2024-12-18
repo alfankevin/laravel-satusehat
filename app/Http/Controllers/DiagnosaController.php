@@ -12,7 +12,9 @@ class DiagnosaController extends Controller
      */
     public function index()
     {
-        //
+        // Mengambil semua data diagnosa
+        $diagnosas = Diagnosa::all();
+        return view('dashboard.diagnosa.index', compact('diagnosas'));
     }
 
     /**
@@ -20,7 +22,8 @@ class DiagnosaController extends Controller
      */
     public function create()
     {
-        //
+        // Menampilkan form create diagnosa
+        return view('diagnosa.create');
     }
 
     /**
@@ -28,7 +31,17 @@ class DiagnosaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi data input
+        $validatedData = $request->validate([
+            'kode' => 'required|string|max:255',
+            'diagnosa' => 'required|string|max:255',
+        ]);
+
+        // Menyimpan data diagnosa baru
+        Diagnosa::create($validatedData);
+
+        // Redirect ke halaman index dengan pesan sukses
+        return redirect()->route('diagnosa.index')->with('success', 'Diagnosa berhasil ditambahkan.');
     }
 
     /**
@@ -36,7 +49,8 @@ class DiagnosaController extends Controller
      */
     public function show(Diagnosa $diagnosa)
     {
-        //
+        // Menampilkan detail diagnosa
+        return view('diagnosa.show', compact('diagnosa'));
     }
 
     /**
@@ -44,7 +58,8 @@ class DiagnosaController extends Controller
      */
     public function edit(Diagnosa $diagnosa)
     {
-        //
+        // Menampilkan form edit diagnosa
+        return view('diagnosa.edit', compact('diagnosa'));
     }
 
     /**
@@ -52,7 +67,17 @@ class DiagnosaController extends Controller
      */
     public function update(Request $request, Diagnosa $diagnosa)
     {
-        //
+        // Validasi data input
+        $validatedData = $request->validate([
+            'kode' => 'required|string|max:255',
+            'diagnosa' => 'required|string|max:255',
+        ]);
+
+        // Mengupdate data diagnosa
+        $diagnosa->update($validatedData);
+
+        // Redirect ke halaman index dengan pesan sukses
+        return redirect()->route('diagnosa.index')->with('success', 'Diagnosa berhasil diupdate.');
     }
 
     /**
@@ -60,6 +85,10 @@ class DiagnosaController extends Controller
      */
     public function destroy(Diagnosa $diagnosa)
     {
-        //
+        // Menghapus diagnosa
+        $diagnosa->delete();
+
+        // Redirect ke halaman index dengan pesan sukses
+        return redirect()->route('diagnosa.index')->with('success', 'Diagnosa berhasil dihapus.');
     }
 }

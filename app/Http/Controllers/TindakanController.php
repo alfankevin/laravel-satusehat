@@ -12,15 +12,8 @@ class TindakanController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $tindakans = Tindakan::all();
+        return view('dashboard.tindakan.index', compact('tindakans'));
     }
 
     /**
@@ -28,15 +21,13 @@ class TindakanController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'tindakan' => 'required|string|max:255',
+            'biaya' => 'required|numeric|min:0',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tindakan $tindakan)
-    {
-        //
+        Tindakan::create($validated);
+        return redirect()->route('tindakan.index')->with('success', 'Tindakan berhasil ditambahkan');
     }
 
     /**
@@ -44,7 +35,7 @@ class TindakanController extends Controller
      */
     public function edit(Tindakan $tindakan)
     {
-        //
+        return response()->json($tindakan);
     }
 
     /**
@@ -52,7 +43,13 @@ class TindakanController extends Controller
      */
     public function update(Request $request, Tindakan $tindakan)
     {
-        //
+        $validated = $request->validate([
+            'tindakan' => 'required|string|max:255',
+            'biaya' => 'required|numeric|min:0',
+        ]);
+
+        $tindakan->update($validated);
+        return redirect()->route('tindakan.index')->with('success', 'Tindakan berhasil diupdate');
     }
 
     /**
@@ -60,6 +57,7 @@ class TindakanController extends Controller
      */
     public function destroy(Tindakan $tindakan)
     {
-        //
+        $tindakan->delete();
+        return redirect()->route('tindakan.index')->with('success', 'Tindakan berhasil dihapus');
     }
 }

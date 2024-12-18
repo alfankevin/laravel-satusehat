@@ -10,7 +10,7 @@
             <div class="row mb-3">
                 <div class="col-7">
                     <label for="tindakanSelect" class="form-label">Tindakan(ICD 9)</label>
-                    <select id="tindakanSelect" class="form-control js-select2`" required>
+                    <select id="tindakanSelect" class="form-control js-select2" required>
                         <option value="" disabled selected>--Pilih tindakan--</option>
                         <option value="Vaksin Covid" data-harga="20000">Vaksin Covid</option>
                         <option value="Suntik Vitamin" data-harga="30000">Suntik Vitamin</option>

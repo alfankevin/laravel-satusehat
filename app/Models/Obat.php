@@ -30,9 +30,4 @@ class Obat extends Model
         'id' => 'integer',
         'harga' => 'float',
     ];
-
-    public function resepObats(): BelongsTo
-    {
-        return $this->belongsTo(Resep::class);
-    }
 }
