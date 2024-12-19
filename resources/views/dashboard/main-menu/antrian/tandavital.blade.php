@@ -18,7 +18,7 @@
                 <div class="col-sm-9">
                     <div class="input-group">
                         <input type="number" class="form-control" name="suhu" value="{{ $pemeriksaan->suhu }}">
-                        <span class="input-group-text" id="basic-addon2"> C</span>
+                        <span class="input-group-text" id="basic-addon2">&#8451;</span>
                     </div>
                 </div>
             </div>

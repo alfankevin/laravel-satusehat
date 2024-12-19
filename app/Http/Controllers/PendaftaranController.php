@@ -43,7 +43,7 @@ class PendaftaranController extends Controller
 
         $latestPasien = Pasien::orderBy('nomorRm', 'desc')->first();
         $nomorRm = $latestPasien ? str_pad($latestPasien->nomorRm + 1, 7, '0', STR_PAD_LEFT) : '20240001';
-        $kelurahans = Kelurahan::with('kecamatan')->get();
+        $kelurahans = Kelurahan::with('kecamatan.kabupaten.provinsi')->get();
         $pasienBaru = $request->get('pasienBaru') ? Pasien::find($request->get('pasienBaru')) : null;
     
         return view('dashboard.main-menu.pendaftaran.index', compact('pendaftarans', 'polis', 'pasiens', 'practitioners','nomorRm','kelurahans','pasienBaru'));
