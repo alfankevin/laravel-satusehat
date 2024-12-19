@@ -28,6 +28,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('kasir*') ? 'bg-info' : '' }}"
+                    href="{{ route('kasir.index') }}">
+                    <i class="nav-icon fas fa-credit-card icon"></i>
+                    <p>Pembayaran</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('rekam-medis*') ? 'bg-info' : '' }}"
                     href="{{ route('rekam-medis.index') }}">
                     <i class="nav-icon fas fa-clipboard icon"></i>
@@ -39,39 +46,25 @@
                 class="nav-item has-treeview {{ request()->is(['pasien', 'obat', 'poli', 'diagnosa', 'tindakan', 'alamat', 'practitioner', 'practitioner-group']) ? 'menu-open' : '' }}">
                 <a href="#"
                     class="nav-link  {{ request()->is(['pasien', 'obat', 'poli', 'diagnosa', 'tindakan', 'alamat', 'practitioner', 'practitioner-group']) ? 'bg-info' : '' }}">
-                    <i class="nav-icon fas fa-chart-pie"></i>
+                    <i class="nav-icon fas fa-cogs"></i>
                     <p>
-                        Master Data
+                        Pengaturan
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('pasien*') ? 'active' : '' }}"
+                        <a class="nav-link {{ request()->routeIs('users*') ? 'active' : '' }}"
+                            href="">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>User & Hak Akses</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs(['pasien*','obat*','poli*','diagnosa*','tindakan*','alamat*','practitioner*','practitioner-group*']) ? 'active' : '' }}"
                             href="{{ route('pasien.index') }}">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Data Pasien</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('poli.index') }}"
-                            class="nav-link {{ request()->routeIs('poli.index') ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Data Poli</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('practitioner.index') }}"
-                            class="nav-link {{ request()->routeIs('practitioner.index') ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Data Practitioner</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('practitioner-group.index') }}"
-                            class="nav-link {{ request()->routeIs('practitioner-group.index') ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Data Practitioner Group</p>
+                            <p>Master Data</p>
                         </a>
                     </li>
                 </ul>

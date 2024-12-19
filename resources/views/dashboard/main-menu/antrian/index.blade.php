@@ -1,6 +1,6 @@
 @extends('dashboard.app')
 @section('content')
-    <div class="content-header">
+    <div class="content">
         <div class="container-fluid">
             <div class="row my-3">
                 <div class="col-md-4">
@@ -57,71 +57,82 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container">
-        <!-- Section untuk Tabel Data Antrian -->
-        <div class="card card-info">
-            <div class="card-header">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">Data Antrian Pemeriksaan</h3>
+            <!-- Section untuk Tabel Data Antrian -->
+            <div class="card card-info">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Data Antrian Pemeriksaan</h3>
+                        <div>
+                            @php
+                                use Carbon\Carbon;
+    
+                                // Mengatur zona waktu ke WIB
+                                $now = Carbon::now('Asia/Jakarta');
+    
+                                // Mengatur locale untuk bahasa Indonesia
+                                Carbon::setLocale('id');
+                            @endphp
+                            <i class="fas fa-calendar"></i> {{ $now->translatedFormat('l d - F Y H:i:s') }}
+    
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="overflow-x: hidden;">
+                    <table id="dataTablePemeriksaan" class="display nowrap  table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th>No Antrian</th>
+                                <th>Nama Pasien</th>
+                                <th>Nomor RM</th>
+                                <th>Tanggal</th>
+                                <th>Jam</th>
+                                <th>Status</th>
+                                <th>Periksa</th>
+                                <th>Panggil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pendaftarans as $key => $pendaftaran)
+                                <tr>
+                                    <td class="text-center align-middle">{{ $key + 1 }}</td>
+                                    <td class="align-middle">{{ $pendaftaran->noAntrian }}</td>
+                                    <td class="align-middle">{{ $pendaftaran->pasien->nama }}</td>
+                                    <td class="align-middle">{{ $pendaftaran->pasien->nomorRm }}</td>
+                                    <td class="align-middle">
+                                        {{ \Carbon\Carbon::parse($pendaftaran->tglDaftar)->format('d-m-Y') }}</td>
+                                    <td class="align-middle">
+                                        {{ \Carbon\Carbon::parse($pendaftaran->created_at)->timezone('Asia/Jakarta') }}
+                                    </td>
+                                    <td class="align-middle">
+                                        @if ($pendaftaran->status == 1)
+                                            <span class="badge bg-success"><i class="fas fa-stethoscope"></i> Sudah
+                                                Diperiksa</span>
+                                        @elseif ($pendaftaran->status == 0)
+                                            <span class="badge bg-danger"><i class="fas fa-stethoscope"></i> Belum
+                                                Diperiksa</span>
+                                        @endif
+                                    </td>
+                                    <td class="align-middle"><a href="{{ route('antrian.pemeriksaan', $pendaftaran->id) }}"
+                                            class="btn btn-primary btn-sm"> <i class="fas fa-stethoscope"></i> Periksa</a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <!-- Tombol Panggil -->
+                                        <button class="btn btn-danger btn-panggil btn-sm"
+                                            data-nomor="{{ $pendaftaran->noAntrian }}">
+                                            <i class="fas fa-bullhorn"></i> Panggil
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="card-body">
-                <table id="dataTablePemeriksaan" class="display nowrap  table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th class="text-center">No</th>
-                            <th>No Antrian</th>
-                            <th>Nama Pasien</th>
-                            <th>Nomor RM</th>
-                            <th>Tanggal</th>
-                            <th>Jam</th>
-                            <th>Status</th>
-                            <th>Periksa</th>
-                            <th>Panggil</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($pendaftarans as $key => $pendaftaran)
-                            <tr>
-                                <td class="text-center align-middle">{{ $key + 1 }}</td>
-                                <td class="align-middle">{{ $pendaftaran->noAntrian }}</td>
-                                <td class="align-middle">{{ $pendaftaran->pasien->nama }}</td>
-                                <td class="align-middle">{{ $pendaftaran->pasien->nomorRm }}</td>
-                                <td class="align-middle">
-                                    {{ \Carbon\Carbon::parse($pendaftaran->tglDaftar)->format('d-m-Y') }}</td>
-                                <td class="align-middle">
-                                    {{ \Carbon\Carbon::parse($pendaftaran->created_at)
-                                        ->timezone('Asia/Jakarta') // Mengatur zona waktu ke WIB
-                                        ->format('H:i');
-                                    }}</td>
-                                <td class="align-middle">
-                                    @if ($pendaftaran->status == 1)
-                                        <span class="badge bg-success"><i class="fas fa-stethoscope"></i> Sudah
-                                            Diperiksa</span>
-                                    @elseif ($pendaftaran->status == 0)
-                                        <span class="badge bg-danger"><i class="fas fa-stethoscope"></i> Belum
-                                            Diperiksa</span>
-                                    @endif
-                                </td>
-                                <td class="align-middle"><a href="{{ route('antrian.pemeriksaan', $pendaftaran->id) }}"
-                                        class="btn btn-primary btn-sm"> <i class="fas fa-stethoscope"></i> Periksa</a>
-                                </td>
-                                <td class="align-middle">
-                                    <!-- Tombol Panggil -->
-                                    <button class="btn btn-danger btn-panggil btn-sm"
-                                        data-nomor="{{ $pendaftaran->noAntrian }}">
-                                        <i class="fas fa-bullhorn"></i> Panggil
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
+   
     <!-- Section untuk Kotak Informasi Antrian -->
 
 
