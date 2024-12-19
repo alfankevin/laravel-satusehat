@@ -19,16 +19,32 @@
                         <option value="Paracetamol 500 Mg" data-harga="14000">Paracetamol 500 Mg</option>
                     </select>
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     <label for="qtyInput" class="form-label">Jumlah</label>
                     <input type="number" id="qtyInput" class="form-control" placeholder="Jumlah" min="1"
                         required />
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <label for="hargaInputObat" class="form-label">Harga</label>
                     <input type="text" id="hargaInputObat" class="form-control" readonly />
                 </div>
-                <div class="col-2 mt-2">
+                <div class="col-5 mt-2">
+                    <label for="instruksi" class="form-label">Cara Minum</label>
+                    <select id="instruksi" class="form-control js-select2" required>
+                        <option value="" disabled selected>--Pilih cara minum--</option>
+                        <option value="Sebelum Makan" >Sebelum Makan</option>
+                        <option value="Setelah Makan" >Setelah Makan</option>
+                    </select>
+                </div>
+                <div class="col-5 mt-2">
+                    <label for="dosis" class="form-label">Dosis</label>
+                    <select id="dosis" class="form-control js-select2" required>
+                        <option value="" disabled selected>--Pilih Dosis--</option>
+                        <option value="3 x 1" >3 x 1</option>
+                        <option value="2 x 1" >2 x 1</option>
+                    </select>
+                </div>
+                <div class="col-2 mt-3">
                     <button class="btn btn-primary btn-sm form-control mt-4" type="submit">
                         <i class="fas fa-plus"></i> Tambah
                     </button>
@@ -47,7 +63,21 @@
                 </tr>
             </thead>
             <tbody id="obatTableBody">
-                <!-- Data Obat Ditambahkan di Sini -->
+                {{-- @foreach ( as ) --}}
+                <tr>
+                    <td class="text-center" width="5%">1</td>
+                    <td>Panadol</td>
+                    <td width="5%">2</td>
+                    <td width="20%">Rp. 15000</td>
+                    <td width="20%">Rp.30000</td>
+                    <td width="5%"><button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <th width="17%">Intruksi:</th>
+                    <td colspan="4">3x1 Sebelum Makan</td>
+                </tr>
+                {{-- {{ @endforeach --}} 
             </tbody>
         </table>
     </div>

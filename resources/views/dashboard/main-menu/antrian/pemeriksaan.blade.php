@@ -45,7 +45,7 @@
                                         <b>Nomor RM</b>
                                     </div>
                                     <div class="col-7">
-                                        : {{ $pemeriksaan->pasien->nama }}
+                                        : {{ $pemeriksaan->pasien->nomorRm }}
                                     </div>
                                 </div>
                                 <hr class="my-1">

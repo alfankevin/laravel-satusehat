@@ -8,7 +8,7 @@
     <div class="card-body">
         <form id="formTambahPemeriksaan">
             <div class="row mb-3">
-                <div class="col-7">
+                <div class="col-5">
                     <label for="pemeriksaanSelect" class="form-label">Pemeriksaan</label>
                     <select id="pemeriksaanSelect" class="form-control js-select2">
                         <option value="">--Pilih Pemeriksaan--</option>
@@ -17,7 +17,11 @@
                         <option value="Cholestrol" data-harga="25000">Cholestrol</option>
                     </select>
                 </div>
-                <div class="col-3">
+                <div class="col-5">
+                    <label for="hasil" class="form-label">Hasil</label>
+                    <input type="text" id="hasil" class="form-control"/>
+                </div>
+                <div class="col-3" style="display: none">
                     <label for="hargaInput" class="form-label">Harga</label>
                     <input type="text" id="hargaInput" class="form-control" readonly />
                 </div>
@@ -33,6 +37,7 @@
                 <tr>
                     <th class="text-center" width="5%">No</th>
                     <th>Pemeriksaan</th>
+                    <th>Hasil</th>
                     <th width="20%">Harga</th>
                     <th width="5%"></th>
                 </tr>
@@ -70,6 +75,7 @@
                     <tr>
                         <td>${$('#pemeriksaanTableBody tr').length + 1}</td>
                         <td>${pemeriksaan}</td>
+                        <td>Normal</td>
                         <td>${harga}</td>
                         <td><button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td>
                     </tr>

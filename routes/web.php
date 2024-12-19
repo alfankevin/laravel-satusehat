@@ -33,8 +33,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::view('/obat', 'dashboard.master-data.obat.index')->name('obat.index');
     Route::view('/tindakan', 'dashboard.master-data.tindakan.index')->name('tindakan.index');
+    Route::view('/laborat', 'dashboard.master-data.laborat.index')->name('laborat.index');
     Route::view('/diagnosa', 'dashboard.master-data.diagnosa.index')->name('diagnosa.index');
     Route::view('/farmasi', 'dashboard.main-menu.farmasi.index')->name('farmasi.index');
+    Route::view('/users', 'dashboard.master-data.user.index')->name('users.index');
 
     Route::get('/kasir',[KasirController::class, 'index'])->name('kasir.index');
 

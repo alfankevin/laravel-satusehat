@@ -5,14 +5,13 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-        @if (request()->routeIs(['pasien.index', 'obat.index', 'tindakan.index','diagnosa.index', 'poli.index', 'practitioner.index', 'practitioner-group.index']))
+        @if (request()->routeIs(['pasien.index', 'obat.index', 'tindakan.index','diagnosa.index', 'poli.index', 'practitioner.index', 'practitioner-group.index','laborat.index']))
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     Pendaftaran
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark">
                     <li><a class="dropdown-item" href="{{ route('pasien.index')  }}">Pasien</a></li>
-                    <li><a class="dropdown-item" href="#">Tipe Pasien</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -21,7 +20,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark">
                     <li><a class="dropdown-item" href="{{ route('tindakan.index') }}">Tindakan</a></li>
-                    <li><a class="dropdown-item" href="#">Laborat</a></li>
+                    <li><a class="dropdown-item" href="{{ route('laborat.index')  }}">Laborat</a></li>
                     <li><a class="dropdown-item" href="{{ route('diagnosa.index') }}">Diagnosa</a></li>
                     <li><a class="dropdown-item" href="{{ route('practitioner-group.index') }}">Practitioner Group</a></li>
                     <li><a class="dropdown-item" href="{{ route('practitioner.index')  }}">Practitioner</a></li>
@@ -33,9 +32,7 @@
                     Apotek
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="{{ route('obat.index') }}">Obat BHP</a></li>
-                    <li><a class="dropdown-item" href="#">Obat Racik</a></li>
-                    <li><a class="dropdown-item" href="#">Suplier</a></li>
+                    <li><a class="dropdown-item" href="{{ route('obat.index') }}">Obat</a></li>
                 </ul>
             </li>
         @endif

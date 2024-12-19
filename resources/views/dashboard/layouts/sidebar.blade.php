@@ -43,9 +43,9 @@
             </li>
 
             <li
-                class="nav-item has-treeview {{ request()->is(['pasien', 'obat', 'poli', 'diagnosa', 'tindakan', 'alamat', 'practitioner', 'practitioner-group']) ? 'menu-open' : '' }}">
+                class="nav-item has-treeview {{ request()->is(['pasien', 'obat', 'poli', 'diagnosa', 'tindakan', 'alamat', 'practitioner', 'practitioner-group','users']) ? 'menu-open' : '' }}">
                 <a href="#"
-                    class="nav-link  {{ request()->is(['pasien', 'obat', 'poli', 'diagnosa', 'tindakan', 'alamat', 'practitioner', 'practitioner-group']) ? 'bg-info' : '' }}">
+                    class="nav-link  {{ request()->is(['pasien', 'obat', 'poli', 'diagnosa', 'tindakan', 'alamat', 'practitioner', 'practitioner-group','users']) ? 'bg-info' : '' }}">
                     <i class="nav-icon fas fa-cogs"></i>
                     <p>
                         Pengaturan
@@ -55,7 +55,7 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('users*') ? 'active' : '' }}"
-                            href="">
+                            href="{{ route('users.index') }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>User & Hak Akses</p>
                         </a>
