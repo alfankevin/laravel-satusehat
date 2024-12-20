@@ -76,9 +76,10 @@
                                         <th>Nama Pemeriksa</th>
                                         <th class="text-center" width="5%">PTV</th>
                                         <th class="text-center" width="5%">SOAP</th>
+                                        <th class="text-center" width="5%">LAB</th>
                                         <th class="text-center" width="8%">Tindakan</th>
                                         <th class="text-center" width="5%">Obat</th>
-                                        <th width="13%">Diagnosa</th>
+                                        <th class="text-center" width="10%">Cetak</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,10 +93,13 @@
                                             <td class="text-center"><a href="" data-toggle="modal"
                                                     data-target="#modal-default"><i class="fas fa-stethoscope"></i></a>
                                             </td>
+                                            <td class="text-center"><a href="" data-toggle="modal"
+                                                    data-target="#modal-default"><i class="fas fa-stethoscope"></i></a>
+                                            </td>
                                             <td class="text-center"><i class="fas fa-stethoscope"></i></td>
                                             <td class="text-center"><i class="fas fa-plus-square"></i></td>
                                             <td class="text-center"><i class="fas fa-capsules"></i></td>
-                                            <td>{{ $medis->diagnosa }}</td>
+                                            <td class="text-center"><button class="btn btn-sm btn-info"><i class="fas fa-print mx-1"></i>Print</button></td>
                                         </tr>
 
                                         <div class="modal fade" id="modal-default">
@@ -115,15 +119,20 @@
                                                             <div class="col-8">
                                                                 <div class="row">
                                                                     <div class="col-5">Nama Dokter</div>
-                                                                    <div class="col-7">: {{ $medis->practitioner->namaPractitioner ?? '' }}</div>
+                                                                    <div class="col-7">:
+                                                                        {{ $medis->practitioner->namaPractitioner ?? '' }}
+                                                                    </div>
                                                                     <div class="col-5">Suhu Tubuh</div>
                                                                     <div class="col-7">: {{ $medis->suhu }}</div>
                                                                     <div class="col-5">Tinggi Badan</div>
-                                                                    <div class="col-7">: {{ $medis->tinggiBadan }} cm</div>
+                                                                    <div class="col-7">: {{ $medis->tinggiBadan }} cm
+                                                                    </div>
                                                                     <div class="col-5">Berat Badan</div>
-                                                                    <div class="col-7">: {{ $medis->beratBadan }} kg</div>
+                                                                    <div class="col-7">: {{ $medis->beratBadan }} kg
+                                                                    </div>
                                                                     <div class="col-5">Lingkar Perut</div>
-                                                                    <div class="col-7">: {{ $medis->lingkarPerut }} cm</div>
+                                                                    <div class="col-7">: {{ $medis->lingkarPerut }} cm
+                                                                    </div>
                                                                     <div class="col-5">Sistole</div>
                                                                     <div class="col-7">: {{ $medis->sistole }}</div>
                                                                     <div class="col-5">Diastole</div>
