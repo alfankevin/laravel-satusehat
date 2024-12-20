@@ -8,7 +8,7 @@
     <div class="card-body">
         <form id="formTambahPemeriksaan">
             <div class="row mb-3">
-                <div class="col-5">
+                <div class="col-4">
                     <label for="pemeriksaanSelect" class="form-label">Pemeriksaan</label>
                     <select id="pemeriksaanSelect" class="form-control js-select2">
                         <option value="">--Pilih Pemeriksaan--</option>
@@ -17,17 +17,26 @@
                         <option value="Cholestrol" data-harga="25000">Cholestrol</option>
                     </select>
                 </div>
-                <div class="col-5">
+                <div class="col-3">
                     <label for="hasil" class="form-label">Hasil</label>
                     <input type="text" id="hasil" class="form-control"/>
+                </div>
+                <div class="col-4">
+                    <label for="petugas" class="form-label">Petugas</label>
+                    <select id="petugas" class="form-control js-select2">
+                        <option value="">--Pilih Petugas--</option>
+                        <option value="Aagus" >Aagus</option>
+                        <option value="Yanto" >Yanto</option>
+                        <option value="Budi" >Budi</option>
+                    </select>
                 </div>
                 <div class="col-3" style="display: none">
                     <label for="hargaInput" class="form-label">Harga</label>
                     <input type="text" id="hargaInput" class="form-control" readonly />
                 </div>
-                <div class="col-2 mt-2">
+                <div class="col-1 mt-2">
                     <button class="btn btn-primary btn-sm form-control mt-4" type="submit">
-                        <i class="fas fa-plus"></i> Tambah
+                        <i class="fas fa-plus"></i>
                     </button>
                 </div>
             </div>

@@ -18,4 +18,13 @@ class KasirController extends Controller
 
         return view('dashboard.main-menu.kasir.index', compact('pendaftarans'));
     }
+
+    public function bayar($id)
+    {
+        // Ambil kunjungan dengan status 'Pending' atau 'InProgress', diurutkan dari yang paling lama dibuat
+        $pendaftarans = Pendaftaran::with('pasien')
+        ->findOrFail($id);
+
+        return view('dashboard.main-menu.kasir.bayar', compact('pendaftarans'));
+    }
 }

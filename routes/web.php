@@ -39,6 +39,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::view('/users', 'dashboard.master-data.user.index')->name('users.index');
 
     Route::get('/kasir',[KasirController::class, 'index'])->name('kasir.index');
+    Route::get('/bayar/{id}',[KasirController::class, 'bayar'])->name('kasir.bayar');
 
     // Route::view('/poli', 'dashboard.master-data.poli.index')->name('poli.index');
     Route::get('/poli', [PoliController::class, 'index'])->name('poli.index');
