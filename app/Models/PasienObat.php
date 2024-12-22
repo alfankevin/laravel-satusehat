@@ -10,12 +10,11 @@ class PasienObat extends Model
 {
     use HasFactory;
 
-    protected $table = 'rekam_medis_obats'; // Nama tabel
-
     protected $fillable = [
-        'pasien_id',
+        'kunjungan_id',
         'obat_id',
         'jumlah_obat',
+        'harga_obat',
         'instruksi',
     ];
 
@@ -27,6 +26,6 @@ class PasienObat extends Model
 
     public function pasien(): BelongsTo
     {
-        return $this->belongsTo(Pasien::class, 'pasien_id');
+        return $this->belongsTo(Pendaftaran::class, 'kunjungan_id');
     }
 }

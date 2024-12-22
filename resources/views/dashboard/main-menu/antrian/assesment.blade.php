@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Instrusi</label>
+                        <label>Instruksi</label>
                         <textarea class="form-control" rows="2" name="instruksi" placeholder="Enter ...">{{ $pemeriksaan->instruksi }}</textarea>
                     </div>
                 </div>

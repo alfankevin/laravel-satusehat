@@ -87,4 +87,9 @@ class Pendaftaran extends Model
     {
         return $this->belongsTo(Tkp::class);
     }
+
+    public function obat()
+    {
+        return $this->hasMany(PasienObat::class, 'kunjungan_id', 'id');
+    }
 }

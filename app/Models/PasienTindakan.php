@@ -16,9 +16,10 @@ class PasienTindakan extends Model
      * @var array
      */
     protected $fillable = [
-        'pasien_id',
+        'kunjungan_id',
         'tindakan_id',
         'practitioner_id',
+        'biaya',
     ];
 
     /**
@@ -28,7 +29,7 @@ class PasienTindakan extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'pasien_id' => 'integer',
+        'kunjungan_id' => 'integer',
         'tindakan_id' => 'integer',
         'practitioner_id' => 'integer',
     ];
@@ -40,7 +41,7 @@ class PasienTindakan extends Model
 
     public function pasien(): BelongsTo
     {
-        return $this->belongsTo(Pasien::class, 'pasien_id');
+        return $this->belongsTo(Pendaftaran::class, 'kunjungan_id');
     }
 
     public function practitioner(): BelongsTo

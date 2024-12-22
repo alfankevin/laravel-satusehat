@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('pasien_tindakans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pasien_id');
+            $table->unsignedBigInteger('kunjungan_id');
             $table->unsignedBigInteger('practitioner_id');
             $table->foreignId('tindakan_id')->constrained();
+            $table->float('biaya');
             $table->timestamps();
 
             // Foreign key constraint
-            $table->foreign('pasien_id')->references('id')->on('pasiens')->onDelete('cascade');
+            $table->foreign('kunjungan_id')->references('id')->on('pendaftarans')->onDelete('cascade');
             $table->foreign('practitioner_id')->references('id')->on('practitioners')->onDelete('cascade');
         });
     }

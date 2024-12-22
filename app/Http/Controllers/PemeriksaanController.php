@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PemeriksaanStoreRequest;
 use App\Http\Requests\PemeriksaanUpdateRequest;
 use App\Http\Requests\PendaftaranUpdateRequest;
+use App\Models\Obat;
 use App\Models\Pasien;
 use App\Models\Pendaftaran;
 use Illuminate\Http\RedirectResponse;
@@ -33,9 +34,11 @@ class PemeriksaanController extends Controller
 
     public function create(Request $request, $id): View
     {
-        $pemeriksaan = Pendaftaran::with('pasien', 'poli')->where('id', $id)->first();
+        $pemeriksaan = Pendaftaran::with('pasien', 'poli', 'obat.obat')->where('id', $id)->first();
+        // dd($pemeriksaan);
+        $obats = Obat::all();
 
-        return view('dashboard.main-menu.antrian.pemeriksaan', compact('pemeriksaan'));
+        return view('dashboard.main-menu.antrian.pemeriksaan', compact('pemeriksaan', 'obats'));
     }
 
     public function store(PemeriksaanStoreRequest $request): RedirectResponse

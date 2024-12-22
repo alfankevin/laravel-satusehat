@@ -20,9 +20,10 @@ class PasienObatRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pasien_id' => ['required', 'integer', 'exists:pasiens,id'],
+            'kunjungan_id' => ['required', 'integer', 'exists:pendaftarans,id'],
             'obat_id' => ['required', 'integer', 'exists:obats,id'],
             'jumlah_obat' => ['required', 'integer'],
+            'harga_obat' => ['required', 'integer'],
             'instruksi' => ['nullable', 'string'],
         ];
     }

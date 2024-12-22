@@ -20,7 +20,7 @@ class PasienDiagnosaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pasien_id' => ['required', 'integer', 'exists:pasiens,id'],
+            'kunjungan_id' => ['required', 'integer', 'exists:pendaftarans,id'],
             'diagnosa_id' => ['required', 'integer', 'exists:diagnosas,id'],
             'practitioner_id' => ['required', 'integer', 'exists:practitioner,id'],
         ];

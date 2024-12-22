@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Pemeriksaan extends Model
+class PasienPemeriksaan extends Model
 {
     use HasFactory;
 
@@ -19,6 +19,7 @@ class Pemeriksaan extends Model
         'kunjungan_id',
         'kategori_pemeriksaan_id',
         'hasil_pemeriksaan',
+        'biaya',
     ];
 
     /**
@@ -35,5 +36,10 @@ class Pemeriksaan extends Model
     public function kategoriPemeriksaan(): BelongsTo
     {
         return $this->belongsTo(KategoriPemeriksaan::class, 'kategori_pemeriksaan_id');
+    }
+
+    public function pasien(): BelongsTo
+    {
+        return $this->belongsTo(Pendaftaran::class, 'kunjungan_id');
     }
 }
