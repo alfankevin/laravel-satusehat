@@ -17,14 +17,15 @@
                     <select id="obatSelect" class="form-control js-select2" name="obat_id" required>
                         <option value="" disabled selected>--Pilih obat--</option>
                         @foreach ($obats as $obat)
-                            <option value="{{ $obat->id }}" data-harga="{{ $obat->harga }}">{{ $obat->nama_obat }}</option>
+                            <option value="{{ $obat->id }}" data-harga="{{ $obat->harga }}">{{ $obat->nama_obat }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-3">
                     <label for="qtyInput" class="form-label">Jumlah</label>
-                    <input type="number" id="qtyInput" class="form-control" name="jumlah_obat" placeholder="Jumlah" min="1"
-                        required />
+                    <input type="number" id="qtyInput" class="form-control" name="jumlah_obat" placeholder="Jumlah"
+                        min="1" required />
                 </div>
                 <div class="col-4">
                     <label for="hargaInputObat" class="form-label">Harga</label>
@@ -34,8 +35,8 @@
                     <label for="cara_minum" class="form-label">Cara Minum</label>
                     <select id="cara_minum" class="form-control js-select2" required>
                         <option value="" disabled selected>--Pilih cara minum--</option>
-                        <option value="Sebelum Makan" >Sebelum Makan</option>
-                        <option value="Setelah Makan" >Setelah Makan</option>
+                        <option value="Sebelum Makan">Sebelum Makan</option>
+                        <option value="Setelah Makan">Setelah Makan</option>
                     </select>
                 </div>
                 <div class="col-5 mt-2">
@@ -66,21 +67,23 @@
             </thead>
             <tbody id="obatTableBody">
                 @foreach ($pemeriksaan->obat as $data)
-                <tr id="obat-{{ $data->id }}">
-                    <td class="text-center" width="5%">{{ $loop->iteration }}</td>
-                    <td>{{ $data->obat->nama_obat }}</td>
-                    <td width="5%">{{ $data->jumlah_obat }}</td>
-                    <td width="20%">Rp{{ number_format(($data->harga_obat), 0, ',', '.') }}</td>
-                    <td width="20%">Rp{{ number_format(($data->harga_obat * $data->jumlah_obat), 0, ',', '.') }}</td>
+                    <tr id="obat-{{ $data->id }}">
+                        <td class="text-center" width="5%">{{ $loop->iteration }}</td>
+                        <td>{{ $data->obat->nama_obat }}</td>
+                        <td width="5%">{{ $data->jumlah_obat }}</td>
+                        <td width="20%">Rp{{ number_format($data->harga_obat, 0, ',', '.') }}</td>
+                        <td width="20%">Rp{{ number_format($data->harga_obat * $data->jumlah_obat, 0, ',', '.') }}
+                        </td>
 
-                    <td width="5%"><button class="btn btn-sm btn-danger delete-obat" data-id="{{ $data->id }}"><i class="fas fa-trash"></i></button></td>
-                </tr>
-                <!-- <tr>
-                    <td></td>
-                    <th width="17%">Intruksi:</th>
-                    <td colspan="4">3x1 Sebelum Makan</td>
-                </tr> -->
-                @endforeach 
+                        <td width="5%"><button class="btn btn-sm btn-danger delete-obat"
+                                data-id="{{ $data->id }}"><i class="fas fa-trash"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <th width="17%">Intruksi:</th>
+                        <td colspan="4">{{ $data->instruksi }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -107,7 +110,8 @@
                     success: function(response) {
                         const rowCount = $('#obatContainer .obatRow').length;
                         const namaObat = $('#nama_obat option:selected').text();
-                        const hargaObat = $('#nama_obat option:selected').data('harga').toLocaleString('id-ID');
+                        const hargaObat = $('#nama_obat option:selected').data('harga')
+                            .toLocaleString('id-ID');
                         const jumlahObat = $('#jumlah_obat').val();
                         const subTotal = hargaObat * jumlahObat;
                         const formattedSubTotal = (subTotal.toFixed(3)).toLocaleString('id-ID');
@@ -138,8 +142,6 @@
             });
         });
     </script> -->
-
-    
 @endpush
 
 @push('scripts')
@@ -156,14 +158,14 @@
                 $('#hargaInputObat').val(harga ? `Rp${new Intl.NumberFormat('id-ID').format(harga)}` : '');
             });
 
-            $('#dosis, #cara_minum').on('change', function () {
+            $('#dosis, #cara_minum').on('change', function() {
                 const dosis = $('#dosis').val();
                 const caraMinum = $('#cara_minum').val();
                 const instruksi = `${dosis} ${caraMinum}`;
 
                 $('#instruksi').val(instruksi);
             });
-            
+
             // Handle form submission
             $('#formTambahObat').on('submit', function(e) {
                 e.preventDefault();
@@ -187,8 +189,10 @@
                         }
 
                         // Format harga dan subtotal
-                        const formattedHarga = `Rp${new Intl.NumberFormat('id-ID').format(harga)}`;
-                        const formattedSubtotal = `Rp${new Intl.NumberFormat('id-ID').format(subtotal)}`;
+                        const formattedHarga =
+                            `Rp${new Intl.NumberFormat('id-ID').format(harga)}`;
+                        const formattedSubtotal =
+                            `Rp${new Intl.NumberFormat('id-ID').format(subtotal)}`;
 
                         // Tambahkan baris ke tabel
                         const tableBody = $('#obatTableBody');
@@ -200,6 +204,11 @@
                                 <td>${formattedHarga}</td>
                                 <td>${formattedSubtotal}</td>
                                 <td><button class="btn btn-sm btn-danger delete-obat" data-id="` + response.no + `"><i class="fas fa-trash"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <th width="17%">Intruksi:</th>
+                                <td colspan="4">${$('#instruksi').val()}</td>
                             </tr>
                         `;
                         tableBody.append(newRow);
@@ -228,7 +237,7 @@
         });
     </script>
 
-<script>
+    <script>
         $(document).on('click', '.delete-obat', function() {
             var id = $(this).data('id'); // Ambil ID dari data-id tombol
 
@@ -246,7 +255,9 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         url: "{{ route('pasien-obat.destroy', '') }}/" + id,
-                        data : {_token: "{{ csrf_token() }}"},
+                        data: {
+                            _token: "{{ csrf_token() }}"
+                        },
                         type: 'DELETE',
                         success: function(response) {
                             if (response.success) {

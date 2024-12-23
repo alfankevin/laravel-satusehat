@@ -8,7 +8,7 @@
     <div class="card-body">
         <form id="formTambahTindakan">
             <div class="row mb-3">
-                <div class="col-7">
+                <div class="col-4">
                     <label for="tindakanSelect" class="form-label">Tindakan(ICD 9)</label>
                     <select id="tindakanSelect" class="form-control js-select2" required>
                         <option value="" disabled selected>--Pilih tindakan--</option>
@@ -16,13 +16,22 @@
                         <option value="Suntik Vitamin" data-harga="30000">Suntik Vitamin</option>
                     </select>
                 </div>
+                <div class="col-4">
+                    <label for="petugas" class="form-label">Petugas</label>
+                    <select id="petugas" class="form-control js-select2">
+                        <option value="">--Pilih Petugas--</option>
+                        <option value="Aagus" >Aagus</option>
+                        <option value="Yanto" >Yanto</option>
+                        <option value="Budi" >Budi</option>
+                    </select>
+                </div>
                 <div class="col-3">
                     <label for="hargaInputtindakan" class="form-label">Harga</label>
                     <input type="text" id="hargaInputtindakan" class="form-control" readonly />
                 </div>
-                <div class="col-2 mt-2">
+                <div class="col-1 mt-2">
                     <button class="btn btn-primary btn-sm form-control mt-4" type="submit">
-                        <i class="fas fa-plus"></i> Tambah
+                        <i class="fas fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -32,6 +41,7 @@
                 <tr>
                     <th class="text-center" width="5%">No</th>
                     <th>Tindakan</th>
+                    <th>Petugas</th>
                     <th width="20%">Harga</th>
                     <th width="5%"></th>
                 </tr>
@@ -68,6 +78,7 @@
                     <tr>
                         <td>${$('#tindakanTableBody tr').length + 1}</td>
                         <td>${tindakan}</td>
+                        <td>Agus</td>
                         <td>${harga}</td>
                         <td><button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td>
                     </tr>

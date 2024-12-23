@@ -19,15 +19,15 @@
                 </div>
                 <div class="col-3">
                     <label for="hasil" class="form-label">Hasil</label>
-                    <input type="text" id="hasil" class="form-control"/>
+                    <input type="text" id="hasil" class="form-control" />
                 </div>
                 <div class="col-4">
                     <label for="petugas" class="form-label">Petugas</label>
                     <select id="petugas" class="form-control js-select2">
                         <option value="">--Pilih Petugas--</option>
-                        <option value="Aagus" >Aagus</option>
-                        <option value="Yanto" >Yanto</option>
-                        <option value="Budi" >Budi</option>
+                        <option value="Aagus">Aagus</option>
+                        <option value="Yanto">Yanto</option>
+                        <option value="Budi">Budi</option>
                     </select>
                 </div>
                 <div class="col-3" style="display: none">
@@ -47,12 +47,13 @@
                     <th class="text-center" width="5%">No</th>
                     <th>Pemeriksaan</th>
                     <th>Hasil</th>
+                    <th>Petugas</th>
                     <th width="20%">Harga</th>
                     <th width="5%"></th>
                 </tr>
             </thead>
             <tbody id="pemeriksaanTableBody">
-                
+
             </tbody>
         </table>
     </div>
@@ -85,6 +86,7 @@
                         <td>${$('#pemeriksaanTableBody tr').length + 1}</td>
                         <td>${pemeriksaan}</td>
                         <td>Normal</td>
+                        <td>Agus</td>
                         <td>${harga}</td>
                         <td><button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td>
                     </tr>

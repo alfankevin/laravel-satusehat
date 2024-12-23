@@ -113,16 +113,7 @@
                                         : {{ \Carbon\Carbon::parse($pemeriksaan->created_at)->format('H:i') }}
                                     </div>
                                 </div>
-                                <hr class="my-1">
-                                <div class="row">
-                                    <div class="col-5 ">
-                                        <b>Dibuat Oleh</b>
-                                    </div>
-                                    <div class="col-7">
-                                        : {{ $pemeriksaan->practitioner->namaPractitioner }}
-                                    </div>
-                                </div>
-                                <hr class="my-1">
+                                <hr class="my-1">                 
                                 <div class="row">
                                     <div class="col-5 ">
                                         <b>Alamat</b>
