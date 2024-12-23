@@ -1,5 +1,6 @@
 <!-- Modal Tambah Kunjungan -->
-<div class="modal fade" id="modalTambahKunjungan" tabindex="-1" aria-labelledby="modalTambahKunjunganLabel" aria-hidden="true">
+<div class="modal fade" id="modalTambahKunjungan" tabindex="-1" aria-labelledby="modalTambahKunjunganLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-info">
@@ -26,7 +27,8 @@
                                     <option value="">--Pilih Pasien--</option>
                                     @foreach ($pasiens as $pasien)
                                         <option value="{{ $pasien->id }}">
-                                            {{ $pasien->nomorRm }} - {{ $pasien->nama }}
+                                            {{ substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }}
+                                            - {{ $pasien->nama }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -55,10 +57,12 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="practitioner_id">Dokter</label>
-                                <select class="form-control js-select2" id="practitioner_id" name="practitioner_id" required>
+                                <select class="form-control js-select2" id="practitioner_id" name="practitioner_id"
+                                    required>
                                     <option value="">--Pilih Dokter--</option>
                                     @foreach ($practitioners as $practitioner)
-                                        <option value="{{ $practitioner->id }}">{{ $practitioner->namaPractitioner }}</option>
+                                        <option value="{{ $practitioner->id }}">{{ $practitioner->namaPractitioner }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -100,16 +104,13 @@
                         @foreach ($pasiens as $pasien)
                             <tr>
                                 <td class="text-center align-middle">
-                                    <button 
-                                        type="button" 
-                                        class="btn btn-sm btn-info btn-pilih-pasien"
+                                    <button type="button" class="btn btn-sm btn-info btn-pilih-pasien"
                                         data-id="{{ $pasien->id }}"
-                                        data-nama="{{ $pasien->nomorRm }} - {{ $pasien->nama }}"
-                                    >
+                                        data-nama="{{ substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }} - {{ $pasien->nama }}">
                                         <i class="fas fa-check"></i>
                                     </button>
                                 </td>
-                                <td class="align-middle">{{ $pasien->nomorRm }}</td>
+                                <td class="align-middle">{{ substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }}</td>
                                 <td class="align-middle">{{ $pasien->nama }}</td>
                                 <td class="align-middle">{{ $pasien->sex === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                 <td class="align-middle">{{ $pasien->tglLahir }}</td>
@@ -123,28 +124,28 @@
 </div>
 
 @push('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Event handler untuk tombol "Pilih"
-        document.querySelectorAll('.btn-pilih-pasien').forEach(button => {
-            button.addEventListener('click', function () {
-                const pasienId = this.getAttribute('data-id');
-                const pasienNama = this.getAttribute('data-nama');
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Event handler untuk tombol "Pilih"
+            document.querySelectorAll('.btn-pilih-pasien').forEach(button => {
+                button.addEventListener('click', function() {
+                    const pasienId = this.getAttribute('data-id');
+                    const pasienNama = this.getAttribute('data-nama');
 
-                // Isi select pada modal tambah kunjungan
-                const pasienSelect = document.querySelector('#modalTambahKunjungan #pasien_id');
-                pasienSelect.value = pasienId;
-                
-                // Trigger event change jika diperlukan
-                $(pasienSelect).trigger('change');
+                    // Isi select pada modal tambah kunjungan
+                    const pasienSelect = document.querySelector('#modalTambahKunjungan #pasien_id');
+                    pasienSelect.value = pasienId;
 
-                // Tutup modal cari pasien
-                $('#modalCariPasien').modal('hide');
+                    // Trigger event change jika diperlukan
+                    $(pasienSelect).trigger('change');
 
-                // Tampilkan modal tambah kunjungan
-                $('#modalTambahKunjungan').modal('show');
+                    // Tutup modal cari pasien
+                    $('#modalCariPasien').modal('hide');
+
+                    // Tampilkan modal tambah kunjungan
+                    $('#modalTambahKunjungan').modal('show');
+                });
             });
         });
-    });
-</script>
+    </script>
 @endpush

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nomorRm');
+            $table->unsignedBigInteger('nomorRm')->unique();
             $table->string('noKartu');
             $table->string('nama');
             $table->char('sex', 1);
@@ -34,6 +34,7 @@ return new class extends Migration
             $table->foreignId('KD_KELURAHAN')->nullable();
             $table->timestamps();
         });
+        
     }
 
     /**

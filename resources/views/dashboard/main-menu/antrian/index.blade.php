@@ -99,7 +99,7 @@
                                     <td class="text-center align-middle">{{ $key + 1 }}</td>
                                     <td class="align-middle">{{ $pendaftaran->noAntrian }}</td>
                                     <td class="align-middle">{{ $pendaftaran->pasien->nama }}</td>
-                                    <td class="align-middle">{{ $pendaftaran->pasien->nomorRm }}</td>
+                                    <td class="align-middle">{{ substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }} </td>
                                     <td class="align-middle">
                                         {{ \Carbon\Carbon::parse($pendaftaran->tglDaftar)->format('d-m-Y') }}</td>
                                     <td class="align-middle">

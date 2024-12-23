@@ -17,7 +17,7 @@
                                     <label for="noRM" class="col-sm-4 col-form-label ">No Rekam Medis</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" id="noRM" name="noRM"
-                                            value="{{ $selectedPasien->nomorRm ?? '' }}" disabled>
+                                            value="{{ substr(str_pad($selectedPasien->nomorRm ?? '', 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($selectedPasien->nomorRm ?? '', 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($selectedPasien->nomorRm ?? '', 6, '0', STR_PAD_LEFT), 4, 2) }} " disabled>
                                     </div>
                                 </div>
                                 <div class="mb-2 row">
@@ -192,7 +192,7 @@
                                         </form>
                                     </td>
 
-                                    <td class="align-middle">{{ $pasien->nomorRm }}</td>
+                                    <td class="align-middle">{{ substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }}</td>
                                     <td class="align-middle">{{ $pasien->nama }}</td>
                                     <td class="align-middle">{{ $pasien->sex === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                     <td class="align-middle">{{ $pasien->tglLahir }}</td>

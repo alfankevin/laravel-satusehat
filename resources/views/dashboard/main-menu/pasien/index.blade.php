@@ -39,7 +39,7 @@
                                 <tr>
                                     <td class="text-center align-middle">{{ $key + 1 }}</td>
                                     <td class="align-middle">{{ $pasien->id }}</td>
-                                    <td  class="align-middle">{{ $pasien->nama }} <br> {{ $pasien->nomorRm }}</td>
+                                    <td  class="align-middle">{{ $pasien->nama }} <br> {{ substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }}</td>
                                     <td class="align-middle">
                                         <span
                                             class="text-nowrap">{{ \Carbon\Carbon::parse($pasien->tglLahir)->format('d-m-Y') }}</span><br>

@@ -36,6 +36,15 @@ class Pasien extends Model
         'KD_KELURAHAN',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($pasien) {
+            $pasien->nomorRm = Pasien::max('nomorRm') + 1; // Increment rekamMedis
+        });
+    }
+
     /**
      * The attributes that should be cast to native types.
      *

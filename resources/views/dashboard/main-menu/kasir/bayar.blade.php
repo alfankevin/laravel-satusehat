@@ -34,7 +34,7 @@
                                         <b>Nomor RM</b>
                                     </div>
                                     <div class="col-7">
-                                        : {{ $pendaftarans->pasien->nomorRm }}
+                                        : {{ substr(str_pad($pendaftarans->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pendaftarans->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pendaftarans->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }} 
                                     </div>
                                 </div>
                                 <hr class="my-1">

@@ -23,7 +23,6 @@ class PasienFactory extends Factory
     public function definition(): array
     {
         return [
-            'nomorRm' => date('Ymd') . str_pad($this->faker->unique()->numberBetween(1, 9999), 4, '0', STR_PAD_LEFT),
             'noKartu' => $this->faker->numerify(str_repeat('#', 8)),
             'nama' => $this->faker->name(),
             'sex' => $this->faker->randomElement(['L', 'P']),
