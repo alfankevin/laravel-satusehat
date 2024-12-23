@@ -18,7 +18,6 @@ class PasienDiagnosa extends Model
     protected $fillable = [
         'kunjungan_id',
         'diagnosa_id',
-        'practitioner_id',
     ];
 
     /**
@@ -30,7 +29,6 @@ class PasienDiagnosa extends Model
         'id' => 'integer',
         'kunjungan_id' => 'integer',
         'diagnosa_id' => 'integer',
-        'practitioner_id' => 'integer',
     ];
 
     public function diagnosa(): BelongsTo
@@ -41,10 +39,5 @@ class PasienDiagnosa extends Model
     public function pasien(): BelongsTo
     {
         return $this->belongsTo(Pendaftaran::class, 'kunjungan_id');
-    }
-
-    public function practitioner(): BelongsTo
-    {
-        return $this->belongsTo(Practitioner::class, 'practitioner_id');
     }
 }

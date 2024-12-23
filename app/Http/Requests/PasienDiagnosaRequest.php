@@ -22,7 +22,6 @@ class PasienDiagnosaRequest extends FormRequest
         return [
             'kunjungan_id' => ['required', 'integer', 'exists:pendaftarans,id'],
             'diagnosa_id' => ['required', 'integer', 'exists:diagnosas,id'],
-            'practitioner_id' => ['required', 'integer', 'exists:practitioner,id'],
         ];
     }
 }

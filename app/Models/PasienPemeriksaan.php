@@ -17,6 +17,7 @@ class PasienPemeriksaan extends Model
      */
     protected $fillable = [
         'kunjungan_id',
+        'practitioner_id',
         'kategori_pemeriksaan_id',
         'hasil_pemeriksaan',
         'biaya',
@@ -30,6 +31,7 @@ class PasienPemeriksaan extends Model
     protected $casts = [
         'id' => 'integer',
         'kunjungan_id' => 'integer',
+        'practitioner_id' => 'integer',
         'kategori_pemeriksaan_id' => 'integer',
     ];
 
@@ -41,5 +43,10 @@ class PasienPemeriksaan extends Model
     public function pasien(): BelongsTo
     {
         return $this->belongsTo(Pendaftaran::class, 'kunjungan_id');
+    }
+
+    public function practitioner(): BelongsTo
+    {
+        return $this->belongsTo(Practitioner::class, 'practitioner_id');
     }
 }

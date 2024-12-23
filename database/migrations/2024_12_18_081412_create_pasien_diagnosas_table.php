@@ -14,13 +14,11 @@ return new class extends Migration
         Schema::create('pasien_diagnosas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kunjungan_id');
-            $table->unsignedBigInteger('practitioner_id');
             $table->foreignId('diagnosa_id')->constrained();
             $table->timestamps();
 
             // Foreign key constraint
             $table->foreign('kunjungan_id')->references('id')->on('pendaftarans')->onDelete('cascade');
-            $table->foreign('practitioner_id')->references('id')->on('practitioners')->onDelete('cascade');
         });
     }
 

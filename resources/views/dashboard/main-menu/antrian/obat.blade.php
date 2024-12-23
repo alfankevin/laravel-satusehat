@@ -66,9 +66,9 @@
                 </tr>
             </thead>
             <tbody id="obatTableBody">
-                @foreach ($pemeriksaan->obat as $data)
-                    <tr id="obat-{{ $data->id }}">
-                        <td class="text-center" width="5%">{{ $loop->iteration }}</td>
+                @foreach ($pemeriksaan->obat as $key => $data)
+                    <tr class="obat-{{ $data->id }}" data-main>
+                        <td class="text-center" width="5%">{{ $key + 1 }}</td>
                         <td>{{ $data->obat->nama_obat }}</td>
                         <td width="5%">{{ $data->jumlah_obat }}</td>
                         <td width="20%">Rp{{ number_format($data->harga_obat, 0, ',', '.') }}</td>
@@ -78,7 +78,7 @@
                         <td width="5%"><button class="btn btn-sm btn-danger delete-obat"
                                 data-id="{{ $data->id }}"><i class="fas fa-trash"></i></button></td>
                     </tr>
-                    <tr>
+                    <tr class="obat-{{ $data->id }}">
                         <td></td>
                         <th width="17%">Intruksi:</th>
                         <td colspan="4">{{ $data->instruksi }}</td>
@@ -196,16 +196,17 @@
 
                         // Tambahkan baris ke tabel
                         const tableBody = $('#obatTableBody');
+                        const rowCount = tableBody.find('tr[data-main]').length + 1;
                         const newRow = `
-                            <tr id="obat-${response.no}">
-                                <td class="text-center">${tableBody.find('tr').length + 1}</td>
+                            <tr class="obat-${response.no}" data-main>
+                                <td class="text-center">${rowCount}</td>
                                 <td>${obat}</td>
                                 <td>${qty}</td>
                                 <td>${formattedHarga}</td>
                                 <td>${formattedSubtotal}</td>
                                 <td><button class="btn btn-sm btn-danger delete-obat" data-id="` + response.no + `"><i class="fas fa-trash"></i></button></td>
                             </tr>
-                            <tr>
+                            <tr class="obat-${response.no}">
                                 <td></td>
                                 <th width="17%">Intruksi:</th>
                                 <td colspan="4">${$('#instruksi').val()}</td>
@@ -262,7 +263,7 @@
                         success: function(response) {
                             if (response.success) {
                                 // Hapus baris dari tampilan
-                                $('#obat-' + id).remove();
+                                $('.obat-' + id).remove();
                             }
                         },
                         error: function(xhr) {

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('pasien_pemeriksaans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kunjungan_id');
+            $table->unsignedBigInteger('practitioner_id');
             $table->foreignId('kategori_pemeriksaan_id')->constrained();
             $table->string('hasil_pemeriksaan');
             $table->float('biaya');
@@ -23,6 +24,7 @@ return new class extends Migration
 
             // Foreign key constraint
             $table->foreign('kunjungan_id')->references('id')->on('pendaftarans')->onDelete('cascade');
+            $table->foreign('practitioner_id')->references('id')->on('practitioners')->onDelete('cascade');
         });
 
         Schema::enableForeignKeyConstraints();

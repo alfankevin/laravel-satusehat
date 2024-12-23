@@ -21,6 +21,7 @@ class PasienPemeriksaanRequest extends FormRequest
     {
         return [
             'kunjungan_id' => ['required', 'integer', 'exists:kunjungans,id'],
+            'practitioner_id' => ['required', 'integer', 'exists:practitioner,id'],
             'kategori_pemeriksaan_id' => ['required', 'integer', 'exists:kategori_pemeriksaans,id'],
             'hasil_pemeriksaan' => ['required', 'string'],
             'biaya' => ['required', 'integer'],
