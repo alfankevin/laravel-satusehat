@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\PasienPemeriksaanRequest;
-use App\Models\Pemeriksaan;
+use App\Models\PasienPemeriksaan;
 use Illuminate\Http\Request;
 
 class PasienPemeriksaanController extends Controller
@@ -14,7 +14,7 @@ class PasienPemeriksaanController extends Controller
      */
     public function store(PasienPemeriksaanRequest $request)
     {
-        $pemeriksaan = Pemeriksaan::create($request->validated());
+        $pemeriksaan = PasienPemeriksaan::create($request->validated());
 
         return response()->json([
             'no' => $pemeriksaan->id,
@@ -27,7 +27,7 @@ class PasienPemeriksaanController extends Controller
      */
     public function destroy($id)
     {
-        $pemeriksaan = Pemeriksaan::find($id);
+        $pemeriksaan = PasienPemeriksaan::find($id);
 
         $pemeriksaan->delete();
 

@@ -10,12 +10,12 @@
             @csrf
             <div class="row mb-3">
                 <div class="col-5">
-                    <input type="hidden" name="kunjungan_id" value="{{ $pemeriksaan->id }}" hidden>
+                    <input type="hidden" name="kunjungan_id" value="{{ $pemeriksaan->id }}">
                     <input type="hidden" name="harga_obat" id="hargaObat">
                     <input type="hidden" name="instruksi" id="instruksi">
                     <label for="obatSelect" class="form-label">Obat</label>
                     <select id="obatSelect" class="form-control js-select2" name="obat_id" required>
-                        <option value="" disabled selected>--Pilih obat--</option>
+                        <option value="" disabled selected>--Pilih Obat--</option>
                         @foreach ($obats as $obat)
                             <option value="{{ $obat->id }}" data-harga="{{ $obat->harga }}">{{ $obat->nama_obat }}
                             </option>
@@ -80,7 +80,7 @@
                     </tr>
                     <tr class="obat-{{ $data->id }}">
                         <td></td>
-                        <th width="17%">Intruksi:</th>
+                        <th width="17%">Instruksi:</th>
                         <td colspan="4">{{ $data->instruksi }}</td>
                     </tr>
                 @endforeach
@@ -90,62 +90,9 @@
 </div>
 
 @push('scripts')
-    <!-- Include SweetAlert2 and jQuery -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-
-    <!-- <script>
-        $(document).ready(function() {
-            $('#formTambahObat').on('submit', function(e) {
-                e.preventDefault();
-
-                // Ambil data dari form
-                var formData = $(this).serialize();
-
-                // Kirim data melalui AJAX
-                $.ajax({
-                    url: "{{ route('pasien-obat.store') }}",
-                    type: "POST",
-                    data: formData,
-                    success: function(response) {
-                        const rowCount = $('#obatContainer .obatRow').length;
-                        const namaObat = $('#nama_obat option:selected').text();
-                        const hargaObat = $('#nama_obat option:selected').data('harga')
-                            .toLocaleString('id-ID');
-                        const jumlahObat = $('#jumlah_obat').val();
-                        const subTotal = hargaObat * jumlahObat;
-                        const formattedSubTotal = (subTotal.toFixed(3)).toLocaleString('id-ID');
-
-                        // Jika sukses, tambahkan row baru ke container
-                        $('.resepEmpty').remove();
-                        $('#obatContainer').append(`
-                            <div class="row obatRow" id="obat-${response.no}">
-                                <div class="col-1 border py-2">` + (rowCount + 1) + `</div>
-                                <div class="col-3 border py-2">` + namaObat + `</div>
-                                <div class="col-3 border py-2">Rp` + hargaObat + `</div>
-                                <div class="col-1 border py-2">` + jumlahObat + `</div>
-                                <div class="col-3 border py-2">Rp` + formattedSubTotal + `</div>
-                                <div class="col-1 border py-1">
-                                    <button class="btn btn-danger btn-sm delete-obat" data-id="` + response.no + `"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>
-                        `);
-
-                        // Reset form setelah submit
-                        $('#obatForm')[0].reset();
-                    },
-                    error: function(xhr) {
-                        // Tangani error (misal validasi)
-                        alert('Something went wrong!');
-                    }
-                });
-            });
-        });
-    </script> -->
-@endpush
-
-@push('scripts')
     <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         $(document).ready(function() {
             // Update harga saat obat dipilih
@@ -208,7 +155,7 @@
                             </tr>
                             <tr class="obat-${response.no}">
                                 <td></td>
-                                <th width="17%">Intruksi:</th>
+                                <th width="17%">Instruksi:</th>
                                 <td colspan="4">${$('#instruksi').val()}</td>
                             </tr>
                         `;
@@ -225,16 +172,6 @@
                     }
                 });
             });
-
-            // Hapus baris dari tabel
-            // $('#obatTableBody').on('click', '.btn-danger', function() {
-            //     $(this).closest('tr').remove();
-
-            //     // Update nomor urut
-            //     $('#obatTableBody tr').each(function(index) {
-            //         $(this).find('td:first').text(index + 1);
-            //     });
-            // });
         });
     </script>
 

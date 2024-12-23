@@ -92,4 +92,19 @@ class Pendaftaran extends Model
     {
         return $this->hasMany(PasienObat::class, 'kunjungan_id', 'id');
     }
+
+    public function laborat()
+    {
+        return $this->hasMany(PasienPemeriksaan::class, 'kunjungan_id', 'id');
+    }
+
+    public function diagnosa()
+    {
+        return $this->hasMany(PasienDiagnosa::class, 'kunjungan_id', 'id');
+    }
+
+    public function tindakan()
+    {
+        return $this->hasMany(PasienTindakan::class, 'kunjungan_id', 'id');
+    }
 }

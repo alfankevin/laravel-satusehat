@@ -22,7 +22,7 @@ class PasienTindakanRequest extends FormRequest
         return [
             'kunjungan_id' => ['required', 'integer', 'exists:pendaftarans,id'],
             'tindakan_id' => ['required', 'integer', 'exists:tindakans,id'],
-            'practitioner_id' => ['required', 'integer', 'exists:practitioner,id'],
+            'practitioner_id' => ['required', 'integer', 'exists:practitioners,id'],
             'biaya' => ['required', 'integer'],
         ];
     }

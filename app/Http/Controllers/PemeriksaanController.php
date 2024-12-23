@@ -7,7 +7,11 @@ use App\Http\Requests\PemeriksaanUpdateRequest;
 use App\Http\Requests\PendaftaranUpdateRequest;
 use App\Models\Obat;
 use App\Models\Pasien;
+use App\Models\Diagnosa;
+use App\Models\Tindakan;
 use App\Models\Pendaftaran;
+use App\Models\Practitioner;
+use App\Models\KategoriPemeriksaan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -21,7 +25,6 @@ class PemeriksaanController extends Controller
         ->where('status', 0) // Menampilkan data dengan status = 0
         ->orderBy('created_at', 'asc')
         ->get();
-    
 
         // Tentukan antrian sekarang (kunjungan pertama dengan status Pending)
         $antrian_sekarang = $pendaftarans->first() ? $pendaftarans->first()->noAntrian : null;
@@ -34,11 +37,14 @@ class PemeriksaanController extends Controller
 
     public function create(Request $request, $id): View
     {
-        $pemeriksaan = Pendaftaran::with('pasien', 'poli', 'obat.obat')->where('id', $id)->first();
-        // dd($pemeriksaan);
+        $pemeriksaan = Pendaftaran::with('pasien', 'poli', 'obat.obat', 'laborat.kategoriPemeriksaan', 'laborat.practitioner', 'diagnosa.diagnosa', 'tindakan.tindakan', 'tindakan.practitioner')->where('id', $id)->first();
+        $practitioners = Practitioner::all();
+        $laborats = KategoriPemeriksaan::all();
+        $diagnosas = Diagnosa::all();
+        $tindakans = Tindakan::all();
         $obats = Obat::all();
 
-        return view('dashboard.main-menu.antrian.pemeriksaan', compact('pemeriksaan', 'obats'));
+        return view('dashboard.main-menu.antrian.pemeriksaan', compact('pemeriksaan', 'practitioners', 'laborats', 'diagnosas', 'tindakans', 'obats'));
     }
 
     public function store(PemeriksaanStoreRequest $request): RedirectResponse

@@ -7,32 +7,37 @@
     </div>
     <div class="card-body">
         <form id="formTambahPemeriksaan">
+            @csrf
             <div class="row mb-3">
                 <div class="col-4">
+                    <input type="hidden" name="kunjungan_id" value="{{ $pemeriksaan->id }}">
                     <label for="pemeriksaanSelect" class="form-label">Pemeriksaan</label>
-                    <select id="pemeriksaanSelect" class="form-control js-select2">
+                    <select id="pemeriksaanSelect" name="kategori_pemeriksaan_id" class="form-control js-select2">
                         <option value="">--Pilih Pemeriksaan--</option>
-                        <option value="Cek Gulah Darah" data-harga="20000">Cek Gulah Darah</option>
-                        <option value="Asam Urat" data-harga="30000">Asam Urat</option>
-                        <option value="Cholestrol" data-harga="25000">Cholestrol</option>
+                        @foreach ($laborats as $laborat)
+                            <option value="{{ $laborat->id }}" data-harga="{{ $laborat->biaya }}">
+                                {{ $laborat->pemeriksaan }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-3">
                     <label for="hasil" class="form-label">Hasil</label>
-                    <input type="text" id="hasil" class="form-control" />
+                    <input type="text" id="hasil" name="hasil_pemeriksaan" class="form-control" />
                 </div>
                 <div class="col-4">
                     <label for="petugas" class="form-label">Petugas</label>
-                    <select id="petugas" class="form-control js-select2">
+                    <select id="petugas" name="practitioner_id" class="form-control js-select2">
                         <option value="">--Pilih Petugas--</option>
-                        <option value="Aagus">Aagus</option>
-                        <option value="Yanto">Yanto</option>
-                        <option value="Budi">Budi</option>
+                        @foreach ($practitioners as $practitioner)
+                            <option value="{{ $practitioner->id }}">{{ $practitioner->namaPractitioner }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-3" style="display: none">
-                    <label for="hargaInput" class="form-label">Harga</label>
-                    <input type="text" id="hargaInput" class="form-control" readonly />
+                    <label for="hargaInput" class="form-label">Biaya</label>
+                    <input type="text" id="hargaInput" name="biaya" class="form-control" readonly />
+                    <input type="hidden" id="hargaLayanan" name="biaya" class="form-control" readonly />
                 </div>
                 <div class="col-1 mt-2">
                     <button class="btn btn-primary btn-sm form-control mt-4" type="submit">
@@ -48,65 +53,118 @@
                     <th>Pemeriksaan</th>
                     <th>Hasil</th>
                     <th>Petugas</th>
-                    <th width="20%">Harga</th>
+                    <th width="20%">Biaya</th>
                     <th width="5%"></th>
                 </tr>
             </thead>
             <tbody id="pemeriksaanTableBody">
-
+                @foreach ($pemeriksaan->laborat as $key => $data)
+                    <tr id="laborat-{{ $data->id }}">
+                        <td class="text-center" width="5%">{{ $key + 1 }}</td>
+                        <td>{{ $data->kategoriPemeriksaan->pemeriksaan }}</td>
+                        <td>{{ $data->hasil_pemeriksaan }}</td>
+                        <td>{{ $data->practitioner->namaPractitioner }}</td>
+                        <td width="20%">Rp{{ number_format($data->biaya, 0, ',', '.') }}</td>
+                        <td width="5%"><button class="btn btn-sm btn-danger delete-laborat" data-id="{{ $data->id }}"><i class="fas fa-trash"></i></button></td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 </div>
 
-
 @push('scripts')
     <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         $(document).ready(function() {
-
             // Update hargaInput on pemeriksaanSelect change
             $('#pemeriksaanSelect').on('change', function() {
                 const selectedOption = $(this).find(':selected');
                 const harga = selectedOption.data('harga');
-                $('#hargaInput').val(harga ? `Rp. ${new Intl.NumberFormat('id-ID').format(harga)}` :
-                    '');
+                $('#hargaLayanan').val(harga);
+                $('#hargaInput').val(harga ? `Rp${new Intl.NumberFormat('id-ID').format(harga)}` : '');
             });
 
             // Handle form submission
             $('#formTambahPemeriksaan').on('submit', function(e) {
                 e.preventDefault();
 
-                const pemeriksaan = $('#pemeriksaanSelect').val();
-                const harga = $('#hargaInput').val();
+                var formData = $(this).serialize();
 
-                if (pemeriksaan && harga) {
-                    const newRow = `
-                    <tr>
-                        <td>${$('#pemeriksaanTableBody tr').length + 1}</td>
-                        <td>${pemeriksaan}</td>
-                        <td>Normal</td>
-                        <td>Agus</td>
-                        <td>${harga}</td>
-                        <td><button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td>
-                    </tr>
-                `;
+                $.ajax({
+                    url: "{{ route('pasien-laborat.store') }}",
+                    type: "POST",
+                    data: formData,
+                    success: function(response) {
+                        const pemeriksaanOption = $('#pemeriksaanSelect').find(':selected');
+                        const pemeriksaan = pemeriksaanOption.text();
+                        const petugasOption = $('#petugas').find(':selected');
+                        const petugas = petugasOption.text();
+                        const hasil = $('#hasil').val();
+                        const harga = $('#hargaInput').val();
 
-                    $('#pemeriksaanTableBody').append(newRow);
-                    $('#modalTambahPemeriksaan').modal('hide');
-                    $('#formTambahPemeriksaan')[0].reset();
-                    $('#pemeriksaanSelect').val(null).trigger('change');
-                }
-            });
+                        if (pemeriksaan && harga) {
+                            const newRow = `
+                                <tr id="laborat-${response.no}">
+                                    <td class="text-center">${$('#pemeriksaanTableBody tr').length + 1}</td>
+                                    <td>${pemeriksaan}</td>
+                                    <td>${hasil}</td>
+                                    <td>${petugas}</td>
+                                    <td>${harga}</td>
+                                    <td><button class="btn btn-sm btn-danger delete-laborat" data-id="` + response.no + `"><i class="fas fa-trash"></i></button></td>
+                                </tr>
+                            `;
 
-            // Handle delete button click
-            $('#pemeriksaanTableBody').on('click', '.btn-danger', function() {
-                $(this).closest('tr').remove();
-
-                // Update numbering
-                $('#pemeriksaanTableBody tr').each(function(index) {
-                    $(this).find('td:first').text(index + 1);
+                            $('#pemeriksaanTableBody').append(newRow);
+                            $('#modalTambahPemeriksaan').modal('hide');
+                            $('#formTambahPemeriksaan')[0].reset();
+                            $('#pemeriksaanSelect').val(null).trigger('change');
+                        }
+                    },
+                    error: function(xhr) {
+                        // Tangani error (misal validasi)
+                        alert('Something went wrong!');
+                    }
                 });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).on('click', '.delete-laborat', function() {
+            var id = $(this).data('id'); // Ambil ID dari data-id tombol
+
+            // Konfirmasi sebelum menghapus
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: 'danger',
+                cancelButtonColor: 'info',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('pasien-laborat.destroy', '') }}/" + id,
+                        data: {
+                            _token: "{{ csrf_token() }}"
+                        },
+                        type: 'DELETE',
+                        success: function(response) {
+                            if (response.success) {
+                                // Hapus baris dari tampilan
+                                $('#laborat-' + id).remove();
+                            }
+                        },
+                        error: function(xhr) {
+                            alert('Something went wrong!');
+                        }
+                    });
+                }
             });
         });
     </script>

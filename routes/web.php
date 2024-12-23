@@ -13,9 +13,10 @@ use App\Http\Controllers\PractitionerController;
 use App\Http\Controllers\PractitionerGroupController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\SoapController;
-use App\Http\Controllers\PasienObatController;
+use App\Http\Controllers\PasienPemeriksaanController;
 use App\Http\Controllers\PasienDiagnosaController;
 use App\Http\Controllers\PasienTindakanController;
+use App\Http\Controllers\PasienObatController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -32,9 +33,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/rekam-medis', [RekamMedisController::class, 'index'])->name('rekam-medis.index');
     Route::get('/antrian-pemeriksaan/{id}', [PemeriksaanController::class, 'create'])->name('antrian.pemeriksaan');
     Route::get('/rekam-medis/fetch', [RekamMedisController::class, 'fetch'])->name('rekam-medis.fetch');
-    Route::resource('pasien-obat', PasienObatController::class);
+    Route::resource('pasien-laborat', PasienPemeriksaanController::class);
     Route::resource('pasien-diagnosa', PasienDiagnosaController::class);
     Route::resource('pasien-tindakan', PasienTindakanController::class);
+    Route::resource('pasien-obat', PasienObatController::class);
 
     Route::view('/obat', 'dashboard.master-data.obat.index')->name('obat.index');
     Route::view('/tindakan', 'dashboard.master-data.tindakan.index')->name('tindakan.index');
