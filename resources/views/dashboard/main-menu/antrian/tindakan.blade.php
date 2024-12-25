@@ -29,7 +29,7 @@
                     </select>
                 </div>
                 <div class="col-3">
-                    <label for="hargaInputtindakan" class="form-label">Harga</label>
+                    <label for="hargaInputtindakan" class="form-label">Biaya</label>
                     <input type="text" id="hargaInputtindakan" class="form-control" readonly />
                     <input type="hidden" id="hargaTindakan" name="biaya" class="form-control" readonly />
                 </div>
@@ -46,7 +46,7 @@
                     <th class="text-center" width="5%">No</th>
                     <th>Tindakan</th>
                     <th>Petugas</th>
-                    <th width="20%">Harga</th>
+                    <th width="20%">Biaya</th>
                     <th width="5%"></th>
                 </tr>
             </thead>

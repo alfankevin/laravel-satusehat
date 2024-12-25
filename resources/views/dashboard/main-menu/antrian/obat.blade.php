@@ -17,7 +17,7 @@
                     <select id="obatSelect" class="form-control js-select2" name="obat_id" required>
                         <option value="" disabled selected>--Pilih Obat--</option>
                         @foreach ($obats as $obat)
-                            <option value="{{ $obat->id }}" data-harga="{{ $obat->harga_jual }}">{{ $obat->nama_obat }}
+                            <option value="{{ $obat->id }}" data-harga="{{ $obat->harga }}">{{ $obat->nama_obat }}
                             </option>
                         @endforeach
                     </select>
