@@ -14,7 +14,7 @@ class DiagnosaController extends Controller
     {
         // Mengambil semua data diagnosa
         $diagnosas = Diagnosa::all();
-        return view('dashboard.diagnosa.index', compact('diagnosas'));
+        return view('dashboard.master-data.diagnosa.index', compact('diagnosas'));
     }
 
     /**

@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Exports\TindakanExport;
+use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\KasirController;
+use App\Http\Controllers\LaboratController;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PemeriksaanController;
@@ -17,6 +20,7 @@ use App\Http\Controllers\PasienPemeriksaanController;
 use App\Http\Controllers\PasienDiagnosaController;
 use App\Http\Controllers\PasienTindakanController;
 use App\Http\Controllers\PasienObatController;
+use App\Http\Controllers\TindakanController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -38,10 +42,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('pasien-tindakan', PasienTindakanController::class);
     Route::resource('pasien-obat', PasienObatController::class);
 
-    Route::view('/obat', 'dashboard.master-data.obat.index')->name('obat.index');
-    Route::view('/tindakan', 'dashboard.master-data.tindakan.index')->name('tindakan.index');
-    Route::view('/laborat', 'dashboard.master-data.laborat.index')->name('laborat.index');
-    Route::view('/diagnosa', 'dashboard.master-data.diagnosa.index')->name('diagnosa.index');
+    Route::resource('obat', ObatController::class);
+    Route::resource('tindakan', TindakanController::class);
+    Route::resource('laborat', LaboratController::class);
+    Route::resource('diagnosa', DiagnosaController::class);
+    
     Route::view('/farmasi', 'dashboard.main-menu.farmasi.index')->name('farmasi.index');
     Route::view('/users', 'dashboard.master-data.user.index')->name('users.index');
 
@@ -54,9 +59,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/poli/{id}', [PoliController::class, 'update'])->name('poli.update');
     Route::delete('/poli/{poli}', [PoliController::class, 'destroy'])->name('poli.destroy');
 
-    Route::get('/practitioner', [PractitionerController::class, 'index'])->name('practitioner.index');
-    Route::post('/practitioner/store', [PractitionerController::class, 'store'])->name('practitioner.store');
-    Route::delete('/practitioner/{practitioner}', [PractitionerController::class, 'destroy'])->name('practitioner.destroy');
+    Route::resource('practitioner', PractitionerController::class);
 
     Route::get('/practitioner-group', [PractitionerGroupController::class, 'index'])->name('practitioner-group.index');
     Route::post('/practitioner-group/store', [PractitionerGroupController::class, 'store'])->name('practitioner-group.store');

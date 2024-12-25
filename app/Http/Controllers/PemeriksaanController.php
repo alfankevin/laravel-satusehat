@@ -44,7 +44,14 @@ class PemeriksaanController extends Controller
         $tindakans = Tindakan::all();
         $obats = Obat::all();
 
-        return view('dashboard.main-menu.antrian.pemeriksaan', compact('pemeriksaan', 'practitioners', 'laborats', 'diagnosas', 'tindakans', 'obats'));
+        $pasienId = $pemeriksaan->pasien_id;
+
+        $rekamMedis = Pendaftaran::with('pasien', 'poli', 'obat.obat', 'laborat.kategoriPemeriksaan', 'laborat.practitioner', 'diagnosa.diagnosa', 'tindakan.tindakan', 'tindakan.practitioner')
+                ->where('pasien_id', $pasienId)
+                ->orderBy('tglDaftar')
+                ->get();
+
+        return view('dashboard.main-menu.antrian.pemeriksaan', compact('pemeriksaan', 'practitioners', 'laborats', 'diagnosas', 'tindakans', 'obats', 'rekamMedis'));
     }
 
     public function store(PemeriksaanStoreRequest $request): RedirectResponse

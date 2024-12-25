@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-info">
-                <h4 class="modal-title">Detail Riwayat Rekam Medis</h4>
+                <h4 class="modal-title">Detail Riwayat Rekam Medis w</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

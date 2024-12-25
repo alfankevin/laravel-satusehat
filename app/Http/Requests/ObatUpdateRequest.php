@@ -21,8 +21,10 @@ class ObatUpdateRequest extends FormRequest
     {
         return [
             'nama_obat' => ['required', 'string'],
-            'harga' => ['required', 'numeric'],
+            'harga_jual' => ['required', 'numeric'],
+            'harga_beli' => ['required', 'numeric'],
             'stok' => ['required', 'numeric'],
+            'status' => ['required', 'boolean'],
         ];
     }
 }

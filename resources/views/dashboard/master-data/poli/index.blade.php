@@ -125,8 +125,4 @@
     @endforeach
 @endsection
 
-@section('scripts')
-    <script>
-        // Optional: Custom scripts for handling the modal or form validation can go here
-    </script>
-@endsection
+

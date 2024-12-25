@@ -56,38 +56,50 @@ class DatabaseSeeder extends Seeder
         \App\Models\Obat::factory()->create([
             'id' => 1,
             'nama_obat' => 'Paramex',
-            'harga' => 10000,
+            'harga_jual' => 10000,
+            'harga_beli' => 5000,
             'stok' => 10,
+            'status' => true,
         ]);
         \App\Models\Obat::factory()->create([
             'id' => 2,
             'nama_obat' => 'Amoxicillin',
-            'harga' => 70000,
+            'harga_jual' => 70000,
+            'harga_beli' => 5000,
             'stok' => 10,
+            'status' => true,
         ]);
         \App\Models\Obat::factory()->create([
             'id' => 3,
             'nama_obat' => 'Metformin',
-            'harga' => 50000,
+            'harga_jual' => 50000,
+            'harga_beli' => 5000,
             'stok' => 10,
+            'status' => true,
         ]);
         \App\Models\Obat::factory()->create([
             'id' => 4,
             'nama_obat' => ' Sulfonilurea',
-            'harga' => 100000,
+            'harga_jual' => 100000,
+            'harga_beli' => 5000,
             'stok' => 10,
+            'status' => true,
         ]);
         \App\Models\Obat::factory()->create([
             'id' => 5,
             'nama_obat' => 'Thiazolidinediones',
-            'harga' => 200000,
+            'harga_jual' => 200000,
+            'harga_beli' => 5000,
             'stok' => 10,
+            'status' => true,
         ]);
         \App\Models\Obat::factory()->create([
             'id' => 6,
             'nama_obat' => 'Gliptin',
-            'harga' => 80000,
+            'harga_jual' => 80000,
+            'harga_beli' => 5000,
             'stok' => 10,
+            'status' => true,
         ]);
 
         \App\Models\Diagnosa::factory()->create([

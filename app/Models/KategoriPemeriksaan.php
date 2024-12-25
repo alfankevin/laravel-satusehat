@@ -32,6 +32,6 @@ class KategoriPemeriksaan extends Model
 
     public function pemeriksaans(): HasMany
     {
-        return $this->hasMany(Pemeriksaan::class);
+        return $this->hasMany(PasienPemeriksaan::class);
     }
 }

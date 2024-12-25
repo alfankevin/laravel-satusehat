@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ObatStoreRequest;
 use App\Http\Requests\ObatUpdateRequest;
 use App\Models\Obat;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -15,7 +16,7 @@ class ObatController extends Controller
     {
         $obats = Obat::orderByDesc('id')->get();
 
-        return view('dashboard.obat.index', compact('obats'));
+        return view('dashboard.master-data.obat.index', compact('obats'));
     }
 
     public function store(ObatStoreRequest $request): RedirectResponse
@@ -27,17 +28,31 @@ class ObatController extends Controller
 
     public function update(ObatUpdateRequest $request, Obat $obat): RedirectResponse
     {
-        $obat->save();
+        $obat = Obat::where('id', $obat->id)->update($request->validated());
 
         return redirect()->route('obat.index');
     }
 
-    public function destroy(Request $request, Obat $obat): RedirectResponse
+    public function storeOrUpdate(Request $request): RedirectResponse
     {
-        $obat = Obat::find($id);
+        $data = $request->all();
 
+        if ($request->id) {
+            // Update existing data
+            $obat = Obat::findOrFail($request->id);
+            $obat->update($data);
+        } else {
+            // Create new data
+            Obat::create($data);
+        }
+
+        return redirect()->route('obat.index')->with('success', 'Data berhasil disimpan!');
+    }
+
+    public function destroy(Obat $obat): RedirectResponse
+    {
         $obat->delete();
 
-        return redirect()->route('dashboard.obat');
+        return redirect()->route('obat.index');
     }
 }

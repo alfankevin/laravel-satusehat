@@ -17,8 +17,10 @@ class Obat extends Model
      */
     protected $fillable = [
         'nama_obat',
-        'harga',
+        'harga_jual',
+        'harga_beli',
         'stok',
+        'status',
     ];
 
     /**
@@ -28,6 +30,7 @@ class Obat extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'harga' => 'float',
+        'harga_jual' => 'float',
+        'harga_beli' => 'float',
     ];
 }

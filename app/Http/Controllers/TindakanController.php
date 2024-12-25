@@ -13,7 +13,7 @@ class TindakanController extends Controller
     public function index()
     {
         $tindakans = Tindakan::all();
-        return view('dashboard.tindakan.index', compact('tindakans'));
+        return view('dashboard.master-data.tindakan.index', compact('tindakans'));
     }
 
     /**
@@ -30,13 +30,6 @@ class TindakanController extends Controller
         return redirect()->route('tindakan.index')->with('success', 'Tindakan berhasil ditambahkan');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tindakan $tindakan)
-    {
-        return response()->json($tindakan);
-    }
 
     /**
      * Update the specified resource in storage.

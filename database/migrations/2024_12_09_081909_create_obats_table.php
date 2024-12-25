@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('obats', function (Blueprint $table) {
             $table->id();
             $table->string('nama_obat');
-            $table->float('harga');
+            $table->float('harga_beli');
+            $table->float('harga_jual');
             $table->integer('stok');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
 
