@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TindakanExport;
 use App\Models\Tindakan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\TindakanImport;
 
 class TindakanController extends Controller
 {
@@ -52,5 +55,22 @@ class TindakanController extends Controller
     {
         $tindakan->delete();
         return redirect()->route('tindakan.index')->with('success', 'Tindakan berhasil dihapus');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048', // Validasi file
+        ]);
+
+        // Proses import menggunakan class Import
+        Excel::import(new TindakanImport, $request->file('file'));
+
+        return redirect()->route('tindakan.index')->with('success', 'Data berhasil diimport.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new TindakanExport, 'data_tindakan.xlsx');
     }
 }

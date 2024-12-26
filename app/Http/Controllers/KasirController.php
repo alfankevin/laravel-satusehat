@@ -20,11 +20,32 @@ class KasirController extends Controller
     }
 
     public function bayar($id)
-    {
-        // Ambil kunjungan dengan status 'Pending' atau 'InProgress', diurutkan dari yang paling lama dibuat
-        $pendaftarans = Pendaftaran::with('pasien')
-        ->findOrFail($id);
+{
+    // Ambil pendaftaran dengan relasi yang dibutuhkan
+    $pendaftarans = Pendaftaran::with(
+        'pasien', 
+        'poli', 
+        'obat.obat', 
+        'laborat.kategoriPemeriksaan', 
+        'laborat.practitioner', 
+        'diagnosa.diagnosa', 
+        'tindakan.tindakan', 
+        'tindakan.practitioner'
+    )->findOrFail($id);
 
-        return view('dashboard.main-menu.kasir.bayar', compact('pendaftarans'));
-    }
+    // Hitung total fee obat
+    $totalFeeObat = $pendaftarans->obat->sum(function ($data) {
+        return $data->harga_obat * $data->jumlah_obat;
+    });
+
+    // Hitung total fee tindakan
+    $totalFeeTindakan = $pendaftarans->tindakan->sum('biaya');
+
+    // Hitung total fee laborat
+    $totalFeeLaborat = $pendaftarans->laborat->sum('biaya');
+
+    // Kirim data ke view
+    return view('dashboard.main-menu.kasir.bayar', compact('pendaftarans', 'totalFeeObat', 'totalFeeTindakan', 'totalFeeLaborat'));
+}
+
 }

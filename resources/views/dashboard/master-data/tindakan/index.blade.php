@@ -6,12 +6,21 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h3 class="mb-0 fw-bold">Data Layanan</h3>
-                        <button class="btn btn-sm btn-light text-dark" data-toggle="modal" data-target="#modalAddEdit"
+                        <div>
+                            <button class="btn btn-sm btn-light text-dark" data-toggle="modal" data-target="#modalAddEdit"
                             onclick="resetModal()">
                             <i class="fas fa-plus"></i> Tambah Data
                         </button>
+                        <a href="#" class="btn btn-sm btn-warning ms-1" data-toggle="modal" data-target="#modalImport">
+                            <i class="fas fa-upload me-2"></i> Import Data
+                        </a>
+                        <a href="{{ route('tindakan.export') }}" class="btn btn-sm btn-success ms-1">
+                            <i class="fas fa-file-excel me-2"></i> Export Excel
+                        </a>
+                        
                     </div>
                 </div>
+            </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="dataTable" class="display nowrap table table-striped table-bordered" style="width:100%">
@@ -85,6 +94,33 @@
             </form>
         </div>
     </div>
+
+
+    <!-- Modal Import Data -->
+<div class="modal fade" id="modalImport" tabindex="-1" aria-labelledby="modalImportLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ route('tindakan.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalImportLabel">Import Data Tindakan</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Pilih File Excel</label>
+                        <input type="file" class="form-control" id="file" name="file" accept=".xlsx,.xls,.csv" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 @endsection
 
 @push('scripts')
@@ -104,7 +140,18 @@
                 // Isi data ke form
                 modal.querySelector('#tindakan').value = this.dataset.tindakan;
                 modal.querySelector('#biaya').value = this.dataset.biaya;
+
+                // // Show modal
+                // $('#modalAddEdit').modal('show');
             });
+        });
+
+        // Reset form on modal close
+        $('#modalAddEdit').on('hidden.bs.modal', function() {
+            const form = document.getElementById('formAddEdit');
+            form.reset(); // Clear form values
+            form.action = '{{ route('tindakan.store') }}'; // Reset action to store
+            document.getElementById('_method').value = 'POST'; // Reset method to POST
         });
     </script>
 @endpush

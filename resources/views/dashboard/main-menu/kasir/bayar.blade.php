@@ -10,14 +10,22 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-8">
-                        @include('dashboard.main-menu.kasir.section.obat')
+                        @if ($pendaftarans->obat->count() > 0)
+                            @include('dashboard.main-menu.kasir.section.obat')
+                        @endif
 
-                        @include('dashboard.main-menu.kasir.section.tindakan')
+                        @if ($pendaftarans->tindakan->count() > 0)
+                            @include('dashboard.main-menu.kasir.section.tindakan')
+                        @endif
 
-                        @include('dashboard.main-menu.kasir.section.laborat')
+                        @if ($pendaftarans->laborat->count() > 0)
+                            @include('dashboard.main-menu.kasir.section.laborat')                            
+                        @endif
+
                     </div>
 
                     <div class="col-4">
+                        {{-- Data Pasien --}}
                         <div class="card shadow-lg mb-4">
                             <div class="card-header">
                                 <h5 class="card-title"><i class="fas fa-user me-2"></i> Data Pasien</h5>
@@ -34,7 +42,8 @@
                                         <b>Nomor RM</b>
                                     </div>
                                     <div class="col-7">
-                                        : {{ substr(str_pad($pendaftarans->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pendaftarans->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pendaftarans->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }} 
+                                        :
+                                        {{ substr(str_pad($pendaftarans->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pendaftarans->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pendaftarans->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }}
                                     </div>
                                 </div>
                                 <hr class="my-1">
@@ -91,7 +100,7 @@
                                     </div>
                                     <div class="col-7">
                                         : {{ \Carbon\Carbon::parse($pendaftarans->tglDaftar)->format('d-m-Y') }} -
-                                        {{ \Carbon\Carbon::parse($pendaftarans->created_at)->format('H:i') }}
+                                        {{ \Carbon\Carbon::parse($pendaftarans->created_at)->format('H:i:s') }}
                                     </div>
                                 </div>
                                 <hr class="my-1">
@@ -107,58 +116,59 @@
                             </div>
                         </div>
 
+                        {{-- bayar --}}
                         <div class="card shadow-lg mb-4">
                             <div class="card-header">
-                                <h5 class="card-title"><i class="fas fa-th-list mx-2"></i>Rincihan Tagihan</h5>
+                                <h5 class="card-title"><i class="fas fa-th-list mx-2"></i>Rincian Tagihan</h5>
                             </div>
                             <div class="card-body border">
                                 <hr class="my-1">
+                                <!-- Subtotal -->
                                 <div class="row">
                                     <div class="col-6">
                                         <b>Subtotal :</b>
                                     </div>
+                                    @php
+                                        $totalFeeObat = $totalFeeObat ?? 0;
+                                        $totalFeeTindakan = $totalFeeTindakan ?? 0;
+                                        $totalFeeLaborat = $totalFeeLaborat ?? 0;
+                                        $subtotalTagihan = $totalFeeObat + $totalFeeTindakan + $totalFeeLaborat;
+                                    @endphp
                                     <div class="col-6 d-flex justify-content-end">
-                                        Rp. 137.000
+                                        Rp {{ number_format($subtotalTagihan, 0, ',', '.') }}
                                     </div>
                                 </div>
+
                                 <hr class="my-1">
+                                <!-- Diskon -->
                                 <div class="row align-items-center">
-                                    <div class="col-4 ">
+                                    <div class="col-3">
                                         <b>Diskon</b>
                                     </div>
-                                    <div class="col-4 ">
-                                        <input type="number" class="form-control">
+                                    <div class="col-6">
+                                        <input type="number" id="diskon" class="form-control"
+                                            placeholder="Masukkan diskon">
                                     </div>
-                                    <div class="col-4 d-flex justify-content-end">
-                                        Rp. 12.000
-                                    </div>
-                                </div>
-                                <hr class="my-1">
-                                <div class="row align-items-center">
-                                    <div class="col-4 ">
-                                        <b>Pajak(%)</b>
-                                    </div>
-                                    <div class="col-4 ">
-                                        <input type="number" class="form-control">
-                                    </div>
-                                    <div class="col-4 d-flex justify-content-end">
-                                        Rp. 5.000
+                                    <div class="col-3 d-flex justify-content-end" id="diskonDisplay">
+                                        Rp 0
                                     </div>
                                 </div>
+
                                 <hr class="my-1">
+                                <!-- Total Tagihan -->
                                 <div class="row">
                                     <div class="col-6">
                                         <b>Total Tagihan:</b>
                                     </div>
-                                    <div class="col-6 d-flex justify-content-end">
-                                        Rp. 120.000
+                                    <div class="col-6 d-flex justify-content-end" id="totalTagihanDisplay">
+                                        Rp {{ number_format($subtotalTagihan, 0, ',', '.') }}
                                     </div>
                                 </div>
-                                <hr class="mt-1 mb-3">
 
+                                <hr class="mt-1 mb-3">
+                                <!-- Sistem Pembayaran -->
                                 <div class="p-3" style="background-color: #f5b8b8">
                                     <form action="">
-
                                         <!-- Input Jumlah Bayar -->
                                         <div class="form-group mb-2">
                                             <label>Jumlah Bayar</label>
@@ -166,8 +176,8 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">Rp</div>
                                                 </div>
-                                                <input type="number" id="jumlah_bayar" name="jumlah_bayar"
-                                                    class="form-control" value="150000">
+                                                <input type="number" id="jumlahBayar" name="jumlah_bayar"
+                                                    class="form-control" placeholder="Masukkan jumlah bayar">
                                             </div>
                                         </div>
 
@@ -179,7 +189,7 @@
                                                     <div class="input-group-text">Rp</div>
                                                 </div>
                                                 <input type="number" readonly id="kembalian" name="kembalian"
-                                                    class="form-control" value="30000">
+                                                    class="form-control" value="0">
                                             </div>
                                         </div>
 
@@ -197,3 +207,31 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtotalTagihan = {{ $subtotalTagihan }};
+            const diskonInput = document.getElementById('diskon');
+            const jumlahBayarInput = document.getElementById('jumlahBayar');
+            const totalTagihanDisplay = document.getElementById('totalTagihanDisplay');
+            const diskonDisplay = document.getElementById('diskonDisplay');
+            const kembalianInput = document.getElementById('kembalian');
+
+            diskonInput.addEventListener('input', function() {
+                const diskon = parseFloat(this.value) || 0;
+                const totalTagihan = subtotalTagihan - diskon;
+                diskonDisplay.textContent = `Rp ${diskon.toLocaleString('id-ID')}`;
+                totalTagihanDisplay.textContent = `Rp ${totalTagihan.toLocaleString('id-ID')}`;
+            });
+
+            jumlahBayarInput.addEventListener('input', function() {
+                const jumlahBayar = parseFloat(this.value) || 0;
+                const diskon = parseFloat(diskonInput.value) || 0;
+                const totalTagihan = subtotalTagihan - diskon;
+                const kembalian = jumlahBayar - totalTagihan;
+                kembalianInput.value = kembalian > 0 ? kembalian : 0;
+            });
+        });
+    </script>
+@endpush

@@ -17,24 +17,27 @@
                 </tr>
             </thead>
             <tbody id="obatTableBody">
-                {{-- @foreach ( as ) --}}
+                @php
+                    $totalFeeObat = 0; // Variabel untuk menyimpan total fee obat
+                @endphp
+                @foreach ($pendaftarans->obat as $key => $data)
+                    @php
+                        $subtotal = $data->harga_obat * $data->jumlah_obat; // Hitung subtotal untuk setiap obat
+                        $totalFeeObat += $subtotal; // Tambahkan subtotal ke total fee obat
+                    @endphp
+                    <tr class="obat-{{ $data->id }}" data-main>
+                        <td class="text-center" width="5%">{{ $key + 1 }}</td>
+                        <td>{{ $data->obat->nama_obat }}</td>
+                        <td width="5%">{{ $data->jumlah_obat }}</td>
+                        <td width="20%">Rp {{ number_format($data->harga_obat, 0, ',', '.') }}</td>
+                        <td width="20%">Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
+                    </tr>
+                @endforeach
                 <tr>
-                    <td class="text-center" width="5%">1</td>
-                    <td>Panadol</td>
-                    <td width="5%">2</td>
-                    <td width="20%">Rp. 15000</td>
-                    <td width="20%">Rp.30000</td>
+                    <th colspan="4" class="text-end">Total Fee Obat:</th>
+                    <td>Rp {{ number_format($totalFeeObat, 0, ',', '.') }}</td>
                 </tr>
-                <tr>
-                    <th colspan="4">Total Fee Obat:</th>
-                    <td >Rp.30000</td>
-                </tr>
-                {{-- {{ @endforeach --}} 
             </tbody>
         </table>
     </div>
 </div>
-
-
-
-

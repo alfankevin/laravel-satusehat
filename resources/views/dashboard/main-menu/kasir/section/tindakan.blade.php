@@ -15,22 +15,25 @@
                 </tr>
             </thead>
             <tbody id="obatTableBody">
-                {{-- @foreach ( as ) --}}
+                @php
+                    $totalFeeTindakan = 0; // Variabel untuk menyimpan total biaya
+                @endphp
+                @foreach ($pendaftarans->tindakan as $key => $data)
+                    @php
+                        $totalFeeTindakan += $data->biaya; // Tambahkan biaya setiap tindakan ke totalFeeTindakan
+                    @endphp
+                    <tr id="tindakan-{{ $data->id }}">
+                        <td class="text-center" width="5%">{{ $key + 1 }}</td>
+                        <td>{{ $data->tindakan->tindakan }}</td>
+                        <td width="20%">Rp {{ number_format($data->biaya, 0, ',', '.') }}</td>
+                    </tr>
+                @endforeach
                 <tr>
-                    <td class="text-center" width="5%">1</td>
-                    <td>Suntik NovoRapid</td>
-                    <td width="20%">Rp.30000</td>
+                    <th colspan="2" class="text-end">Total Fee Tindakan:</th>
+                    <td>Rp {{ number_format($totalFeeTindakan, 0, ',', '.') }}</td>
                 </tr>
-                <tr>
-                    <th colspan="2">Total Fee Tindakan:</th>
-                    <td >Rp.30000</td>
-                </tr>
-                {{-- {{ @endforeach --}} 
             </tbody>
+            
         </table>
     </div>
 </div>
-
-
-
-

@@ -20,22 +20,22 @@ class PractitionerGroupController extends Controller
 
     public function store(PractitionerGroupStoreRequest $request): RedirectResponse
     {
-        $practitionerGroup = PractitionerGroup::create($request->validated());
-        // dd($practitionerGroup);
-        return redirect()->route('practitioner-group.index');
+        PractitionerGroup::create($request->validated());
+        return redirect()->route('practitioner-group.index')->with('success', 'Data berhasil ditambahkan.');
     }
 
     public function update(PractitionerGroupUpdateRequest $request, PractitionerGroup $practitionerGroup): RedirectResponse
     {
-        $practitionerGroup->save();
+        // Update data menggunakan data yang telah divalidasi
+        $practitionerGroup->update($request->validated());
 
-        return redirect()->route('practitionerGroup.index');
+        return redirect()->route('practitioner-group.index')->with('success', 'Data berhasil diperbarui.');
     }
 
     public function destroy(Request $request, PractitionerGroup $practitionerGroup): RedirectResponse
     {
         $practitionerGroup->delete();
 
-        return redirect()->route('practitioner-group.index');
+        return redirect()->route('practitioner-group.index')->with('success', 'Data berhasil dihapus.');
     }
 }

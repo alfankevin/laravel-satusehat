@@ -16,28 +16,27 @@ class PractitionerController extends Controller
     {
         $practitioners = Practitioner::all();
         
-        // dd($groups);
         return view('dashboard.master-data.practitioner.index', compact('practitioners'));
     }
 
     public function store(PractitionerStoreRequest $request): RedirectResponse
     {
         $practitioner = Practitioner::create($request->validated());
-        // dd($practitioner);
-        return redirect()->route('practitioner.index');
+        return redirect()->route('practitioner.index')->with('success', 'Data practitioner berhasil ditambahkan.');
     }
 
     public function update(PractitionerUpdateRequest $request, Practitioner $practitioner): RedirectResponse
     {
-        $practitioner->save();
+        // Menggunakan data yang divalidasi dari request untuk mengupdate objek practitioner
+        $practitioner->update($request->validated());
 
-        return redirect()->route('practitioner.index');
+        return redirect()->route('practitioner.index')->with('success', 'Data practitioner berhasil diperbarui.');
     }
 
     public function destroy(Request $request, Practitioner $practitioner): RedirectResponse
     {
         $practitioner->delete();
 
-        return redirect()->route('practitioner.index');
+        return redirect()->route('practitioner.index')->with('success', 'Data practitioner berhasil dihapus.');
     }
 }

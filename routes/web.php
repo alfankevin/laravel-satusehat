@@ -43,7 +43,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('pasien-obat', PasienObatController::class);
 
     Route::resource('obat', ObatController::class);
-    Route::resource('tindakan', TindakanController::class);
+    Route::resource('tindakan', TindakanController::class)->except('show');
+
     Route::resource('laborat', LaboratController::class);
     Route::resource('diagnosa', DiagnosaController::class);
     
@@ -60,16 +61,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/poli/{poli}', [PoliController::class, 'destroy'])->name('poli.destroy');
 
     Route::resource('practitioner', PractitionerController::class);
+    Route::resource('practitioner-group', PractitionerGroupController::class);
 
-    Route::get('/practitioner-group', [PractitionerGroupController::class, 'index'])->name('practitioner-group.index');
-    Route::post('/practitioner-group/store', [PractitionerGroupController::class, 'store'])->name('practitioner-group.store');
-    Route::delete('/practitioner-group/{practitionerGroup}', [PractitionerGroupController::class, 'destroy'])->name('practitioner-group.destroy');
+    
 
 });
 
-Route::get('/export-tindakan', function () {
-    return Excel::download(new TindakanExport, 'data_tindakan.xlsx');
-})->name('export.tindakan');
+Route::get('tindakan/export', [TindakanController::class, 'export'])->name('tindakan.export');
+Route::post('tindakan/import', [TindakanController::class, 'import'])->name('tindakan.import');
 
 require __DIR__ . '/auth.php';
 

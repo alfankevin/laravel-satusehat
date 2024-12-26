@@ -95,7 +95,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         // Handle edit button click
         document.querySelectorAll('.btn-edit').forEach(btn => {
@@ -125,4 +125,4 @@
             document.getElementById('_method').value = 'POST'; // Reset method to POST
         });
     </script>
-@endsection
+@endpush
