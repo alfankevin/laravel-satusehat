@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('nomorRm')->unique();
-            $table->string('noKartu');
+            $table->string('noKartu')->nullable();
             $table->string('nama');
             $table->char('sex', 1);
             $table->date('tglLahir');

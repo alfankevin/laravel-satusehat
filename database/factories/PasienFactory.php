@@ -27,7 +27,7 @@ class PasienFactory extends Factory
             'nama' => $this->faker->name(),
             'sex' => $this->faker->randomElement(['L', 'P']),
             'tglLahir' => $this->faker->date(),
-            'jnsPeserta' => $this->faker->numberBetween(1, 10000),
+            'jnsPeserta' => $this->faker->numberBetween(1, 2),
             'golDarah' => $this->faker->randomElement(['A', 'B', 'AB', 'O']),
             'noHp' => '+6285' . $this->faker->numerify(str_repeat('#', 9)), 
             'noKtp' => $this->faker->numerify(str_repeat('#', 16)),

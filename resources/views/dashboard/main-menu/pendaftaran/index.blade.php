@@ -12,7 +12,7 @@
                             </button>
     
                             <button class="btn btn-light text-dark btn-sm" data-toggle="modal"
-                                data-target="#modalTambahKunjungan">
+                                data-target="#modalCariPasien">
                                 <i class="fas fa-plus"></i> Tambah Kunjungan
                             </button>
                         </div>

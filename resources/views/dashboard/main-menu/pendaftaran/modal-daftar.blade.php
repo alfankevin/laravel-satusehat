@@ -22,13 +22,13 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="pasien_id">Nama Pasien</label>
+                                <label for="pasien_id">Nama Pasien (No. RM)</label>
                                 <select class="form-control js-select2" id="pasien_id" name="pasien_id" required>
                                     <option value="">--Pilih Pasien--</option>
                                     @foreach ($pasiens as $pasien)
                                         <option value="{{ $pasien->id }}">
-                                            {{ substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }}
-                                            - {{ $pasien->nama }}
+                                            {{ $pasien->nama }} ({{ substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }})
+        
                                         </option>
                                     @endforeach
                                 </select>

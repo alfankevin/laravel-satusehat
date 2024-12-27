@@ -18,24 +18,24 @@ class PendaftaranController extends Controller
     public function index(Request $request): View
     {
         $query = Pendaftaran::with('pasien', 'poli', 'practitioner')->orderBy('tglDaftar');
-    
+
         // Filter berdasarkan input pengguna
         if ($request->filled('no_rm')) {
             $query->whereHas('pasien', function ($q) use ($request) {
                 $q->where('nomorRm', 'like', '%' . $request->no_rm . '%');
             });
         }
-    
+
         if ($request->filled('nama_pasien')) {
             $query->whereHas('pasien', function ($q) use ($request) {
                 $q->where('nama', 'like', '%' . $request->nama_pasien . '%');
             });
         }
-    
+
         if ($request->filled('tgl_daftar')) {
             $query->whereDate('tglDaftar', $request->tgl_daftar);
         }
-    
+
         $pendaftarans = $query->get();
         $polis = Poli::orderBy('namaPoli')->get();
         $pasiens = Pasien::orderBy('nama')->get();
@@ -45,11 +45,11 @@ class PendaftaranController extends Controller
         $nomorRm = $latestPasien->nomorRm + 1;
         $kelurahans = Kelurahan::with('kecamatan.kabupaten.provinsi')->get();
         $pasienBaru = $request->get('pasienBaru') ? Pasien::find($request->get('pasienBaru')) : null;
-    
 
-        return view('dashboard.main-menu.pendaftaran.index', compact('pendaftarans', 'polis', 'pasiens', 'practitioners','nomorRm','kelurahans','pasienBaru'));
+
+        return view('dashboard.main-menu.pendaftaran.index', compact('pendaftarans', 'polis', 'pasiens', 'practitioners', 'nomorRm', 'kelurahans', 'pasienBaru'));
     }
-    
+
 
     public function create(Request $request): View
     {
@@ -83,8 +83,9 @@ class PendaftaranController extends Controller
             ['noAntrian' => $newNoAntrian]
         ));
 
-        // Redirect ke halaman kunjungan
-        return redirect()->route('kunjungan.index')->with('success', 'Create Kunjungan Successfully!');
+        // Redirect ke route antrian-pemeriksaan dengan ID pendaftaran
+        return redirect()->route('antrian.pemeriksaan', ['id' => $pendaftaran->id])
+            ->with('success', 'Create Kunjungan Successfully!');
     }
 
 

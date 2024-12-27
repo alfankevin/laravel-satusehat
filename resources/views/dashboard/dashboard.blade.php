@@ -3,20 +3,16 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <div class="mb-3 row d-flex justify-content-end">
-                        <label for="tempat" class="col-sm-3 col-form-label fw-bold">Pilih Tanggal</label>
-                        <div class="col-sm-5">
-                            <input type="date" class="form-control" id="tglKun" name="tglDaftar"
-                                value="{{ now()->format('Y-m-d') }}">
-                        </div>
-                    </div>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
+
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">{{ now()->format('d F Y') }}</h1>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Selamat Datang di Modul Rawat Jalan,
+                        <span><b>{{ auth()->user()->name }}</b></span></h3>
+                </div>
+            </div>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -30,7 +26,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>{{ $jumlahPasienUmum }}</h3>
                             <p> Total Kunjungan Umum</p>
                         </div>
                         <div class="icon">
@@ -44,7 +40,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>50</h3>
+                            <h3>{{ $jumlahPasienBpjs }}</h3>
                             <p> Total Kunjungan BPJS</p>
                         </div>
                         <div class="icon">
@@ -58,7 +54,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>3</h3>
+                            <h3>{{ $jumlahPasien }}</h3>
                             <p>Jumlah Pasien Baru</p>
                         </div>
                         <div class="icon">
@@ -73,10 +69,10 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <!-- DONUT CHART -->
+                    <!-- BAR CHART -->
                     <div class="card card-danger">
                         <div class="card-header">
-                            <h3 class="card-title"><i class="fas fa-chart-pie mx-1"></i> 10 Besar Penyakit</h3>
+                            <h3 class="card-title"><i class="fas fa-users mx-1"></i>Pendapatan PerBulan</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
@@ -87,13 +83,14 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <canvas id="donutChart"
-                                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            <div class="chart">
+                                <canvas id="barChartPendapatan"
+                                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
-
 
                 </div>
                 <!-- /.col (LEFT) -->
@@ -134,37 +131,61 @@
         <script>
             $(function() {
                 //-------------
-                //- DONUT CHART -
+                //- BAR CHART -
                 //-------------
-                var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-                var donutData = {
-                    labels: [
-                        'Diabetes',
-                        'Jantung',
-                        'Kanker',
-                        'Tuberkulosis',
-                        'Asma',
-                        'Stroke',
-                        'Diare',
-                        'Hipertensi',
-                        'Sirosis Hati',
-                        'Flu'
-                    ],
+                var barChartCanvas = $('#barChartPendapatan').get(0).getContext('2d');
+
+                var barChartData = {
+                    labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'],
                     datasets: [{
-                        data: [700, 500, 400, 600, 300, 100, 100, 100, 100, 100],
-                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de',
-                            '#f56954', '#00a65a', '#f39c12', '#00c0ef'
-                        ],
-                    }]
+                            label: 'Pendapatan Umum',
+                            backgroundColor: 'red',
+                            borderColor: '#00a65a',
+                            data: [65000, 59000, 80000, 81000, 56000, 55000] // Nilai dalam format angka
+                        },
+                        {
+                            label: 'Pendapatan BPJS',
+                            backgroundColor: 'green',
+                            borderColor: '#f39c12',
+                            data: [45000, 39000, 60000, 71000, 46000, 45000]
+                        }
+                    ]
                 };
-                var donutOptions = {
+
+                var barChartOptions = {
+                    responsive: true,
                     maintainAspectRatio: false,
-                    responsive: true
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return 'Rp ' + value.toLocaleString('id-ID'); // Format ke Rupiah
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    var label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += 'Rp ' + context.raw.toLocaleString(
+                                    'id-ID'); // Format tooltip ke Rupiah
+                                    return label;
+                                }
+                            }
+                        }
+                    }
                 };
-                new Chart(donutChartCanvas, {
-                    type: 'doughnut',
-                    data: donutData,
-                    options: donutOptions
+
+                new Chart(barChartCanvas, {
+                    type: 'bar',
+                    data: barChartData,
+                    options: barChartOptions
                 });
 
                 //-------------
@@ -172,11 +193,10 @@
                 //-------------
                 var barChartCanvas = $('#barChart').get(0).getContext('2d');
                 var barChartData = {
-                    labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'
-                    ],
+                    labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'],
                     datasets: [{
                             label: 'Jumlah Pasien Umum',
-                            backgroundColor: '#00a65a',
+                            backgroundColor: 'blue',
                             borderColor: '#00a65a',
                             data: [65, 59, 80, 81, 56, 55]
                         },

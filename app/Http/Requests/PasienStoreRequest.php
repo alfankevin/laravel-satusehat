@@ -21,7 +21,7 @@ class PasienStoreRequest extends FormRequest
     {
         return [
             'nomorRm' => ['required', 'integer'],
-            'noKartu' => ['required', 'string'],
+            'noKartu' => 'nullable|string',
             'nama' => ['required', 'string'],
             'sex' => ['required', 'string', 'max:1'],
             'tglLahir' => ['required', 'date'],

@@ -101,16 +101,7 @@
                                         <b>Tanggal Daftar</b>
                                     </div>
                                     <div class="col-7">
-                                        : {{ \Carbon\Carbon::parse($pemeriksaan->tglDaftar)->format('d-m-Y') }}
-                                    </div>
-                                </div>
-                                <hr class="my-1">
-                                <div class="row">
-                                    <div class="col-5 ">
-                                        <b>Jam Daftar</b>
-                                    </div>
-                                    <div class="col-7">
-                                        : {{ \Carbon\Carbon::parse($pemeriksaan->created_at)->format('H:i') }}
+                                        : {{ \Carbon\Carbon::parse($pemeriksaan->tglDaftar)->format('d-m-Y') }} - {{ \Carbon\Carbon::parse($pemeriksaan->created_at)->format('H:i:s') }}
                                     </div>
                                 </div>
                                 <hr class="my-1">                 

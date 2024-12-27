@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Exports\TindakanExport;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\LaboratController;
@@ -27,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::view('/dashboard', 'dashboard.dashboard')->name('dashboard');
+    Route::get('/dashboard',[ DashboardController::class, 'index'])->name('dashboard');
     Route::resource('pasien', PasienController::class);
     Route::get('/pasien-create', [PasienController::class, 'create'])->name('pasien.create');
     Route::resource('kunjungan', PendaftaranController::class);
@@ -73,6 +74,9 @@ Route::post('tindakan/import', [TindakanController::class, 'import'])->name('tin
 require __DIR__ . '/auth.php';
 
 Route::view('/404', 'dashboard.main-menu.pendaftaran.404')->name('404');
+Route::view('/hasil', 'dashboard.main-menu.rekam-medis.hasil-lab')->name('hasil');
+
+
 
 Route::resource('pasiens', App\Http\Controllers\PasienController::class)->except('create', 'edit', 'show');
 Route::resource('practitioners', App\Http\Controllers\PractitionerController::class)->except('create', 'edit', 'show');

@@ -67,7 +67,7 @@
                                         placeholder="NIK">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="noKartu" name="noHp"
+                                    <input type="text" class="form-control" id="noHp" name="noHp"
                                         placeholder="No. HP">
                                 </div>
                             </div>
@@ -87,8 +87,8 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="nik" name="noKartu"
-                                        placeholder="No Kartu">
+                                    <input type="text" class="form-control" id="noKartu" name="noKartu"
+                                        placeholder="No Kartu" value="" readonly>
                                 </div>
                             </div>
                         </div>
@@ -126,3 +126,22 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.getElementById('jnsPeserta').addEventListener('change', function () {
+        var noKartuInput = document.getElementById('noKartu');
+        
+        if (this.value === '1') {
+            // Jika JKN dipilih, input noKartu tidak readonly
+            noKartuInput.readOnly = false;
+            noKartuInput.placeholder = "Masukkan No Kartu";
+        } else {
+            // Jika Non JKN atau Belum Memilih, input noKartu readonly
+            noKartuInput.readOnly = true;
+            noKartuInput.placeholder = "Masukkan No Kartu";
+            noKartuInput.value = ""; // Kosongkan nilai jika readonly
+        }
+    });
+</script>
+@endpush
