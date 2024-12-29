@@ -81,7 +81,6 @@
                                         <th class="text-center" width="5%">LAB</th>
                                         <th class="text-center" width="8%">Tindakan</th>
                                         <th class="text-center" width="5%">Obat</th>
-                                        <th class="text-center" width="10%">Cetak</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -121,11 +120,6 @@
                                                 data-id="{{ $medis->id }}" >
                                                 <i class="fas fa-capsules"></i>
                                             </a></td>
-                                            <td class="text-center">
-                                                <button class="btn btn-sm btn-info">
-                                                    <i class="fas fa-print mx-1"></i>Print
-                                                </button>
-                                            </td>
                                         </tr>
 
                                         <!-- Modal PVT -->

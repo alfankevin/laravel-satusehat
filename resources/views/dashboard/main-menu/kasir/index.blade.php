@@ -38,11 +38,13 @@
                                         </td>
                                         <td class="align-middle">{{ Str::limit($pendaftaran->pasien->alamat, 15) }}
                                         </td>
-                                        <td class="text-start align-middle">{{ $pendaftaran->pasien->tglLahir }}</td>
+                                        <td class="text-start align-middle">{{ \Carbon\Carbon::parse($pendaftaran->pasien->tglLahir)->locale('id')->translatedFormat('d F Y') }}</td>
                                         <td class="align-middle"><span class="badge bg-warning text-dark">Belum Bayar</span></td>
                                         <td class="align-middle text-center">
-                                            <button class="btn btn-primary btn-sm"><i class="fas fa-receipt"></i>
-                                                Nota</button>
+                                            <a href="{{ route('kasir.cetak-kwitansi', $pendaftaran->id) }}" target="_blank" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-receipt"></i> Kwitansi
+                                            </a>
+                                            
                                             <a href="{{ route('kasir.bayar', $pendaftaran->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-money-bill"></i>
                                                 Bayar</a>
                                         </td>

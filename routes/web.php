@@ -37,7 +37,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/soap', [SoapController::class, 'store'])->name('soap.store');
     Route::get('/rekam-medis', [RekamMedisController::class, 'index'])->name('rekam-medis.index');
     Route::get('/antrian-pemeriksaan/{id}', [PemeriksaanController::class, 'create'])->name('antrian.pemeriksaan');
-    Route::get('/rekam-medis/fetch', [RekamMedisController::class, 'fetch'])->name('rekam-medis.fetch');
+    Route::get('/rekam-medis/cetak/{id}', [RekamMedisController::class, 'cetak'])->name('rekam-medis.cetak');
+
     Route::resource('pasien-laborat', PasienPemeriksaanController::class);
     Route::resource('pasien-diagnosa', PasienDiagnosaController::class);
     Route::resource('pasien-tindakan', PasienTindakanController::class);
@@ -54,6 +55,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/kasir',[KasirController::class, 'index'])->name('kasir.index');
     Route::get('/bayar/{id}',[KasirController::class, 'bayar'])->name('kasir.bayar');
+    Route::get('/kasir/kwitansi/{id}', [KasirController::class, 'cetakKwitansi'])->name('kasir.cetak-kwitansi');
+
 
     // Route::view('/poli', 'dashboard.master-data.poli.index')->name('poli.index');
     Route::get('/poli', [PoliController::class, 'index'])->name('poli.index');

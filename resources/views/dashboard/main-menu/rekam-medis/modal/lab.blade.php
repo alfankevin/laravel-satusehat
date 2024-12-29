@@ -3,10 +3,15 @@
         <div class="modal-content">
             <div class="modal-header bg-info">
                 <h4 class="modal-title">Detail Data</h4>
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <div>
+                    <a class="btn btn-light text-dark" href="{{ route('rekam-medis.cetak', $medis->id) }}" target="_blank">
+                        <i class="fas fa-print"></i> Print
+                    </a>
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             </div>
             <div class="modal-body">
                 <div class="row py-2" style="background-color: #b8d6f5; border-color: black"> 
