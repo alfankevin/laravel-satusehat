@@ -15,15 +15,17 @@
                     <select id="pemeriksaanSelect" name="kategori_pemeriksaan_id" class="form-control js-select2">
                         <option value="">--Pilih Pemeriksaan--</option>
                         @foreach ($laborats as $laborat)
-                            <option value="{{ $laborat->id }}" data-harga="{{ $laborat->biaya }}">
+                            <option value="{{ $laborat->id }}" data-harga="{{ $laborat->biaya }}" data-nilai-normal="{{ $laborat->nilai_normal }}">
                                 {{ $laborat->pemeriksaan }}
                             </option>
                         @endforeach
                     </select>
+                    
                 </div>
                 <div class="col-3">
                     <label for="hasil" class="form-label">Hasil</label>
-                    <input type="text" id="hasil" name="hasil_pemeriksaan" class="form-control" />
+                    <input type="text" id="hasil" name="hasil_pemeriksaan" class="form-control"
+                        placeholder="{{ $laborat->nilai_normal }}" />
                 </div>
                 <div class="col-4">
                     <label for="petugas" class="form-label">Petugas</label>
@@ -65,7 +67,8 @@
                         <td>{{ $data->hasil_pemeriksaan }}</td>
                         <td>{{ $data->practitioner->namaPractitioner }}</td>
                         <td width="20%">Rp{{ number_format($data->biaya, 0, ',', '.') }}</td>
-                        <td width="5%"><button class="btn btn-sm btn-danger delete-laborat" data-id="{{ $data->id }}"><i class="fas fa-trash"></i></button></td>
+                        <td width="5%"><button class="btn btn-sm btn-danger delete-laborat"
+                                data-id="{{ $data->id }}"><i class="fas fa-trash"></i></button></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -79,12 +82,18 @@
 
     <script>
         $(document).ready(function() {
-            // Update hargaInput on pemeriksaanSelect change
+            // Update hargaInput dan placeholder hasil berdasarkan pemeriksaanSelect
             $('#pemeriksaanSelect').on('change', function() {
                 const selectedOption = $(this).find(':selected');
                 const harga = selectedOption.data('harga');
+                const nilaiNormal = selectedOption.data('nilai-normal');
+
+                // Update harga
                 $('#hargaLayanan').val(harga);
                 $('#hargaInput').val(harga ? `Rp${new Intl.NumberFormat('id-ID').format(harga)}` : '');
+
+                // Update placeholder hasil
+                $('#hasil').attr('placeholder', nilaiNormal || '');
             });
 
             // Handle form submission
@@ -107,15 +116,15 @@
 
                         if (pemeriksaan && harga) {
                             const newRow = `
-                                <tr id="laborat-${response.no}">
-                                    <td class="text-center">${$('#pemeriksaanTableBody tr').length + 1}</td>
-                                    <td>${pemeriksaan}</td>
-                                    <td>${hasil}</td>
-                                    <td>${petugas}</td>
-                                    <td>${harga}</td>
-                                    <td><button class="btn btn-sm btn-danger delete-laborat" data-id="` + response.no + `"><i class="fas fa-trash"></i></button></td>
-                                </tr>
-                            `;
+                        <tr id="laborat-${response.no}">
+                            <td class="text-center">${$('#pemeriksaanTableBody tr').length + 1}</td>
+                            <td>${pemeriksaan}</td>
+                            <td>${hasil}</td>
+                            <td>${petugas}</td>
+                            <td>${harga}</td>
+                            <td><button class="btn btn-sm btn-danger delete-laborat" data-id="` + response.no + `"><i class="fas fa-trash"></i></button></td>
+                        </tr>
+                    `;
 
                             $('#pemeriksaanTableBody').append(newRow);
                             $('#modalTambahPemeriksaan').modal('hide');

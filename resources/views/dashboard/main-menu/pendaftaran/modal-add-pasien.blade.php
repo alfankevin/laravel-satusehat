@@ -52,9 +52,6 @@
                                         <option value="O">O</option>
                                     </select>
                                 </div>
-                                <!-- <div class="col-sm-2">
-                                                <input type="text" class="form-control" id="umur" value="27 Tahun" disabled>
-                                            </div> -->
                             </div>
                         </div>
                     </div>
@@ -128,20 +125,20 @@
 </div>
 
 @push('scripts')
-<script>
-    document.getElementById('jnsPeserta').addEventListener('change', function () {
-        var noKartuInput = document.getElementById('noKartu');
-        
-        if (this.value === '1') {
-            // Jika JKN dipilih, input noKartu tidak readonly
-            noKartuInput.readOnly = false;
-            noKartuInput.placeholder = "Masukkan No Kartu";
-        } else {
-            // Jika Non JKN atau Belum Memilih, input noKartu readonly
-            noKartuInput.readOnly = true;
-            noKartuInput.placeholder = "Masukkan No Kartu";
-            noKartuInput.value = ""; // Kosongkan nilai jika readonly
-        }
-    });
-</script>
+    <script>
+        document.getElementById('jnsPeserta').addEventListener('change', function() {
+            var noKartuInput = document.getElementById('noKartu');
+
+            if (this.value === '1') {
+                // Jika JKN dipilih, input noKartu tidak readonly
+                noKartuInput.readOnly = false;
+                noKartuInput.placeholder = "Masukkan No Kartu";
+            } else {
+                // Jika Non JKN atau Belum Memilih, input noKartu readonly
+                noKartuInput.readOnly = true;
+                noKartuInput.placeholder = "Masukkan No Kartu";
+                noKartuInput.value = ""; // Kosongkan nilai jika readonly
+            }
+        });
+    </script>
 @endpush

@@ -27,7 +27,7 @@ class PasienController extends Controller
         $latestPasien = Pasien::orderBy('nomorRm', 'desc')->first();
         $nomorRm = $latestPasien->nomorRm + 1;
 
-        
+
         return view('dashboard.main-menu.pasien.create', compact('nomorRm', 'kelurahans'));
     }
 
@@ -42,9 +42,10 @@ class PasienController extends Controller
             'nomorRm' => $pasien->nomorRm,
         ]);
 
-        return redirect()->route('kunjungan.index', ['pasienBaru' => $pasien->id])
+        return redirect()->route('kunjungan.index')
             ->with('success', 'Pasien berhasil ditambahkan, silakan tambah kunjungan.');
     }
+
 
 
     public function update(PasienUpdateRequest $request, Pasien $pasien): RedirectResponse

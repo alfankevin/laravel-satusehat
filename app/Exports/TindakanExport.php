@@ -21,6 +21,6 @@ class TindakanExport implements FromCollection, WithHeadings
      */
     public function headings(): array
     {
-        return ['Nama Layanan', 'Tarif'];
+        return ['Tindakan', 'Biaya'];
     }
 }

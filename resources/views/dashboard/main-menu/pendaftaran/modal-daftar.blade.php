@@ -1,6 +1,5 @@
 <!-- Modal Tambah Kunjungan -->
-<div class="modal fade" id="modalTambahKunjungan" tabindex="-1" aria-labelledby="modalTambahKunjunganLabel"
-    aria-hidden="true">
+<div class="modal fade" id="modalTambahKunjungan" tabindex="-1" aria-labelledby="modalTambahKunjunganLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-info">
@@ -22,16 +21,18 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="pasien_id">Nama Pasien (No. RM)</label>
-                                <select class="form-control js-select2" id="pasien_id" name="pasien_id" required>
+                                <label for="pasien_id_disabled">Nama Pasien (No. RM)</label>
+                                <!-- Hanya untuk tampilan -->
+                                <select class="form-control js-select2" id="pasien_id_disabled" disabled>
                                     <option value="">--Pilih Pasien--</option>
                                     @foreach ($pasiens as $pasien)
-                                        <option value="{{ $pasien->id }}">
+                                        <option value="{{ $pasien->id }}" {{ $pasien->id == $selectedPasienId ? 'selected' : '' }}>
                                             {{ $pasien->nama }} ({{ substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }})
-        
                                         </option>
                                     @endforeach
                                 </select>
+                                <!-- Input hidden untuk data -->
+                                <input type="hidden" id="pasien_id" name="pasien_id" value="{{ $selectedPasienId }}">
                             </div>
                         </div>
                         <div class="col-6">
@@ -67,10 +68,11 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -124,28 +126,33 @@
 </div>
 
 @push('scripts')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Event handler untuk tombol "Pilih"
-            document.querySelectorAll('.btn-pilih-pasien').forEach(button => {
-                button.addEventListener('click', function() {
-                    const pasienId = this.getAttribute('data-id');
-                    const pasienNama = this.getAttribute('data-nama');
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Event handler untuk tombol "Pilih Pasien"
+        document.querySelectorAll('.btn-pilih-pasien').forEach(button => {
+            button.addEventListener('click', function() {
+                const pasienId = this.getAttribute('data-id');
+                const pasienNama = this.getAttribute('data-nama');
 
-                    // Isi select pada modal tambah kunjungan
-                    const pasienSelect = document.querySelector('#modalTambahKunjungan #pasien_id');
-                    pasienSelect.value = pasienId;
+                // Isi input hidden pasien_id
+                document.querySelector('#modalTambahKunjungan #pasien_id').value = pasienId;
 
-                    // Trigger event change jika diperlukan
-                    $(pasienSelect).trigger('change');
+                // Isi select untuk tampilan
+                const pasienSelect = document.querySelector('#modalTambahKunjungan #pasien_id_disabled');
+                pasienSelect.innerHTML = `<option>${pasienNama}</option>`;
 
-                    // Tutup modal cari pasien
-                    $('#modalCariPasien').modal('hide');
+                // Tutup modal Cari Pasien
+                $('#modalCariPasien').modal('hide');
 
-                    // Tampilkan modal tambah kunjungan
-                    $('#modalTambahKunjungan').modal('show');
-                });
+                // Tampilkan modal Tambah Kunjungan
+                $('#modalTambahKunjungan').modal('show');
             });
         });
-    </script>
+    });
+</script>
 @endpush
+
+
+
+
+

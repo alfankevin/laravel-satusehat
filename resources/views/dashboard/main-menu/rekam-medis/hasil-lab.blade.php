@@ -116,8 +116,8 @@
                 @foreach ($pendaftaran->laborat as $lab)
                     <tr>
                         <td>{{ $lab->kategoriPemeriksaan->pemeriksaan ?? '-' }}</td>
-                        <td>mg/dl</td>
-                        <td>90-130</td>
+                        <td>{{ $lab->kategoriPemeriksaan->satuan ?? '-' }}</td>
+                        <td>{{ $lab->kategoriPemeriksaan->nilai_normal ?? '-' }}</td>
                         <td>{{ $lab->hasil_pemeriksaan ?? '-' }}</td>
                     </tr>
                 @endforeach

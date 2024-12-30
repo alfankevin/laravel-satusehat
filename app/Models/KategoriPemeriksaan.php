@@ -17,6 +17,8 @@ class KategoriPemeriksaan extends Model
      */
     protected $fillable = [
         'pemeriksaan',
+        'satuan',
+        'nilai_normal',
         'biaya',
     ];
 

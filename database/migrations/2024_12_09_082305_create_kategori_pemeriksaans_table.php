@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('kategori_pemeriksaans', function (Blueprint $table) {
             $table->id();
             $table->string('pemeriksaan');
+            $table->string('satuan');
+            $table->string('nilai_normal');
             $table->float('biaya');
             $table->timestamps();
         });

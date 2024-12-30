@@ -71,6 +71,8 @@ class TindakanController extends Controller
 
     public function export()
     {
+        session()->flash('success', 'Data berhasil diekspor.');
         return Excel::download(new TindakanExport, 'data_tindakan.xlsx');
     }
+    
 }

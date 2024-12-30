@@ -69,13 +69,11 @@
                                     <td class="text-center align-middle text-nowrap">
                                         <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                         <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ route('pasien.destroy', $pasien->id) }}" method="POST"
-                                            style="display: inline;">
+                                        <form id="delete-form-{{ $pasien->id }}" action="{{ route('pasien.destroy', $pasien->id) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Apakah Anda yakin untuk menghapus data ini?')">
-                                                <i class="fas fa-trash"></i>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $pasien->id }}')">
+                                                <i class="fas fa-trash"></i> Hapus
                                             </button>
                                         </form>
                                     </td>

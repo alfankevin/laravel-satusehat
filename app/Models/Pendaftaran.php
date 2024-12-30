@@ -107,4 +107,9 @@ class Pendaftaran extends Model
     {
         return $this->hasMany(PasienTindakan::class, 'kunjungan_id', 'id');
     }
+
+    public function bayar()
+    {
+        return $this->hasOne(Bayar::class, 'kunjungan_id', 'id');
+    }
 }

@@ -25,6 +25,8 @@
                                 <tr>
                                     <th class="text-center" width="5%">No</th>
                                     <th width="30%">Nama Lab</th>
+                                    <th>Satuan</th>
+                                    <th>Nilai Normal</th>
                                     <th width="60%">Tarif</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
@@ -34,21 +36,21 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $laborat->pemeriksaan }}</td>
+                                        <td>{{ $laborat->satuan }}</td>
+                                        <td>{{ $laborat->nilai_normal }}</td>
                                         <td>Rp{{ number_format($laborat->biaya, 0, ',', '.') }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-warning btn-sm btn-edit" data-toggle="modal"
                                                 data-target="#modalAddEdit" data-id="{{ $laborat->id }}"
                                                 data-pemeriksaan="{{ $laborat->pemeriksaan }}"
-                                                data-biaya="{{ $laborat->biaya }}">
+                                                data-biaya="{{ $laborat->biaya }}"  data-satuan="{{ $laborat->satuan }}"  data-nilai_normal="{{ $laborat->nilai_normal }}">
                                                 <i class="fas fa-edit"></i> Ubah
                                             </button>
 
-                                            <form action="{{ route('laborat.destroy', $laborat->id) }}" method="POST"
-                                                style="display: inline;">
+                                            <form id="delete-form-{{ $laborat->id }}" action="{{ route('laborat.destroy', $laborat->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Apakah Anda yakin untuk menghapus laborat ini?')">
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $laborat->id }}')">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </button>
                                             </form>
@@ -81,6 +83,14 @@
                             <input type="text" class="form-control" id="pemeriksaan" name="pemeriksaan" required>
                         </div>
                         <div class="mb-3">
+                            <label for="satuan" class="form-label">Satuan</label>
+                            <input type="text" class="form-control" id="satuan" name="satuan" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nilai_normal" class="form-label">Nilai Normal</label>
+                            <input type="text" class="form-control" id="nilai_normal" name="nilai_normal" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="biaya" class="form-label">Tarif</label>
                             <input type="number" class="form-control" id="biaya" name="biaya" required>
                         </div>
@@ -110,6 +120,8 @@
 
                 // Populate form fields
                 modal.querySelector('#pemeriksaan').value = this.dataset.pemeriksaan;
+                modal.querySelector('#satuan').value = this.dataset.satuan;
+                modal.querySelector('#nilai_normal').value = this.dataset.nilai_normal;
                 modal.querySelector('#biaya').value = this.dataset.biaya;
 
                 // Show modal

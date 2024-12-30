@@ -117,16 +117,13 @@
                                             @endif
                                         </td>
                                         <td class="text-center align-middle">
-                                            <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                             <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
     
-                                            <form action="{{ route('kunjungan.destroy', $pendaftaran->id) }}" method="POST"
-                                                style="display: inline;">
+                                            <form id="delete-form-{{ $pendaftaran->id }}" action="{{ route('pendaftaran.destroy', $pendaftaran->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Apakah Anda yakin untuk menghapus data ini?')">
-                                                    <i class="fas fa-trash"></i>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $pendaftaran->id }}')">
+                                                    <i class="fas fa-trash"></i> Hapus
                                                 </button>
                                             </form>
                                         </td>
@@ -148,31 +145,26 @@
     </div>
 @endsection
 
-@if (session('newPasien'))
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Ambil data pasien dari session
-                const newPasien = @json(session('newPasien'));
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Cek apakah session flash `newPasien` ada
+        @if (session('newPasien'))
+            const newPasien = @json(session('newPasien'));
 
-                // Pastikan elemen modal sudah ada di DOM
-                if (newPasien && document.getElementById('modalTambahKunjungan')) {
-                    // Cari elemen dropdown pasien
-                    const pasienDropdown = document.getElementById('pasien_id');
-                    if (pasienDropdown) {
-                        // Setel nilai default dropdown ke pasien baru
-                        for (const option of pasienDropdown.options) {
-                            if (option.value == newPasien.id) {
-                                option.selected = true;
-                                break;
-                            }
-                        }
-                    }
+            // Isi input pasien ID secara otomatis
+            const pasienIdInput = document.querySelector('#pasien_id');
+            if (pasienIdInput) {
+                pasienIdInput.innerHTML += `<option value="${newPasien.id}" selected>
+                    ${newPasien.nama} (${newPasien.nomorRm})
+                </option>`;
+            }
 
-                    // Tampilkan modal tambah kunjungan
-                    $('#modalTambahKunjungan').modal('show');
-                }
-            });
-        </script>
-    @endpush
-@endif
+            // Buka modal "Tambah Kunjungan"
+            $('#modalTambahKunjungan').modal('show');
+        @endif
+    });
+</script>
+
+@endpush
+

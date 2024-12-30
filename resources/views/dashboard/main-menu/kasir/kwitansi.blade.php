@@ -143,15 +143,15 @@
     <div class="mt-2 ">
         <div class="row ">
             <div class="col-9 text-right"><b>Total Tagihan:</b></div>
-            <div class="col-3 text-end">Rp {{ number_format(($totalFeeObat ?? 0) + ($totalFeeLaborat ?? 0) + ($totalFeeTindakan ?? 0), 0, ',', '.') }}</div>
+            <div class="col-3 text-end">Rp {{ number_format($pendaftaran->bayar->total_tagihan?? 0, 0, ',', '.') }}</div>
         </div>
         <div class="row">
             <div class="col-9 text-right"><b>Bayar:</b></div>
-            <div class="col-3 text-end">Rp</div>
+            <div class="col-3 text-end">Rp {{ number_format($pendaftaran->bayar->jumlah_bayar?? 0, 0, ',', '.') }}</div>
         </div>
         <div class="row">
             <div class="col-9 text-right"><b>Kembali:</b></div>
-            <div class="col-3 text-end">Rp</div>
+            <div class="col-3 text-end">Rp {{ number_format($pendaftaran->bayar->kembalian?? 0, 0, ',', '.') }}</div>
         </div>
     </div>
     

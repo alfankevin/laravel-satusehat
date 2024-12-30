@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $jumlahPasien = \App\Models\Pasien::count();
+        $jumlahPasien = \App\Models\Pasien::whereDate('created_at', Carbon::today())->count();
 
 
 

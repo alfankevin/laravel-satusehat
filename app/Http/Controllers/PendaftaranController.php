@@ -47,7 +47,8 @@ class PendaftaranController extends Controller
         $pasienBaru = $request->get('pasienBaru') ? Pasien::find($request->get('pasienBaru')) : null;
 
 
-        return view('dashboard.main-menu.pendaftaran.index', compact('pendaftarans', 'polis', 'pasiens', 'practitioners', 'nomorRm', 'kelurahans', 'pasienBaru'));
+        $selectedPasienId = session('newPasien')['id'] ?? null; // Nilai default dari session
+        return view('dashboard.main-menu.pendaftaran.index', compact('selectedPasienId','pendaftarans', 'polis', 'pasiens', 'practitioners', 'nomorRm', 'kelurahans', 'pasienBaru'));
     }
 
 

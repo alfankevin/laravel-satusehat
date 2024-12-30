@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Exports\TindakanExport;
+use App\Http\Controllers\BayarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\KasirController;
@@ -33,6 +34,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/pasien-create', [PasienController::class, 'create'])->name('pasien.create');
     Route::resource('kunjungan', PendaftaranController::class);
     Route::get('/kunjungan-create', [PendaftaranController::class, 'create'])->name('kunjungan.create');
+    Route::delete('/pendaftaran/{pendaftaran}', [PendaftaranController::class, 'destroy'])->name('pendaftaran.destroy');
+
+
     Route::resource('antrian', PemeriksaanController::class);
     Route::post('/soap', [SoapController::class, 'store'])->name('soap.store');
     Route::get('/rekam-medis', [RekamMedisController::class, 'index'])->name('rekam-medis.index');
@@ -57,6 +61,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/bayar/{id}',[KasirController::class, 'bayar'])->name('kasir.bayar');
     Route::get('/kasir/kwitansi/{id}', [KasirController::class, 'cetakKwitansi'])->name('kasir.cetak-kwitansi');
 
+    Route::post('/bayar', [BayarController::class, 'store'])->name('bayar.store');
 
     // Route::view('/poli', 'dashboard.master-data.poli.index')->name('poli.index');
     Route::get('/poli', [PoliController::class, 'index'])->name('poli.index');

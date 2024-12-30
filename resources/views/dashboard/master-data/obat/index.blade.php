@@ -50,12 +50,11 @@
                                             data-status="{{ $obat->status }}">
                                             <i class="fas fa-edit"></i> Ubah
                                         </button>
-                                        <form action="{{ route('obat.destroy', $obat->id) }}" method="POST"
-                                            style="display: inline;">
+
+                                        <form id="delete-form-{{ $obat->id }}" action="{{ route('obat.destroy', $obat->id) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Apakah Anda yakin untuk menghapus obat ini?')">
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $obat->id }}')">
                                                 <i class="fas fa-trash"></i> Hapus
                                             </button>
                                         </form>

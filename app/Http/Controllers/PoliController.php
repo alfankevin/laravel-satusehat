@@ -22,7 +22,7 @@ class PoliController extends Controller
     {
         $poli = Poli::create($request->validated());
         // dd($poli);
-        return redirect()->route('poli.index');
+        return redirect()->route('poli.index')->with('success', 'Data berhasil disimpan!');
     }
 
     public function update(PoliUpdateRequest $request, $id): RedirectResponse
@@ -31,13 +31,13 @@ class PoliController extends Controller
 
         $poli->update($request->only(['kodePoli', 'namaPoli']));
 
-        return redirect()->route('poli.index');
+        return redirect()->route('poli.index')->with('success', 'Data berhasil diubah!');
     }
 
     public function destroy(Request $request, Poli $poli): RedirectResponse
     {
         $poli->delete();
 
-        return redirect()->route('poli.index');
+        return redirect()->route('poli.index')->with('success', 'Data berhasil dihapus!');
     }
 }

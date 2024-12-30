@@ -8,19 +8,20 @@
                         <h3 class="mb-0 fw-bold">Data Layanan</h3>
                         <div>
                             <button class="btn btn-sm btn-light text-dark" data-toggle="modal" data-target="#modalAddEdit"
-                            onclick="resetModal()">
-                            <i class="fas fa-plus"></i> Tambah Data
-                        </button>
-                        <a href="#" class="btn btn-sm btn-warning ms-1" data-toggle="modal" data-target="#modalImport">
-                            <i class="fas fa-upload me-2"></i> Import Data
-                        </a>
-                        <a href="{{ route('tindakan.export') }}" class="btn btn-sm btn-success ms-1">
-                            <i class="fas fa-file-excel me-2"></i> Export Excel
-                        </a>
-                        
+                                onclick="resetModal()">
+                                <i class="fas fa-plus"></i> Tambah Data
+                            </button>
+                            <a href="#" class="btn btn-sm btn-warning ms-1" data-toggle="modal"
+                                data-target="#modalImport">
+                                <i class="fas fa-upload me-2"></i> Import Data
+                            </a>
+                            <a href="{{ route('tindakan.export') }}" class="btn btn-sm btn-success ms-1">
+                                <i class="fas fa-file-excel me-2"></i> Export Excel
+                            </a>
+
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="dataTable" class="display nowrap table table-striped table-bordered" style="width:100%">
@@ -39,17 +40,16 @@
                                         <td>{{ $tindakan->tindakan }}</td>
                                         <td>Rp.{{ number_format($tindakan->biaya, 0, ',', '.') }}</td>
                                         <td class="text-center">
-                                            <button class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#modalAddEdit" data-id="{{ $tindakan->id }}"
+                                            <button class="btn btn-warning btn-sm btn-edit" data-toggle="modal"
+                                                data-target="#modalAddEdit" data-id="{{ $tindakan->id }}"
                                                 data-tindakan="{{ $tindakan->tindakan }}"
                                                 data-biaya="{{ $tindakan->biaya }}">
                                                 <i class="fas fa-edit"></i> Ubah
                                             </button>
-                                            <form action="{{ route('tindakan.destroy', $tindakan->id) }}" method="POST"
-                                                style="display: inline;">
+                                            <form id="delete-form-{{ $tindakan->id }}" action="{{ route('tindakan.destroy', $tindakan->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Apakah Anda yakin untuk menghapus layanan ini?')">
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $tindakan->id }}')">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </button>
                                             </form>
@@ -97,35 +97,51 @@
 
 
     <!-- Modal Import Data -->
-<div class="modal fade" id="modalImport" tabindex="-1" aria-labelledby="modalImportLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="{{ route('tindakan.import') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalImportLabel">Import Data Tindakan</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="file" class="form-label">Pilih File Excel</label>
-                        <input type="file" class="form-control" id="file" name="file" accept=".xlsx,.xls,.csv" required>
+    <div class="modal fade" id="modalImport" tabindex="-1" aria-labelledby="modalImportLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <form action="{{ route('tindakan.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalImportLabel">Import Data Tindakan</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h2>PERHATIAN!</h2>
+                                <h5 class="card-title">Silakan melakukan penyesuaian format data yang akan diupload menggunakan template yang sudah kami sediakan, anda bisa mendownload nya <a
+                                        href=""><u > disini</u></a></h5>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="file">Pilih File Excel</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="file" id="file" accept=".xlsx,.xls,.csv" required>
+                                    <label class="custom-file-label" for="file">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id=""><i class="fas fa-file-import"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Upload</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-
 @endsection
 
 @push('scripts')
     <script>
-
         // Handle edit button click
         document.querySelectorAll('.btn-warning').forEach(btn => {
             btn.addEventListener('click', function() {

@@ -23,14 +23,14 @@ class ObatController extends Controller
     {
         $obat = Obat::create($request->validated());
 
-        return redirect()->route('obat.index');
+        return redirect()->route('obat.index')->with('success', 'Data Obat berhasil ditambakan');
     }
 
     public function update(ObatUpdateRequest $request, Obat $obat): RedirectResponse
     {
         $obat = Obat::where('id', $obat->id)->update($request->validated());
 
-        return redirect()->route('obat.index');
+        return redirect()->route('obat.index')->with('success', 'Data Obat berhasil diubah');
     }
 
     public function storeOrUpdate(Request $request): RedirectResponse
@@ -53,6 +53,6 @@ class ObatController extends Controller
     {
         $obat->delete();
 
-        return redirect()->route('obat.index');
+        return redirect()->route('obat.index')->with('success', 'Data Obat berhasil dihapus');
     }
 }

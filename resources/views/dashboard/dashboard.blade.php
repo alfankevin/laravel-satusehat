@@ -139,13 +139,13 @@
                     labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'],
                     datasets: [{
                             label: 'Pendapatan Umum',
-                            backgroundColor: 'red',
+                            backgroundColor: '#007bff',
                             borderColor: '#00a65a',
                             data: [65000, 59000, 80000, 81000, 56000, 55000] // Nilai dalam format angka
                         },
                         {
                             label: 'Pendapatan BPJS',
-                            backgroundColor: 'green',
+                            backgroundColor: '#f39c12',
                             borderColor: '#f39c12',
                             data: [45000, 39000, 60000, 71000, 46000, 45000]
                         }
@@ -196,7 +196,7 @@
                     labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'],
                     datasets: [{
                             label: 'Jumlah Pasien Umum',
-                            backgroundColor: 'blue',
+                            backgroundColor: '#007bff',
                             borderColor: '#00a65a',
                             data: [65, 59, 80, 81, 56, 55]
                         },

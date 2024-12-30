@@ -23,6 +23,8 @@ class LaboratController extends Controller
     {
         $validated = $request->validate([
             'pemeriksaan' => 'required|string|max:255',
+            'satuan' => 'required|string|max:255',
+            'nilai_normal' => 'required|string|max:255',
             'biaya' => 'required|numeric|min:0',
         ]);
 
@@ -38,6 +40,8 @@ class LaboratController extends Controller
     {
         $validated = $request->validate([
             'pemeriksaan' => 'required|string|max:255',
+            'satuan' => 'required|string|max:255',
+            'nilai_normal' => 'required|string|max:255',
             'biaya' => 'required|numeric|min:0',
         ]);
 

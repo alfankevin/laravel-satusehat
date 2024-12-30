@@ -41,11 +41,10 @@
                                             data-diagnosa="{{ $diagnosa->diagnosa }}">
                                             <i class="fas fa-edit"></i> Ubah
                                         </button>
-                                        <form action="{{ route('diagnosa.destroy', $diagnosa->id) }}" method="POST" style="display: inline;">
+                                        <form id="delete-form-{{ $diagnosa->id }}" action="{{ route('diagnosa.destroy', $diagnosa->id) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Apakah Anda yakin untuk menghapus diagnosa ini?')">
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $diagnosa->id }}')">
                                                 <i class="fas fa-trash"></i> Hapus
                                             </button>
                                         </form>

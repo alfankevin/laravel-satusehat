@@ -42,12 +42,10 @@
                                             <i class="fas fa-edit"></i> Ubah
                                         </a>
 
-                                        <form action="{{ route('practitioner-group.destroy', $item->id) }}" method="POST"
-                                            style="display: inline;">
+                                        <form id="delete-form-{{ $item->id }}" action="{{ route('practitioner-group.destroy', $item->id) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Apakah Anda yakin untuk menghapus data ini?')">
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $item->id }}')">
                                                 <i class="fas fa-trash"></i> Hapus
                                             </button>
                                         </form>

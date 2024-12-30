@@ -31,10 +31,10 @@ return new class extends Migration
             $table->integer('updated_by')->nullable();
             $table->dateTime('deleted_at')->nullable();
             $table->integer('deleted_by')->nullable();
-            $table->foreignId('pasien_id');
-            $table->foreignId('poli_id');
-            $table->foreignId('practitioner_id');
-            $table->foreignId('tkp_id');
+            $table->foreignId('pasien_id')->constrained('pasiens')->onDelete('cascade');
+            $table->foreignId('poli_id')->constrained('polis');
+            $table->foreignId('practitioner_id')->constrained('practitioners');
+            $table->foreignId('tkp_id')->constrained('tkps');
             $table->string('subyektif')->nullable();
             $table->string('assesment')->nullable();
             $table->string('instruksi')->nullable();

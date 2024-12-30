@@ -42,10 +42,10 @@ class KasirController extends Controller
         $totalFeeTindakan = $pendaftarans->tindakan->sum('biaya');
 
         // Hitung total fee laborat
-        $totalFeeLaborat = $pendaftarans->laborat->sum('biaya');
+        $totalFeeLaborat = $pendaftarans->laborat->sum('biaya');        
 
         // Kirim data ke view
-        return view('dashboard.main-menu.kasir.bayar', compact('pendaftarans', 'totalFeeObat', 'totalFeeTindakan', 'totalFeeLaborat'));
+        return view('dashboard.main-menu.kasir.bayar', compact( 'pendaftarans', 'totalFeeObat', 'totalFeeTindakan', 'totalFeeLaborat'));
     }
 
     public function cetakKwitansi($id)
@@ -55,7 +55,8 @@ class KasirController extends Controller
             'pasien',
             'poli',
             'laborat.kategoriPemeriksaan',
-            'practitioner'
+            'practitioner',
+            'bayar',
         )->findOrFail($id);
 
         // Kirim data ke view
