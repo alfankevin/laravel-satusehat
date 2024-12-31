@@ -56,6 +56,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     
     Route::view('/farmasi', 'dashboard.main-menu.farmasi.index')->name('farmasi.index');
     Route::view('/users', 'dashboard.master-data.user.index')->name('users.index');
+    Route::view('/modul', 'dashboard.master-data.modul.index')->name('modul.index');
 
     Route::get('/kasir',[KasirController::class, 'index'])->name('kasir.index');
     Route::get('/bayar/{id}',[KasirController::class, 'bayar'])->name('kasir.bayar');

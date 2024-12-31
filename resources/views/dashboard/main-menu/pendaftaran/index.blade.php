@@ -25,21 +25,21 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="no_rm">No. Rekam Medis</label>
+                                        <label for="no_rm">Filter Nomor RM</label>
                                         <input type="text" name="no_rm" id="no_rm" class="form-control"
                                             value="{{ request('no_rm') }}" placeholder="Masukkan No. RM">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="nama_pasien">Nama Pasien</label>
+                                        <label for="nama_pasien">Filter Nama</label>
                                         <input type="text" name="nama_pasien" id="nama_pasien" class="form-control"
                                             value="{{ request('nama_pasien') }}" placeholder="Masukkan Nama Pasien">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="tgl_daftar">Tanggal Daftar</label>
+                                        <label for="tgl_daftar">Filter Tanggal Daftar</label>
                                         <input type="date" name="tgl_daftar" id="tgl_daftar" class="form-control"
                                             value="{{ request('tgl_daftar') }}">
                                     </div>

@@ -67,6 +67,13 @@
                             <p>Master Data</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('modul*') ? 'active' : '' }}"
+                            href="{{ route('modul.index') }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Modul Aplikasi</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
