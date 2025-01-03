@@ -32,6 +32,7 @@ return new class extends Migration
             $table->dateTime('deleted_at')->nullable();
             $table->integer('deleted_by')->nullable();
             $table->foreignId('KD_KELURAHAN')->nullable();
+            $table->string('satusehat_id')->nullable();
             $table->timestamps();
         });
         

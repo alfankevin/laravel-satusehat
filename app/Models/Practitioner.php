@@ -19,6 +19,7 @@ class Practitioner extends Model
         'namaPractitioner',
         'nikPractitioner',
         'practitioner_group_id',
+        'satusehat_id'
     ];
 
     /**

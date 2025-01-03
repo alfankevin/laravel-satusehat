@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('namaPractitioner');
             $table->string('nikPractitioner');
             $table->foreignId('practitioner_group_id');
+            $table->string('satusehat_id')->nullable();
             $table->timestamps();
         });
     }

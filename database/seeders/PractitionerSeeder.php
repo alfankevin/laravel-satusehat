@@ -12,7 +12,7 @@ class PractitionerSeeder extends Seeder
         DB::table('practitioners')->insert([
             [
                 'namaPractitioner' => 'Dr. Ahmad Fauzan',
-                'nikPractitioner' => '1234567890123456',
+                'nikPractitioner' => '7209061211900001',
                 'practitioner_group_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -45,41 +45,41 @@ class PractitionerSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'namaPractitioner' => 'Dr. Lina Kusuma',
-                'nikPractitioner' => '6789012345678901',
-                'practitioner_group_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'namaPractitioner' => 'Dr. Hendra Wijaya',
-                'nikPractitioner' => '7890123456789012',
-                'practitioner_group_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'namaPractitioner' => 'Dr. Maria Clara',
-                'nikPractitioner' => '8901234567890123',
-                'practitioner_group_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'namaPractitioner' => 'Dr. Putra Aditya',
-                'nikPractitioner' => '9012345678901234',
-                'practitioner_group_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'namaPractitioner' => 'Dr. Dewi Sartika',
-                'nikPractitioner' => '0123456789012345',
-                'practitioner_group_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            // [
+            //     'namaPractitioner' => 'Dr. Lina Kusuma',
+            //     'nikPractitioner' => '6789012345678901',
+            //     'practitioner_group_id' => 1,
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
+            // [
+            //     'namaPractitioner' => 'Dr. Hendra Wijaya',
+            //     'nikPractitioner' => '7890123456789012',
+            //     'practitioner_group_id' => 1,
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
+            // [
+            //     'namaPractitioner' => 'Dr. Maria Clara',
+            //     'nikPractitioner' => '8901234567890123',
+            //     'practitioner_group_id' => 1,
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
+            // [
+            //     'namaPractitioner' => 'Dr. Putra Aditya',
+            //     'nikPractitioner' => '9012345678901234',
+            //     'practitioner_group_id' => 1,
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
+            // [
+            //     'namaPractitioner' => 'Dr. Dewi Sartika',
+            //     'nikPractitioner' => '0123456789012345',
+            //     'practitioner_group_id' => 1,
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
         ]);
     }
 }

@@ -22,6 +22,7 @@ use App\Http\Controllers\PasienPemeriksaanController;
 use App\Http\Controllers\PasienDiagnosaController;
 use App\Http\Controllers\PasienTindakanController;
 use App\Http\Controllers\PasienObatController;
+use App\Http\Controllers\SatusehatController;
 use App\Http\Controllers\TindakanController;
 
 Route::get('/', function () {
@@ -90,3 +91,8 @@ Route::view('/hasil', 'dashboard.main-menu.rekam-medis.hasil-lab')->name('hasil'
 Route::resource('pasiens', App\Http\Controllers\PasienController::class)->except('create', 'edit', 'show');
 Route::resource('practitioners', App\Http\Controllers\PractitionerController::class)->except('create', 'edit', 'show');
 Route::resource('pendaftarans', App\Http\Controllers\PendaftaranController::class)->except('create', 'edit', 'show');
+
+Route::post('/sync-satusehat', [SatusehatController::class, 'syncSatusehat'])->name('sync.satusehat');
+Route::post('/sync-all-satusehat', [SatusehatController::class, 'syncAllPatients'])->name('sync.all.satusehat');
+
+Route::post('/sync-all-practitioner', [SatusehatController::class, 'syncAllPractitioner'])->name('sync.all.practitioner');

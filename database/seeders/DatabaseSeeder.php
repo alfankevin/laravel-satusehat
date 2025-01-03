@@ -46,9 +46,9 @@ class DatabaseSeeder extends Seeder
             ObatSeeder::class,
             DiagnosaSeeder::class,
             PractitionerSeeder::class,
+            PasientSeeder::class,
         ]);
 
-        Pasien::factory(5)->create();
         
     }
 }

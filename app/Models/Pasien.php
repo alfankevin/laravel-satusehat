@@ -34,6 +34,7 @@ class Pasien extends Model
         'updated_by',
         'deleted_by',
         'KD_KELURAHAN',
+        'satusehat_id',
     ];
 
     protected static function boot()
