@@ -26,7 +26,6 @@ return new class extends Migration
             $table->float('lingkarPerut')->nullable();
             $table->float('heartRate')->nullable();
             $table->integer('rujukBalik')->nullable();
-            $table->integer('status')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->dateTime('deleted_at')->nullable();
@@ -41,6 +40,8 @@ return new class extends Migration
             $table->string('obyektif')->nullable();
             $table->string('plan')->nullable();
             $table->string('evaluasi')->nullable();
+            $table->timestamp('start_inProgress')->nullable();
+            $table->timestamp('end_inProgress')->nullable();
             $table->timestamps();
         });
     }

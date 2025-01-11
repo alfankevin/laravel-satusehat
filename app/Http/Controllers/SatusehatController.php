@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppInfo;
 use App\Models\Pasien;
 use App\Models\Practitioner;
+use App\Models\Satusehat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -22,7 +24,7 @@ class SatusehatController extends Controller
         ]);
 
         $nik = $request->input('nik');
-        $url = "http://integrasi-satusehat.test/api/patient/nik?identifier=https://fhir.kemkes.go.id/id/nik|{$nik}";
+        $url = "http://laravel-satusehat.test/nik?identifier=https://fhir.kemkes.go.id/id/nik|{$nik}";
 
         try {
             $response = Http::get($url);
@@ -88,7 +90,7 @@ class SatusehatController extends Controller
         $success = 0;
 
         foreach ($pasiens as $pasien) {
-            $url = "http://integrasi-satusehat.test/api/patient/nik?identifier=https://fhir.kemkes.go.id/id/nik|{$pasien->noKtp}";
+            $url = "http://laravel-satusehat.test/nik?identifier=https://fhir.kemkes.go.id/id/nik|{$pasien->noKtp}";
             try {
                 $response = Http::get($url);
                 $data = $response->json();
@@ -114,7 +116,7 @@ class SatusehatController extends Controller
     }
 
 
-    // Sinkronisasi semua pasien
+    // Sinkronisasi semua practitioner
     public function syncAllPractitioner()
     {
         // Ambil praktisi yang satusehat_id-nya kosong (null atau string kosong)
@@ -127,7 +129,7 @@ class SatusehatController extends Controller
 
         foreach ($practitioners as $practitioner) {
             // URL API untuk mendapatkan data Practitioner
-            $url = "http://integrasi-satusehat.test/api/practitioner-nik?identifier=https://fhir.kemkes.go.id/id/nik|{$practitioner->nikPractitioner}";
+            $url = "http://laravel-satusehat.test/practitioner-nik?identifier=https://fhir.kemkes.go.id/id/nik|{$practitioner->nikPractitioner}";
             try {
                 $response = Http::get($url);
                 $data = $response->json();
@@ -164,5 +166,42 @@ class SatusehatController extends Controller
             'message' => "Sinkronisasi selesai. {$success} berhasil, " . count($failed) . " gagal.",
             'failed' => $failed,
         ]);
+    }
+
+    public function index()
+    {
+        // Get the first record or null if no record exists
+        $satusehat = Satusehat::first();
+        $appInfo = AppInfo::first();
+        return view('dashboard.master-data.modul.index', compact('satusehat', 'appInfo'));
+    }
+
+    /**
+     * Store or update data in the Satusehat table.
+     */
+    public function storeOrUpdate(Request $request)
+    {
+        $validated = $request->validate([
+            'status' => 'required|in:AKTIF,TIDAK AKTIF',
+            'environment' => 'required|in:TESTING,PRODUCTION',
+            'organization_id' => 'nullable|string',
+            'client_id' => 'nullable|string',
+            'client_secret' => 'nullable|string',
+        ]);
+
+        // Check if a record exists
+        $satusehat = Satusehat::first();
+
+        if ($satusehat) {
+            // Update the existing record
+            $satusehat->update($validated);
+
+            return redirect()->back()->with('success', 'Data updated successfully.');
+        } else {
+            // Create a new record
+            Satusehat::create($validated);
+
+            return redirect()->back()->with('success', 'Data created successfully.');
+        }
     }
 }

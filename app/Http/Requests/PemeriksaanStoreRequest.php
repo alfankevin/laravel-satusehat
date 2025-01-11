@@ -31,6 +31,8 @@ class PemeriksaanStoreRequest extends FormRequest
             'respRate' => ['nullable', 'numeric'],
             'lingkarPerut' => ['nullable', 'numeric'],
             'heartRate' => ['nullable', 'numeric'],
+            'start_inProgress' => ['nullable'],
+            'end_inProgress' => ['nullable'],
         ];
     }
 }

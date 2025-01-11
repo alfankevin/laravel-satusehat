@@ -48,7 +48,7 @@ class PendaftaranController extends Controller
 
 
         $selectedPasienId = session('newPasien')['id'] ?? null; // Nilai default dari session
-        return view('dashboard.main-menu.pendaftaran.index', compact('selectedPasienId','pendaftarans', 'polis', 'pasiens', 'practitioners', 'nomorRm', 'kelurahans', 'pasienBaru'));
+        return view('dashboard.main-menu.pendaftaran.index', compact('selectedPasienId', 'pendaftarans', 'polis', 'pasiens', 'practitioners', 'nomorRm', 'kelurahans', 'pasienBaru'));
     }
 
 

@@ -39,6 +39,8 @@ class PendaftaranUpdateRequest extends FormRequest
             'poli_id' => ['required', 'integer', 'exists:polis,id'],
             'practitioner_id' => ['required', 'integer', 'exists:practitioners,id'],
             'tkp_id' => ['required', 'integer', 'exists:tkps,id'],
+            'start_inProgress' => ['nullable'],
+            'end_inProgress' => ['nullable'],
         ];
     }
 }

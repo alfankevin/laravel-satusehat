@@ -32,114 +32,81 @@
                                     aria-labelledby="custom-tabs-two-home-tab">
                                     <div class="row">
                                         <div class="col-9">
-                                            <form action="{{ route('antrian.store') }}" method="POST">
+                                            <form action="{{ route('app.info.store') }}" method="POST"
+                                                enctype="multipart/form-data">
                                                 @csrf
 
                                                 <div class="mb-2 row">
-                                                    <label for="tempat"
-                                                        class="col-sm-3 col-form-label fw-bold">Nama Instansi</label>
+                                                    <label for="nama" class="col-sm-3 col-form-label fw-bold">Nama
+                                                        Instansi</label>
                                                     <div class="col-sm-9">
-                                                        <div class="row">
-                                                            <div class="col-sm-6 mb-2">
-                                                                <div class="input-group">
-                                                                    <input type="number" class="form-control"
-                                                                        name="nama" placeholder="nama instansi">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-6 mb-2">
-                                                                <div class="input-group">
-                                                                    <input type="number" class="form-control"
-                                                                        name="kode" placeholder="kode fasyankes">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <input type="text" class="form-control" name="nama"
+                                                            id="nama" value="{{ $appInfo->nama ?? '' }}"
+                                                            placeholder="Nama Instansi">
                                                     </div>
                                                 </div>
 
                                                 <div class="mb-2 row">
-                                                    <label for="tempat"
-                                                        class="col-sm-3 col-form-label fw-bold">Email & Telepon</label>
+                                                    <label for="kode" class="col-sm-3 col-form-label fw-bold">Kode
+                                                        Fasyankes</label>
                                                     <div class="col-sm-9">
-                                                        <div class="row">
-                                                            <div class="col-sm-6 mb-2">
-                                                                <div class="input-group">
-                                                                    <input type="number" class="form-control"
-                                                                        name="email" placeholder="Email">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-6 mb-2">
-                                                                <div class="input-group">
-                                                                    <input type="number" class="form-control"
-                                                                        name="telepon" placeholder="Telepon">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <input type="text" class="form-control" name="kode"
+                                                            id="kode" value="{{ $appInfo->kode ?? '' }}"
+                                                            placeholder="Kode Fasyankes">
                                                     </div>
                                                 </div>
 
                                                 <div class="mb-2 row">
-                                                    <label for="tempat"
+                                                    <label for="email"
+                                                        class="col-sm-3 col-form-label fw-bold">Email</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="email" class="form-control" name="email"
+                                                            id="email" value="{{ $appInfo->email ?? '' }}"
+                                                            placeholder="Email">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-2 row">
+                                                    <label for="telepon"
+                                                        class="col-sm-3 col-form-label fw-bold">Telepon</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="telepon"
+                                                            id="telepon" value="{{ $appInfo->telepon ?? '' }}"
+                                                            placeholder="Telepon">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-2 row">
+                                                    <label for="provinsi"
                                                         class="col-sm-3 col-form-label fw-bold">Alamat</label>
                                                     <div class="col-sm-9">
-                                                        <div class="row">
-                                                            <div class="col-sm-6 mb-2">
-                                                                <div class="input-group">
-                                                                    <select class="js-select2 form-control" name="provinsi" id="">
-                                                                        <option value="">Pilih Provinsi</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-6 mb-2">
-                                                                <div class="input-group">
-                                                                    <select class="js-select2 form-control" name="provinsi" id="">
-                                                                        <option value="">Pilih Kabupaten</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-6 mb-2">
-                                                                <div class="input-group">
-                                                                    <select class="js-select2 form-control" name="provinsi" id="">
-                                                                        <option value="">Pilih Kecamatan</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-6 mb-2">
-                                                                <div class="input-group">
-                                                                    <select class="js-select2 form-control" name="provinsi" id="">
-                                                                        <option value="">Pilih Kelurahan</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <input type="text" class="form-control" name="provinsi"
+                                                            id="provinsi" value="{{ $appInfo->provinsi ?? '' }}"
+                                                            placeholder="Alamat">
                                                     </div>
                                                 </div>
 
                                                 <div class="mb-2 row">
-                                                    <label for="tempat"
+                                                    <label for="logo"
                                                         class="col-sm-3 col-form-label fw-bold">Logo</label>
                                                     <div class="col-sm-9">
-                                                        <div class="row">
-                                                            <div class="col-sm-12 mb-2">
-                                                                <div class="input-group">
-                                                                    <div class="custom-file">
-                                                                        <input type="file" class="custom-file-input" name="logo" id="logo" accept=".jpg,.jpeg,.png" required>
-                                                                        <label class="custom-file-label" for="logo">Choose file</label>
-                                                                    </div>
-                                                                    <div class="input-group-append">
-                                                                        <span class="input-group-text" id=""><i class="fas fa-file-import"></i></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        @if (!empty($appInfo->logo))
+                                                            <img src="{{ asset('storage/' . $appInfo->logo) }}"
+                                                                alt="Logo" class="img-thumbnail mb-2" width="150">
+                                                        @endif
+                                                        <input type="file" class="form-control" name="logo"
+                                                            id="logo" accept=".jpg,.jpeg,.png">
                                                     </div>
                                                 </div>
+                                                
 
-                                                <div class="text-end d-flex justify-content-end">
+                                                <div class="text-end">
                                                     <button type="submit" class="btn btn-danger">Simpan</button>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
+
                                 </div>
 
 
@@ -151,8 +118,8 @@
                                                 @csrf
 
                                                 <div class="mb-2 row">
-                                                    <label for="tempat"
-                                                        class="col-sm-3 col-form-label fw-bold">Aktifkan Penjamin BPJS</label>
+                                                    <label for="tempat" class="col-sm-3 col-form-label fw-bold">Aktifkan
+                                                        Penjamin BPJS</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
                                                             <select class="form-control" name="staus" id="status">
@@ -177,65 +144,87 @@
                                     aria-labelledby="custom-tabs-two-messages-tab">
                                     <div class="row">
                                         <div class="col-9">
-                                            <form action="{{ route('antrian.store') }}" method="POST">
+                                            <form action="{{ route('satusehat.store') }}" method="POST">
                                                 @csrf
 
                                                 <div class="mb-2 row">
-                                                    <label for="tempat"
-                                                        class="col-sm-3 col-form-label fw-bold">Status Integrasi</label>
+                                                    <label for="status" class="col-sm-3 col-form-label fw-bold">Status
+                                                        Integrasi</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" name="status" id="status"
+                                                            required>
+                                                            <option value="TIDAK AKTIF"
+                                                                {{ ($satusehat->status ?? '') === 'TIDAK AKTIF' ? 'selected' : '' }}>
+                                                                TIDAK AKTIF</option>
+                                                            <option value="AKTIF"
+                                                                {{ ($satusehat->status ?? '') === 'AKTIF' ? 'selected' : '' }}>
+                                                                AKTIF</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-2 row">
+                                                    <label for="environment"
+                                                        class="col-sm-3 col-form-label fw-bold">Environment</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" name="environment" id="environment"
+                                                            required>
+                                                            <option value="TESTING"
+                                                                {{ ($satusehat->environment ?? '') === 'TESTING' ? 'selected' : '' }}>
+                                                                TESTING</option>
+                                                            <option value="PRODUCTION"
+                                                                {{ ($satusehat->environment ?? '') === 'PRODUCTION' ? 'selected' : '' }}>
+                                                                PRODUCTION</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-2 row">
+                                                    <label for="organization_id"
+                                                        class="col-sm-3 col-form-label fw-bold">Organization ID</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="organization_id"
+                                                            id="organization_id"
+                                                            value="{{ $satusehat->organization_id ?? '' }}"
+                                                            placeholder="ORGANIZATION ID">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-2 row">
+                                                    <label for="client_id" class="col-sm-3 col-form-label fw-bold">Client
+                                                        ID</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
-                                                            <select class="form-control" name="staus" id="status">
-                                                                <option value="">TIDAK AKTIF</option>
-                                                                <option value="">AKTIF</option>
-                                                            </select>
+                                                            <input type="password" class="form-control" name="client_id"
+                                                                id="client_id" value="{{ $satusehat->client_id ?? '' }}"
+                                                                placeholder="CLIENT ID">
+                                                            <button type="button"
+                                                                class="btn btn-outline-secondary toggle-visibility"
+                                                                data-target="#client_id">
+                                                                <i class="fas fa-eye"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="mb-2 row">
-                                                    <label for="tempat"
-                                                        class="col-sm-3 col-form-label fw-bold">Enveronment</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <select class="form-control" name="staus" id="status">
-                                                                <option value="">TESTING</option>
-                                                                <option value="">PRODUCTION</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="mb-2 row">
-                                                    <label for="tempat"
-                                                        class="col-sm-3 col-form-label fw-bold">Organization id</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" name="organization_id" id="organization_id" placeholder="ORGANIZATION ID">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="mb-2 row">
-                                                    <label for="tempat"
-                                                        class="col-sm-3 col-form-label fw-bold">Client id</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" name="client_id" id="client_id" placeholder="CLIENT ID">
-                                                            <span class="input-group-text" id="basic-addon2"><i class="fas fa-eye"></i></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-2 row">
-                                                    <label for="tempat"
+                                                    <label for="client_secret"
                                                         class="col-sm-3 col-form-label fw-bold">Client Secret</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
-                                                            <input type="number" class="form-control" name="client_secret" id="client_secret" placeholder="CLIENT SECRET">
-                                                            <span class="input-group-text" id="basic-addon2"><i class="fas fa-eye"></i></span>
+                                                            <input type="password" class="form-control"
+                                                                name="client_secret" id="client_secret"
+                                                                value="{{ $satusehat->client_secret ?? '' }}"
+                                                                placeholder="CLIENT SECRET">
+                                                            <button type="button"
+                                                                class="btn btn-outline-secondary toggle-visibility"
+                                                                data-target="#client_secret">
+                                                                <i class="fas fa-eye"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
+
 
                                                 <div class="text-end d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-danger">Simpan</button>
@@ -243,6 +232,7 @@
                                             </form>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -253,3 +243,28 @@
         </div>
     </div>
 @endsection
+
+
+@push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".toggle-visibility").forEach(button => {
+                button.addEventListener("click", function() {
+                    const target = document.querySelector(this.getAttribute("data-target"));
+                    if (target) {
+                        const type = target.getAttribute("type") === "password" ? "text" :
+                            "password";
+                        target.setAttribute("type", type);
+
+                        // Toggle icon
+                        this.querySelector("i").classList.toggle("fa-eye");
+                        this.querySelector("i").classList.toggle("fa-eye-slash");
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
+
+
+

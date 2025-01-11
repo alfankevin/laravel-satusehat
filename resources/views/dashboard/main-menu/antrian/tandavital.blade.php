@@ -5,6 +5,9 @@
     <div class="card-body">
         <form action="{{ route('antrian.store') }}" method="POST">
             @csrf
+            <input type="hidden" name="start_inProgress"
+                value="{{ now()->timezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}">
+
             <div class="mb-2 row">
                 <label for="keluhan" class="col-sm-3 col-form-label ">Keluhan</label>
                 <div class="col-sm-9">

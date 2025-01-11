@@ -7,10 +7,11 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h3 class="card-title mx-1">Data Kunjungan</h3>
                         <div>
-                            <button class="btn btn-light text-dark btn-sm" data-toggle="modal" data-target="#modalTambahPasien">
+                            <button class="btn btn-light text-dark btn-sm" data-toggle="modal"
+                                data-target="#modalTambahPasien">
                                 <i class="fas fa-plus"></i> Tambah Pasien Baru
                             </button>
-    
+
                             <button class="btn btn-light text-dark btn-sm" data-toggle="modal"
                                 data-target="#modalCariPasien">
                                 <i class="fas fa-plus"></i> Tambah Kunjungan
@@ -60,7 +61,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </form>
                     </div>
                     @if ($pendaftarans->isEmpty())
@@ -102,27 +103,39 @@
                                         <td class="text-center align-middle">{{ $key + 1 }}</td>
                                         <td class="align-middle">{{ $pendaftaran->noAntrian }}</td>
                                         <td class="align-middle">{{ $pendaftaran->pasien->nama }}</td>
-                                        <td class="align-middle">{{ substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }} </td>
+                                        <td class="align-middle">
+                                            {{ substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }}
+                                        </td>
                                         <td class="align-middle">{{ $pendaftaran->poli->namaPoli }}</td>
                                         <td class="align-middle">{{ $pendaftaran->practitioner->namaPractitioner }}</td>
                                         <td class="align-middle">
                                             {{ \Carbon\Carbon::parse($pendaftaran->tglDaftar)->format('d-m-Y') }}</td>
                                         <td class="align-middle">
-                                            @if ($pendaftaran->status == 1)
-                                                <span class="badge bg-success"><i class="fas fa-stethoscope"></i> Sudah
-                                                    Diperiksa</span>
-                                            @elseif ($pendaftaran->status == 0)
-                                                <span class="badge bg-danger"><i class="fas fa-stethoscope"></i> Belum
-                                                    Diperiksa</span>
+                                            @if ($pendaftaran->end_inProgress && $pendaftaran->start_inProgress)
+                                                <span class="badge bg-success">
+                                                    <i class="fas fa-stethoscope"></i> Sudah Diperiksa
+                                                </span>
+                                            @elseif ($pendaftaran->start_inProgress && !$pendaftaran->end_inProgress)
+                                                <span class="badge bg-info">
+                                                    <i class="fas fa-stethoscope"></i> Sedang Diperiksa
+                                                </span>
+                                            @elseif (!$pendaftaran->start_inProgress && !$pendaftaran->end_inProgress)
+                                                <span class="badge bg-danger">
+                                                    <i class="fas fa-stethoscope"></i> Belum Diperiksa
+                                                </span>
                                             @endif
+
                                         </td>
                                         <td class="text-center align-middle">
                                             <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
-    
-                                            <form id="delete-form-{{ $pendaftaran->id }}" action="{{ route('pendaftaran.destroy', $pendaftaran->id) }}" method="POST" style="display: inline;">
+
+                                            <form id="delete-form-{{ $pendaftaran->id }}"
+                                                action="{{ route('pendaftaran.destroy', $pendaftaran->id) }}"
+                                                method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $pendaftaran->id }}')">
+                                                <button type="button" class="btn btn-danger btn-sm"
+                                                    onclick="confirmDelete('{{ $pendaftaran->id }}')">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </button>
                                             </form>
@@ -132,39 +145,37 @@
                             </tbody>
                         </table>
                     @endif
-    
-    
+
+
                 </div>
             </div>
-    
+
             <!-- Modal untuk menambahkan pasien baru -->
             @include('dashboard.main-menu.pendaftaran.modal-add-pasien')
-    
+
             @include('dashboard.main-menu.pendaftaran.modal-daftar')
         </div>
     </div>
 @endsection
 
 @push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Cek apakah session flash `newPasien` ada
-        @if (session('newPasien'))
-            const newPasien = @json(session('newPasien'));
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cek apakah session flash `newPasien` ada
+            @if (session('newPasien'))
+                const newPasien = @json(session('newPasien'));
 
-            // Isi input pasien ID secara otomatis
-            const pasienIdInput = document.querySelector('#pasien_id');
-            if (pasienIdInput) {
-                pasienIdInput.innerHTML += `<option value="${newPasien.id}" selected>
+                // Isi input pasien ID secara otomatis
+                const pasienIdInput = document.querySelector('#pasien_id');
+                if (pasienIdInput) {
+                    pasienIdInput.innerHTML += `<option value="${newPasien.id}" selected>
                     ${newPasien.nama} (${newPasien.nomorRm})
                 </option>`;
-            }
+                }
 
-            // Buka modal "Tambah Kunjungan"
-            $('#modalTambahKunjungan').modal('show');
-        @endif
-    });
-</script>
-
+                // Buka modal "Tambah Kunjungan"
+                $('#modalTambahKunjungan').modal('show');
+            @endif
+        });
+    </script>
 @endpush
-

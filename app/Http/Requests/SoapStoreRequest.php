@@ -28,7 +28,7 @@ class SoapStoreRequest extends FormRequest
             'obyektif' => ['required', 'string'],
             'plan' => ['required', 'string'],
             'evaluasi' => ['required', 'string'],
-            'status' => ['required', 'integer'],
+            'end_inProgress' => ['nullable'],
         ];
     }
 }

@@ -108,7 +108,7 @@
                 <tr>
                     <th>JENIS PEMERIKSAAN</th>
                     <th>SATUAN</th>
-                    <th>NILAI NORMAL</th>
+                    <th>NILAI RUJUKAN</th>
                     <th>HASIL</th>
                 </tr>
             </thead>

@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Panggil helper untuk memuat konfigurasi dari database
+        if (class_exists(\App\Models\Satusehat::class)) {
+            loadSatusehatConfig();
+        }
     }
 }

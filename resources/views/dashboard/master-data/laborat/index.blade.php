@@ -26,7 +26,7 @@
                                     <th class="text-center" width="5%">No</th>
                                     <th width="30%">Nama Lab</th>
                                     <th>Satuan</th>
-                                    <th>Nilai Normal</th>
+                                    <th>Nilai Rujukan</th>
                                     <th width="60%">Tarif</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>

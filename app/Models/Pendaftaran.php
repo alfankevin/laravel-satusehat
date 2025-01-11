@@ -43,6 +43,8 @@ class Pendaftaran extends Model
         'obyektif',
         'plan',
         'evaluasi',
+        'start_inProgress',
+        'end_inProgress',
     ];
 
     /**

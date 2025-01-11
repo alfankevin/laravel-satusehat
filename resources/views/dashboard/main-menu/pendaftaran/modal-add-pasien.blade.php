@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('pasien.store') }}" method="POST">
+                <form id="formTambahPasien" action="{{ route('pasien.store') }}" method="POST">
                     @csrf
                     <div class="mb-3 row" hidden>
                         <label for="nomorrm" class="col-sm-3 col-form-label fw-bold">Nomor RM</label>
@@ -141,4 +141,54 @@
             }
         });
     </script>
+
+
+    {{-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const form = document.getElementById('formTambahPasien');
+            const formData = new FormData(form);
+
+            // Persiapkan payload
+            const payload = {
+                nama: formData.get('nama'),
+                noHp: formData.get('noHp'),
+                noKtp: formData.get('noKtp'),
+                tglLahir: formData.get('tglLahir'),
+                alamat: formData.get('alamat'),
+                sex: formData.get('sex'),
+                email: 'john.doe@example.com',
+                homePhone: '02112345678',
+                contactName: 'Jane Doe',
+                contactPhone: '08198765432'
+            };
+
+            console.log(payload);
+
+
+            // Kirim data ke API Satusehat
+            fetch('http://integrasi-satusehat.test/api/patient-store', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content')
+                    },
+                    body: JSON.stringify(payload),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Data pasien berhasil disimpan ke Satusehat.');
+                        form.submit(); // Lanjutkan submit ke server lokal
+                    } else {
+                        alert('Gagal menyimpan data ke Satusehat.');
+                    }
+                })
+                .catch(error => {
+                    alert('Terjadi kesalahan saat menyimpan data ke Satusehat.');
+                    console.error(error);
+                });
+        });
+    </script> --}}
 @endpush

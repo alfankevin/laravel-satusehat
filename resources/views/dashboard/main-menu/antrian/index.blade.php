@@ -65,16 +65,16 @@
                         <div>
                             @php
                                 use Carbon\Carbon;
-    
+
                                 // Mengatur zona waktu ke WIB
                                 $now = Carbon::now('Asia/Jakarta');
-    
+
                                 // Mengatur locale untuk bahasa Indonesia
                                 Carbon::setLocale('id');
                             @endphp
                             <i class="fas fa-calendar"></i> {{ $now->translatedFormat('l d - F Y H:i:s') }}
-    
-    
+
+
                         </div>
                     </div>
                 </div>
@@ -99,19 +99,27 @@
                                     <td class="text-center align-middle">{{ $key + 1 }}</td>
                                     <td class="align-middle">{{ $pendaftaran->noAntrian }}</td>
                                     <td class="align-middle">{{ $pendaftaran->pasien->nama }}</td>
-                                    <td class="align-middle">{{ substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }} </td>
+                                    <td class="align-middle">
+                                        {{ substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 0, 2) . '-' . substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 2, 2) . '-' . substr(str_pad($pendaftaran->pasien->nomorRm, 6, '0', STR_PAD_LEFT), 4, 2) }}
+                                    </td>
                                     <td class="align-middle">
                                         {{ \Carbon\Carbon::parse($pendaftaran->tglDaftar)->format('d-m-Y') }}</td>
                                     <td class="align-middle">
                                         {{ \Carbon\Carbon::parse($pendaftaran->created_at)->timezone('Asia/Jakarta') }}
                                     </td>
                                     <td class="align-middle">
-                                        @if ($pendaftaran->status == 1)
-                                            <span class="badge bg-success"><i class="fas fa-stethoscope"></i> Sudah
-                                                Diperiksa</span>
-                                        @elseif ($pendaftaran->status == 0)
-                                            <span class="badge bg-danger"><i class="fas fa-stethoscope"></i> Belum
-                                                Diperiksa</span>
+                                        @if ($pendaftaran->end_inProgress && $pendaftaran->start_inProgress)
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-stethoscope"></i> Sudah Diperiksa
+                                            </span>
+                                        @elseif ($pendaftaran->start_inProgress && !$pendaftaran->end_inProgress)
+                                            <span class="badge bg-info">
+                                                <i class="fas fa-stethoscope"></i> Sedang Diperiksa
+                                            </span>
+                                        @elseif (!$pendaftaran->start_inProgress && !$pendaftaran->end_inProgress)
+                                            <span class="badge bg-danger">
+                                                <i class="fas fa-stethoscope"></i> Belum Diperiksa
+                                            </span>
                                         @endif
                                     </td>
                                     <td class="align-middle"><a href="{{ route('antrian.pemeriksaan', $pendaftaran->id) }}"
@@ -132,7 +140,7 @@
             </div>
         </div>
     </div>
-   
+
     <!-- Section untuk Kotak Informasi Antrian -->
 
 

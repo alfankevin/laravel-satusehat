@@ -99,8 +99,10 @@
                                         <b>Tanggal Daftar</b>
                                     </div>
                                     <div class="col-7">
-                                        : {{ \Carbon\Carbon::parse($pendaftarans->tglDaftar)->format('d-m-Y') }} -
-                                        {{ \Carbon\Carbon::parse($pendaftarans->created_at)->format('H:i:s') }}
+                                        :
+                                        {{ \Carbon\Carbon::parse($pendaftarans->tglDaftar)->timezone('Asia/Jakarta')->format('d-m-Y') }}
+                                        -
+                                        {{ \Carbon\Carbon::parse($pendaftarans->created_at)->timezone('Asia/Jakarta')->format('H:i:s') }}
                                     </div>
                                 </div>
                                 <hr class="my-1">
@@ -174,7 +176,7 @@
                                     <hr class="mt-1 mb-3">
                                     <!-- Sistem Pembayaran -->
                                     <div class="p-3" style="background-color: #f5b8b8">
-                                        <form action="{{ route('bayar.store') }}" method="POST">
+                                        <form id="paymentForm" action="{{ route('bayar.store') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="kunjungan_id" value="{{ $pendaftarans->id }}">
                                             <input type="hidden" id="totalTagihanInput" name="total_tagihan"
@@ -224,7 +226,7 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const subtotalTagihan = {{ $subtotalTagihan??0 }};
+            const subtotalTagihan = {{ $subtotalTagihan ?? 0 }};
             const diskonInput = document.getElementById('diskon');
             const jumlahBayarInput = document.getElementById('jumlahBayar');
             const totalTagihanDisplay = document.getElementById('totalTagihanDisplay');
@@ -254,6 +256,27 @@
 
                 kembalianInput.value = kembalian > 0 ? kembalian : 0;
             });
+        });
+    </script>
+
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Mencegah pengiriman form default
+            const form = this;
+            const formData = new FormData(form);
+
+            try {
+
+                // Kirim ke route kedua (bundle.store) di latar belakang
+                formData.append('id', '{{ $pendaftarans->id }}');
+                navigator.sendBeacon('{{ route('bundle.store') }}', formData);
+
+                // Arahkan pengguna ke halaman berikutnya
+                form.submit(); // Lanjutkan pengiriman form untuk navigasi ke halaman berikutnya
+            } catch (error) {
+                console.error(error.message);
+                alert('Terjadi kesalahan saat memproses pembayaran. Silakan coba lagi.');
+            }
         });
     </script>
 @endpush

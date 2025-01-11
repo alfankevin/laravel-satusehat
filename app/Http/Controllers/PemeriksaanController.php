@@ -22,7 +22,7 @@ class PemeriksaanController extends Controller
     {
         // Ambil kunjungan dengan status 'Pending' atau 'InProgress', diurutkan dari yang paling lama dibuat
         $pendaftarans = Pendaftaran::with('pasien')
-        ->where('status', 0) // Menampilkan data dengan status = 0
+        ->where('end_InProgress', null) // Menampilkan data dengan status = 0
         ->orderBy('created_at', 'asc')
         ->get();
 

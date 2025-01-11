@@ -4,12 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @include('dashboard.layouts.link')
+
+    <!-- Styles -->
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 300px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -23,9 +31,9 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="https://erm.klinikbimamedika.com/uploads/settings/logo_64e846e26ce60.png" alt="Logo Klinik"
-                class="brand-image img-circle elevation-3">
-                <span class="brand-text font-weight-light">Bima Medika</span>
+                <img src="{{ asset('storage/' . getAppInfo('logo')) }}" alt="Logo" alt="Logo Klinik"
+                    class="brand-image img-circle elevation-3">
+                <span class="brand-text font-weight-light">{{ getAppInfo('nama') }}</span>
             </a>
 
             <!-- Sidebar -->
@@ -40,7 +48,7 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
+            {{ getAppInfo('email') }}
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.0.1-pre
             </div>

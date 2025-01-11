@@ -45,13 +45,14 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Status Rawat</label>
-                        <select class="form-control" name="status" required>
-                            <option value="1" {{ $pemeriksaan->status == 1 ? 'selected' : '' }}>Sudah Diperiksa</option>
-                            <option value="0" {{ $pemeriksaan->status == 0 ? 'selected' : '' }}>Belum Diperiksa</option>
+                        <label>Status Pulang</label>
+                        <select class="form-control" name="" required>
+                            <option value="1">Rawat Jalan</option>
+                            {{-- <option value="0" {{ $pemeriksaan->status == 0 ? 'selected' : '' }}>Belum Diperiksa</option> --}}
                         </select>
                     </div>
                 </div>
+                <input type="hidden" name="end_inProgress" value="{{ now()->timezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}">
                 <div class="col-sm-6 mt-4">
                     <div class="form-group ">
                         <button type="submit" class="btn btn-primary form-control mt-2">Simpan</button>

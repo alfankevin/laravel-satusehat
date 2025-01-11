@@ -82,6 +82,10 @@
 
             toastr.success('{{ session('success') }}');
         @endif
+
+        @if (session('error'))
+            toastr.success('{{ session('error') }}');
+        @endif
     });
 
     $(document).ready(function() {

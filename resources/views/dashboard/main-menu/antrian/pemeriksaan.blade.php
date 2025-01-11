@@ -9,9 +9,6 @@
                         <button id="btn-keluhan-ttv" class="btn btn-light text-dark btn-sm" onclick="showCard('keluhan-ttv')">
                             <i class="fas fa-stethoscope"></i> Tanda Vital
                         </button>
-                        <button id="btn-assesment" class="btn btn-light text-dark btn-sm" onclick="showCard('assesment')">
-                            <i class="fas fa-stethoscope"></i> SOAP
-                        </button>
                         <button id="btn-pemeriksaan" class="btn btn-light text-dark btn-sm" onclick="showCard('pemeriksaan')">
                             <i class="fas fa-flask"></i> Laborat
                         </button>
@@ -23,6 +20,9 @@
                         </button>
                         <button id="btn-obat" class="btn btn-light text-dark btn-sm" onclick="showCard('obat')">
                             <i class="fas fa-capsules"></i> Obat
+                        </button>
+                        <button id="btn-assesment" class="btn btn-light text-dark btn-sm" onclick="showCard('assesment')">
+                            <i class="fas fa-stethoscope"></i> SOAP
                         </button>
                         <button data-toggle="modal"
                         data-target="#modal-riwayat-medis-2" class="btn btn-danger btn-sm"><i class="fas fa-book  "></i> Riwayat Medis</button>
